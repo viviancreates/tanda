@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Tandas</h1>
+
+<div id="tandas">
+  <% @tandas.each do |tanda| %>
+    <%= render tanda %>
+    <p>
+      <%= link_to "Show this tanda", tanda %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New tanda", new_tanda_path %>
