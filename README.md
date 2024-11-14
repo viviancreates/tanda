@@ -1,5 +1,5 @@
 # Tandas
-The Tandas App is a Ruby application that allows users to set saving goals and track them with friends and family.
+The Tanda App is a Ruby application that allows users to set saving goals and track them with friends and family.
 
 ## Installation
 1. Clone the repo
