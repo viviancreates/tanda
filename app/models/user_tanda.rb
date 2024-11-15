@@ -9,4 +9,7 @@
 #  user_id    :integer
 #
 class UserTanda < ApplicationRecord
+  belongs_to :user
+  belongs_to :tanda
+  has_many :transactions
 end

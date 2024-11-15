@@ -11,4 +11,7 @@
 #  creator_id  :integer
 #
 class Tanda < ApplicationRecord
+  has_many :user_tandas
+  has_many :transactions
+  has_many :users, through: :user_tandas
 end

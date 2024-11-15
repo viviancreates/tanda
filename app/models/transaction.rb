@@ -12,4 +12,6 @@
 #  user_tanda_id    :integer
 #
 class Transaction < ApplicationRecord
+  belongs_to :user
+ 
 end
