@@ -86,6 +86,7 @@ gem "table_print"
 gem "simple_form"
 gem "carrierwave"
 
+
 group :development do
   gem "annotate"
   gem "better_errors"
@@ -102,6 +103,7 @@ end
 
 group :development, :test do
   gem "rspec-rails", "~> 6.0.0"
+  gem 'faker'
 end
 
 group :test do
