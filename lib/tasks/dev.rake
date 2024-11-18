@@ -22,10 +22,11 @@ task sample_data: :environment do
   p "There are now #{User.count} users."
 
   4.times do
+    
     Tanda.create(
       name: "#{Faker::Lorem.word.capitalize} Fund",
       goal_amount: rand(1000..5000),
-      creator_id: User.all.sample,
+      creator_id: User.all.sample.id,
       due_date: Date.today + rand(30..60), 
     )
   end
