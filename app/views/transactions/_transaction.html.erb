@@ -1,5 +1,10 @@
 <div id="<%= dom_id transaction %>">
   <p>
+    <strong>User:</strong>
+    <%= transaction.user_tanda.user.username %>
+  </p>
+
+  <p>
     <strong>User tanda:</strong>
     <%= transaction.user_tanda_id %>
   </p>
