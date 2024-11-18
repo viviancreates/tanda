@@ -32,5 +32,16 @@ task sample_data: :environment do
   end
   
   p "There are now #{Tanda.count} tandas."
+
+  Tanda.all.each do |tanda|
+    User.all.sample(rand(2..5)).each do |user|
+      UserTanda.create(
+        user_id: user.id,
+        tanda_id: tanda.id
+      )
+    end
+  end
+
+  p "There are now #{UserTanda.count} user_tandas."
   
 end
