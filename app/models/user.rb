@@ -26,5 +26,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :user_tandas
-  has_many :tandas, through: :user_tandas
+  has_many :tandas, through: :user_tandas, foreign_key: 'creator_id'
 end

@@ -1,6 +1,6 @@
 class TandasController < ApplicationController
   before_action :set_tanda, only: %i[ show edit update destroy ]
-
+  
   # GET /tandas or /tandas.json
   def index
     @tandas = Tanda.all
