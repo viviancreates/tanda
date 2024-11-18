@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Rails Template</title>
+    <title>Tanda</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
+    <%= render partial: "shared/cdn_assets" %>
   </head>
 
   <body>
-  <p class="notice"><%= notice %></p>
-       <p class="alert"><%= alert %></p>
+   
+    <%= render partial: "shared/navbar" %>
+     <div class="container mt-3">
+
+      <%= render partial: "shared/flash_messages" %>
     <%= yield %>
+    </div>
   </body>
 </html>
