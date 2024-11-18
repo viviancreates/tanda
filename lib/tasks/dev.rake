@@ -37,11 +37,22 @@ task sample_data: :environment do
     User.all.sample(rand(2..5)).each do |user|
       UserTanda.create(
         user_id: user.id,
-        tanda_id: tanda.id
+        tanda_id: tanda.id,
       )
     end
   end
 
   p "There are now #{UserTanda.count} user_tandas."
   
+  UserTanda.all.each do |user_tanda|
+      Transaction.create(
+        user_tanda_id: user_tanda.id,
+        amount: rand(20..100),
+        date: Date.today,
+        description: Faker::Lorem.sentence,
+        transaction_type: ["deposit", "withdrawl"].sample
+      )
+end
+
+p "There are #{Transaction.count} transactions."
 end
