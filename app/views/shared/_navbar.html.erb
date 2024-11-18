@@ -1,35 +1,47 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-      <div class="container-fluid">
-        <%= link_to "Tanda", root_path, class:"navbar-brand" %>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <div>
-            <li class="nav-item">
-              <%= link_to "Tandas", tandas_path, class:"nav_link" %>
-              <%# <a class="nav-link active" aria-current="page" href="#">Home</a> %>
-            </li>
-            </div>
-            <div>
-            <li class="nav-item">
-              <%= link_to "Transactions", transactions_path, class:"nav_link" %>
-              <%# <a class="nav-link active" aria-current="page" href="#">Home</a> %>
-            </li>
-            </div>
-            <div>
-            <li class="nav-item">
-              <%= link_to "Friends", user_tandas_path, class:"nav_link" %>
-              <%# <a class="nav-link active" aria-current="page" href="#">Home</a> %>
-            </li>
-            </div>
-            <%# DELETE WHAT YOU DO NOT NEED %>
-          </ul>
-          <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-          </form>
-        </div>
-      </div>
-    </nav>
+<nav class="navbar navbar-expand-lg bg-light mb-4">
+  <div class="container">
+    <%= link_to "Tanda", root_path, class: "navbar-brand" %>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Resources
+          </a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="/tandas">Tandas</a>
+            <a class="dropdown-item" href="/transactions">Transactions</a>
+            <a class="dropdown-item" href="/user_tandas">Friends</a>
+          </div>
+
+        </li>
+       
+      </ul>
+
+      <ul class="navbar-nav">
+        <% if user_signed_in? %>
+          <li class="nav-item">
+            <%= link_to "Edit #{current_user.username}", edit_user_registration_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Sign out", destroy_user_session_path, data: { turbo_method: :delete }, class: "nav-link" %>
+          </li>
+
+        <% else %>
+          <li class="nav-item">
+            <%= link_to "Sign in", new_user_session_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Sign up", new_user_registration_path, class: "nav-link" %>
+          </li>
+
+        <% end %>
+      </ul>
+
+    </div>
+  </div>
+</div>
+</nav>

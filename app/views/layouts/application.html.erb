@@ -7,15 +7,23 @@
     <%= csp_meta_tag %>
 
     <%= render partial: "shared/cdn_assets" %>
+
+     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
   </head>
 
   <body>
-   
     <%= render partial: "shared/navbar" %>
-     <div class="container mt-3">
+     <div class="container">
+      <% if notice.present? %>
+        <%= render partial: "shared/flash", locals: { message: notice, css_class: "success" } %>
+      <% end %>
+      
+      <% if alert.present? %>
+        <%= render partial: "shared/flash", locals: { message: alert, css_class: "danger" } %>
+      <% end %>
 
-      <%= render partial: "shared/flash_messages" %>
-    <%= yield %>
+      <%= yield %>
     </div>
-  </body>
+    </body>
 </html>
