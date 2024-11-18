@@ -1,4 +1,9 @@
 <div id="<%= dom_id tanda %>">
+ <p>
+    <strong>Name:</strong>
+    <%= tanda.name %>
+  </p>
+
   <p>
     <strong>Goal amount:</strong>
     <%= tanda.goal_amount %>
@@ -6,12 +11,7 @@
 
   <p>
     <strong>Creator:</strong>
-    <%= tanda.creator_id %>
-  </p>
-
-  <p>
-    <strong>Name:</strong>
-    <%= tanda.name %>
+    <%= tanda.creator.username %>
   </p>
 
   <p>
