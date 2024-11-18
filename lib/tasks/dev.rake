@@ -50,7 +50,7 @@ task sample_data: :environment do
         amount: rand(20..100),
         date: Date.today,
         description: Faker::Lorem.sentence,
-        transaction_type: ["deposit", "withdrawl"].sample
+        transaction_type: ["deposit", "withdrawal"].sample
       )
 end
 
