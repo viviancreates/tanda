@@ -23,9 +23,13 @@
 
       <p class="card-text">
         <strong>Created by:</strong>
+        <br>
         <%= tanda.creator.username %>
+        <br>
         <strong>Users:</strong>
-        <%= tanda.users %>
+        <% tanda.users.each do |user| %>
+          <li><%= user.username %></li>
+        <% end %>
       </p>
 
     </div>
