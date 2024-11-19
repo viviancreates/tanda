@@ -1,6 +1,5 @@
 <div id="<%= dom_id tanda %>">
 
-
   <div class="card">
     <div class="card-header">
       <%= tanda.name %>
@@ -12,15 +11,21 @@
         <%= tanda.goal_amount %>
       </h5>
 
+      <h5 class="card-title">
+        <strong>Current amount:</strong>
+        <%= tanda.goal_amount %>
+      </h5>
+
       <p>
         <strong>Due date:</strong>
         <%= tanda.due_date %>
       </p>
 
       <p class="card-text">
-        <strong>Users:</strong>
+        <strong>Created by:</strong>
         <%= tanda.creator.username %>
-        <%= tanda.user_tandas.name %>
+        <strong>Users:</strong>
+        <%= tanda.users %>
       </p>
 
     </div>
