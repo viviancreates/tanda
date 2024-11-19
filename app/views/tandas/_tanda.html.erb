@@ -1,34 +1,25 @@
 <div id="<%= dom_id tanda %>">
- <p>
-    <strong>Name:</strong>
-    <%= tanda.name %>
-  </p>
+  <div class="card">
+    <div class="card-header">
+      <%= tanda.name %>
+    </div>
 
-  <p>
-    <strong>Goal amount:</strong>
-    <%= tanda.goal_amount %>
-  </p>
+    <div class="card-body">
+      <h5 class="card-title">
+        <strong>Goal amount:</strong>
+        <%= tanda.goal_amount %>
+      </h5>
 
-  <p>
-    <strong>Creator:</strong>
-    <%= tanda.creator.username %>
-  </p>
+      <p>
+        <strong>Due date:</strong>
+        <%= tanda.due_date %>
+      </p>
 
-  <p>
-    <strong>Due date:</strong>
-    <%= tanda.due_date %>
-  </p>
+      <p class="card-text">
+        <strong>Users:</strong>
+        <%= tanda.creator.username %>
+        <%= tanda.user_tandas.name %>
+      </p>
 
-</div>
-
-<div class="card">
-  <div class="card-header">
-    <%= tanda.name %>
+    </div>
   </div>
-  <div class="card-body">
-    <h5 class="card-title">Special title treatment</h5>
-    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-    <a href="#" class="btn btn-primary">Quick Stats</a>
-
-  </div>
-</div>
