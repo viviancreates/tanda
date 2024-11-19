@@ -1,5 +1,5 @@
 <h1>Analytics</h1>
 
 <div>
-<%= bar_chart Transaction.group(:user_tanda_id).sum(:amount) %>
+<%= pie_chart Transaction.group(:user_tanda_id).sum(:amount), title: "Amount contrinuted per User" %>
 </div>
