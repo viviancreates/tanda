@@ -1,0 +1,65 @@
+<div class="container mt-4">
+  <h1>
+    <%= @user.username %>
+  </h1>
+
+  <div class="card mb-4">
+    <div class="card-header">
+      <h4>User Info</h4>
+    </div>
+    <div class="card-body">
+      <p><strong>Name:</strong> <%= [@user.first_name, @user.last_name].compact.join(" ") %></p>
+      <p><strong>Email:</strong> <%= @user.email %></p>
+    </div>
+  </div>
+</div>
+
+<div class="card mb-4">
+  <div class="card-header">
+    <h4>Your Tandas</h4>
+  </div>
+  <div class="card-body">
+    <% if @tandas.any? %>
+      <ul class="list-group">
+        <% @tandas.each do |tanda| %>
+          <li class="list-group-item">
+            <%= link_to tanda.name, tanda_path(tanda), class: "text-decoration-none" %>
+            - Goal: $<%= tanda.goal_amount %>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>No tandas created yet.</p>
+    <% end %>
+  </div>
+</div>
+
+<div class="card mb-4">
+  <div class="card-header">
+    <h4 class="mb-0">Your Transactions</h4>
+  </div>
+  <div class="card-body">
+    <% if @transactions.any? %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Description</th>
+            <th>Amount</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @transactions.each do |transaction| %>
+            <tr>
+              <td><%= transaction.description %></td>
+              <td>$<%= transaction.amount %></td>
+              <td><%= transaction.date.strftime("%B %d, %Y") %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p>No transactions yet.</p>
+    <% end %>
+  </div>
+</div>
