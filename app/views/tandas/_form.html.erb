@@ -3,14 +3,22 @@
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-  <div class="form-inputs">
-    <%= f.input :goal_amount %>
-    <%= f.input :creator_id %>
-    <%= f.input :name %>
-    <%= f.input :due_date %>
+<div class="mb-3">
+    <%= f.label :goal_amount, "Goal Amount", class: "form-label" %>
+    <%= f.input_field :goal_amount, class: "form-control", placeholder: "Enter goal amount" %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :name, "Name", class: "form-label" %>
+    <%= f.input_field :name, class: "form-control", placeholder: "Enter name" %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :due_date, "Due Date", class: "form-label" %>
+    <%= f.input_field :due_date, class: "form-control", type: "date" %>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, class: "btn btn-primary" %>
   </div>
 <% end %>

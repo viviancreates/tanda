@@ -25,6 +25,7 @@ class TandasController < ApplicationController
   # POST /tandas or /tandas.json
   def create
     @tanda = Tanda.new(tanda_params)
+    @tanda.creator_id = current_user.id
 
     respond_to do |format|
       if @tanda.save
