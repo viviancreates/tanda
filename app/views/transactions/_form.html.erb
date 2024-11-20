@@ -22,10 +22,19 @@
     <%= f.input_field :description, class: "form-control", placeholder: "Enter Description" %>
   </div>
 
-  <div class="mb-3">
-    <%= f.label :transaction_type, "Type", class: "form-label" %>
-    <%= f.input_field :transaction_type, class: "form-control", placeholder: "Enter Type" %>
-  </div>
+  <div class="form-check">
+  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+  <label class="form-check-label" for="flexRadioDefault1">
+    Deposit
+  </label>
+</div>
+
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+  <label class="form-check-label" for="flexRadioDefault2">
+    Withdrawal
+  </label>
+</div>
 
   <div class="form-actions">
     <%= f.button :submit, class: "btn btn-primary" %>
