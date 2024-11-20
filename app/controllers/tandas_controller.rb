@@ -8,6 +8,9 @@ class TandasController < ApplicationController
 
   # GET /tandas/1 or /tandas/1.json
   def show
+    @current_amount = Transaction.joins(user_tanda: :tanda)
+    .where(tandas: { id: @tanda.id })
+    .sum(:amount)
   end
 
   # GET /tandas/new
@@ -22,6 +25,7 @@ class TandasController < ApplicationController
   # POST /tandas or /tandas.json
   def create
     @tanda = Tanda.new(tanda_params)
+    @tanda.creator_id = current_user.id
 
     respond_to do |format|
       if @tanda.save

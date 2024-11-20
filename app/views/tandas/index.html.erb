@@ -1,14 +1,14 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Tandas</h1>
+<div class="d-flex justify-content-between align-items-center mb-4">
+<h1>My Tandas</h1>
+<%= link_to "New Tanda", new_tanda_path, class: "btn btn-primary" %>
+</div>
 
 <div id="tandas">
   <% @tandas.each do |tanda| %>
+  <div class="mb-5">
     <%= render tanda %>
-    <p>
-      <%= link_to "Show this tanda", tanda %>
-    </p>
+    </div>
   <% end %>
 </div>
-
-<%= link_to "New tanda", new_tanda_path %>

@@ -85,6 +85,8 @@ gem "sqlite3", "~> 1.4"
 gem "table_print"
 gem "simple_form"
 gem "carrierwave"
+gem 'chartkick'
+gem 'groupdate'
 
 
 group :development do
