@@ -3,23 +3,28 @@
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="mb-3">
-    <%= f.input :user_tanda_id %>
+    <%= f.label :user_tanda_id, "ID", class: "form-label" %>
+    <%= f.input_field :user_tanda_id, class: "form-control", placeholder: "Enter ID" %>
+  </div>
+  
+  <div class="mb-3">
+    <%= f.label :amount, "Transaction Amount", class: "form-label" %>
+    <%= f.input_field :amount, class: "form-control", placeholder: "Enter Amount" %>
   </div>
 
   <div class="mb-3">
-    <%= f.input :amount %>
+    <%= f.label :date, "Transaction Date", class: "form-label" %>
+    <%= f.input_field :date, class: "form-control", placeholder: "Enter Date" %>
   </div>
 
   <div class="mb-3">
-    <%= f.input :date %>
+    <%= f.label :description, "Transaction Description", class: "form-label" %>
+    <%= f.input_field :description, class: "form-control", placeholder: "Enter Description" %>
   </div>
 
   <div class="mb-3">
-    <%= f.input :description %>
-  </div>
-
-  <div class="mb-3">
-    <%= f.input :transaction_type %>
+    <%= f.label :transaction_type, "Type", class: "form-label" %>
+    <%= f.input_field :transaction_type, class: "form-control", placeholder: "Enter Type" %>
   </div>
 
   <div class="form-actions">
