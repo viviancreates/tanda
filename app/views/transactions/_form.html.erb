@@ -1,17 +1,28 @@
-
 <%= simple_form_for(@transaction) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-  <div class="form-inputs">
+  <div class="mb-3">
     <%= f.input :user_tanda_id %>
+  </div>
+
+  <div class="mb-3">
     <%= f.input :amount %>
+  </div>
+
+  <div class="mb-3">
     <%= f.input :date %>
+  </div>
+
+  <div class="mb-3">
     <%= f.input :description %>
+  </div>
+
+  <div class="mb-3">
     <%= f.input :transaction_type %>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, class: "btn btn-primary %>
   </div>
 <% end %>
