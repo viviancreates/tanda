@@ -27,4 +27,5 @@ class User < ApplicationRecord
 
   has_many :user_tandas
   has_many :tandas, through: :user_tandas, foreign_key: 'creator_id'
+  has_many :transactions, through: :user_tandas
 end

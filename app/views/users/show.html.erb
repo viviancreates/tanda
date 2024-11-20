@@ -1,3 +1,44 @@
-<h1>
-  <%= @user.username %>
-</h1>
+<div class="container mt-4">
+  <h1>
+    <%= @user.username %>
+  </h1>
+
+  <div>
+    <h2>User Info</h2>
+    <div>
+      <p><strong>Name:</strong> <%= [@user.first_name, @user.last_name].compact.join(" ") %></p>
+      <p><strong>Email:</strong> <%= @user.email %></p>
+    </div>
+  </div>
+
+  <div>
+    <h2>Your Tandas</h2>
+    <% if @tandas.any? %>
+      <% @tandas.each do |tanda| %>
+        <div>
+          <h3><%= link_to tanda.name, tanda_path(tanda) %></h3>
+          <p><strong>Goal:</strong> $<%= tanda.goal_amount %></p>
+        </div>
+      <% end %>
+    <% else %>
+      <p>No tandas created yet.</p>
+    <% end %>
+  </div>
+
+  <div>
+    <h2>Your Transactions</h2>
+    <% if @transactions.any? %>
+      <% @transactions.each do |transaction| %>
+        <div>
+          <p><strong>Description:</strong> <%= transaction.description %></p>
+          <p><strong>Amount:</strong> $<%= transaction.amount %></p>
+          <p><strong>Date:</strong> <%= transaction.date.strftime("%B %d, %Y") %></p>
+        </div>
+      <% end %>
+    <% else %>
+      <p>No transactions yet.</p>
+    <% end %>
+  </div>
+
+</div>
+</div>
