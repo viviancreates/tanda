@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: "home#landing"
+  root to: "home#index"
   
   devise_for :users
   resources :user_tandas

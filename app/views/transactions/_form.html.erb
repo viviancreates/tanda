@@ -1,17 +1,38 @@
-
 <%= simple_form_for(@transaction) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-  <div class="form-inputs">
-    <%= f.input :user_tanda_id %>
-    <%= f.input :amount %>
-    <%= f.input :date %>
-    <%= f.input :description %>
-    <%= f.input :transaction_type %>
+  <div class="mb-3">
+    <%= f.label :user_tanda_id, "ID", class: "form-label" %>
+    <%= f.input_field :user_tanda_id, class: "form-control", placeholder: "Enter ID" %>
+  </div>
+  
+  <div class="mb-3">
+    <%= f.label :amount, "Transaction Amount", class: "form-label" %>
+    <%= f.input_field :amount, class: "form-control", placeholder: "Enter Amount" %>
   </div>
 
+  <div class="mb-3">
+    <%= f.label :date, "Transaction Date", class: "form-label" %>
+    <%= f.input_field :date, class: "form-control", placeholder: "Enter Date" %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :description, "Transaction Description", class: "form-label" %>
+    <%= f.input_field :description, class: "form-control", placeholder: "Enter Description" %>
+  </div>
+
+  <div class="form-check">
+    <%= f.radio_button :transaction_type, "deposit", id: "deposit", class: "form-check-input" %>
+    <%= f.label :transaction_type, "Deposit", value: "deposit", class: "form-check-label", for: "deposit" %>
+</div>
+
+<div class="form-check">
+  <%= f.radio_button :transaction_type, "withdrawal", id: "withdrawal", class: "form-check-input" %>  
+  <%= f.label :transaction_type, "Withdrawal", value: "withdrawal", class: "form-check-label", for: "withdrawal" %>
+</div>
+
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, class: "btn btn-primary" %>
   </div>
 <% end %>

@@ -24,7 +24,7 @@ task sample_data: :environment do
   4.times do
     
     Tanda.create(
-      name: ["Wedding", "Vacation", "House", "Fun", "Car", "Family", "Budget", "Debt"].sample + "Fund",
+      name: ["Wedding", "Vacation", "House", "Fun", "Car", "Family", "Budget", "Debt"].sample + " " + "Fund",
       goal_amount: rand(1000..5000),
       creator_id: User.all.sample.id,
       due_date: Date.today + rand(30..60), 
