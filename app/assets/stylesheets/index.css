@@ -12,3 +12,9 @@ body::before {
   z-index: -1;
 }
 
+.dropdown {
+  color: blue;
+  text-align: left;
+  display: flex;
+
+  }
