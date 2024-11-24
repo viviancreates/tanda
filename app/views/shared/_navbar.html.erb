@@ -24,8 +24,12 @@
       <ul class="navbar-nav">
         <% if user_signed_in? %>
         <li class="nav-item">
+          <% if current_user.username.present? %> 
             <%= link_to "Profile #{current_user.username}", user_path(current_user.username), class: "nav-link" %>
-          </li>
+          <% else %>
+            <%= link_to "Profile", user_path(current_user), class: "nav-link" %>
+          <% end %>
+        </li>
           <li class="nav-item">
             <%= link_to "Edit #{current_user.username}", edit_user_registration_path, class: "nav-link" %>
           </li>
