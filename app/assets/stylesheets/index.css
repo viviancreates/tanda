@@ -1,4 +1,4 @@
-body {
+body.landing-page {
   margin: 0;
   font-family: 'Poppins', sans-serif;
   background-color: #f8f9fa; 
@@ -7,17 +7,17 @@ body {
   line-height: 1.6;
 }
 
-a {
+body.landing-page a {
   text-decoration: none;
   color: inherit;
   transition: color 0.3s ease;
 }
 
-a:hover {
+body.landing-page a:hover {
   color: #529651;
 }
 
-.hero {
+body.landing-page .hero {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -28,11 +28,11 @@ a:hover {
   text-align: center;
 }
 
-.hero-content {
+body.landing-page .hero-content {
   max-width: 600px;
 }
 
-.tanda-logo {
+body.landing-page .tanda-logo {
   font-size: 3.5rem;
   margin: 0;
   display: flex;
@@ -40,61 +40,61 @@ a:hover {
   gap: 8px;
 }
 
-.tanda-logo span {
+body.landing-page .tanda-logo span {
   font-weight: 700;
 }
 
-.tanda-logo .t {
+body.landing-page .tanda-logo .t {
   color: #FFE29D;
 }
 
-.tanda-logo .a {
+body.landing-page .tanda-logo .a {
   color: #5DC7A4;
 }
 
-.tanda-logo .n {
+body.landing-page .tanda-logo .n {
   color: #3A3F87;
 }
 
-.tanda-logo .d {
+body.landing-page .tanda-logo .d {
   color: #CF3E81;
 }
 
-.tanda-logo .a2 {
+body.landing-page .tanda-logo .a2 {
   color: #F0983E;
 }
 
-.hero h2 {
+body.landing-page .hero h2 {
   font-size: 2.8rem;
   color: #3a3f87; /* Deep Blue */
   margin-bottom: 20px;
 }
 
-.description {
+body.landing-page .description {
   font-size: 1.2rem;
   color: #666;
   margin-bottom: 20px;
 }
 
-.works {
+body.landing-page .works {
   padding: 60px 20px;
   background: #ffffff;
 }
 
-.works h2 {
+body.landing-page .works h2 {
   font-size: 2.5rem;
   color: #3a3f87;
   margin-bottom: 40px;
 }
 
-.steps {
+body.landing-page .steps {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
   justify-content: center;
 }
 
-.step {
+body.landing-page .step {
   background: #f8f9fa;
   border-radius: 12px;
   padding: 20px;
@@ -104,24 +104,24 @@ a:hover {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.step:hover {
+body.landing-page .step:hover {
   transform: scale(1.05);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-.step h3 {
+body.landing-page .step h3 {
   font-size: 1.5rem;
   color: #f0983e;
   margin-bottom: 10px;
 }
 
-.step p {
+body.landing-page .step p {
   font-size: 1rem;
   color: #666;
   line-height: 1.5;
 }
 
-footer {
+body.landing-page footer {
   text-align: center;
   padding: 20px;
   background: #3a3f87;
@@ -129,7 +129,7 @@ footer {
   font-size: 0.9rem;
 }
 
-.footer-links {
+body.landing-page .footer-links {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -138,15 +138,15 @@ footer {
   gap: 15px;
 }
 
-.footer-links li {
+body.landing-page .footer-links li {
   display: inline;
 }
 
-.footer-links a {
+body.landing-page .footer-links a {
   color: #fff;
   font-weight: 500;
 }
 
-.footer-links a:hover {
+body.landing-page .footer-links a:hover {
   color: #f0983e;
 }
