@@ -1,65 +1,86 @@
-<div class="container mt-4">
+ <div class="container user-show-page mt-4">
   <h1>
-    <%= @user.username %>
+    <i class="fa fa-user-circle"></i> <%= @user.username %>
   </h1>
 
   <div class="card mb-4">
     <div class="card-header">
-      <h4>User Info</h4>
+      <h4><i class="fa fa-info-circle"></i> User Info</h4>
     </div>
     <div class="card-body">
       <p><strong>Name:</strong> <%= [@user.first_name, @user.last_name].compact.join(" ") %></p>
       <p><strong>Email:</strong> <%= @user.email %></p>
     </div>
   </div>
-</div>
 
-<div class="card mb-4">
-  <div class="card-header">
-    <h4>Your Tandas</h4>
-  </div>
-  <div class="card-body">
-    <% if @tandas.any? %>
-      <ul class="list-group">
-        <% @tandas.each do |tanda| %>
-          <li class="list-group-item">
-            <%= link_to tanda.name, tanda_path(tanda), class: "text-decoration-none" %>
-            - Goal: $<%= tanda.goal_amount %>
-          </li>
-        <% end %>
-      </ul>
-    <% else %>
-      <p>No tandas created yet.</p>
-    <% end %>
-  </div>
-</div>
-
-<div class="card mb-4">
-  <div class="card-header">
-    <h4 class="mb-0">Your Transactions</h4>
-  </div>
-  <div class="card-body">
-    <% if @transactions.any? %>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Description</th>
-            <th>Amount</th>
-            <th>Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @transactions.each do |transaction| %>
-            <tr>
-              <td><%= transaction.description %></td>
-              <td>$<%= transaction.amount %></td>
-              <td><%= transaction.date.strftime("%B %d, %Y") %></td>
-            </tr>
+  <div class="card mb-4">
+    <div class="card-header">
+      <h4><i class="fa fa-users"></i> Your Tandas</h4>
+    </div>
+    <div class="card-body">
+      <% if @tandas.any? %>
+        <ul class="list-group">
+          <% @tandas.each do |tanda| %>
+            <li class="list-group-item">
+              <i class="fa fa-piggy-bank"></i> 
+              <%= link_to tanda.name, tanda_path(tanda), class: "text-decoration-none" %>
+              - Goal: $<%= tanda.goal_amount %>
+            </li>
           <% end %>
-        </tbody>
-      </table>
-    <% else %>
-      <p>No transactions yet.</p>
-    <% end %>
+        </ul>
+      <% else %>
+        <p>No tandas created yet.</p>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="card mb-4">
+    <div class="card-header">
+      <h4 class="mb-0"><i class="fa fa-wallet"></i> Your Transactions</h4>
+    </div>
+    <div class="card-body">
+      <% if @transactions.any? %>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Description</th>
+              <th>Amount</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @transactions.each do |transaction| %>
+              <tr>
+                <td><i class="fa fa-tag"></i> <%= transaction.description %></td>
+                <td>$<%= transaction.amount %></td>
+                <td><%= transaction.date.strftime("%B %d, %Y") %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% else %>
+        <p>No transactions yet.</p>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="card mb-4">
+    <div class="card-header">
+      <h4><i class="fa fa-users"></i> Connections</h4>
+    </div>
+    <div class="card-body">
+      <% if @connections.any? %>
+        <ul class="list-group">
+          <% @connections.each do |connection| %>
+            <li class="list-group-item">
+              <i class="fa fa-user-circle"></i> 
+              <%= connection.username %>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p>No connections yet.</p>
+      <% end %>
+    </div>
   </div>
 </div>
