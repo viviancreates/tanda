@@ -1,5 +1,7 @@
 <h1>Analytics</h1>
 
-<div>
-  <%= pie_chart @amount_per_user, title: "Amount Contributed per User" %>
-</div>
+<% @charts_data.each do |tanda_name, user_data| %>
+  <h3><%= tanda_name %></h3>
+  <%= pie_chart user_data, title: "#{tanda_name} Contributions" %>
+<% end %>
+
