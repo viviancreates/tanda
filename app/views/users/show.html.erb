@@ -3,6 +3,14 @@
     <%= @user.username %>
   </h1>
 
+<div class ="card mb-4">
+<% if @user.avatar.attached? %>
+  <%= image_tag url_for(@user.avatar) %>
+<% else %>
+  <p>No avatar uploaded</p>
+<% end %>
+</div>
+
   <div class="card mb-4">
     <div class="card-header">
       <h4>User Info</h4>
