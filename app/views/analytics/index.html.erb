@@ -1,7 +1,14 @@
 <h1>Analytics</h1>
 
-<% @charts_data.each do |tanda_name, user_data| %>
+<div class="tanda_by_user_contribution">
+<% @charts_data.each do |tanda_name, chart_data| %>
   <h3><%= tanda_name %></h3>
-  <%= pie_chart user_data, title: "#{tanda_name} Contributions" %>
-<% end %>
+  <%= pie_chart chart_data[:user_data], title: "#{tanda_name} Contributions" %>
 
+  <div class="metrics">
+    <p><strong>Total Contributions:</strong> <%= number_to_currency(chart_data[:total]) %></p>
+    <p><strong>Tanda Goal:</strong> <%= number_to_currency(chart_data[:goal]) %></p>
+    <p><strong>Remaining Goal:</strong> <%= number_to_currency(chart_data[:remaining_goal]) %></p>
+  </div>
+<% end %>
+</div>
