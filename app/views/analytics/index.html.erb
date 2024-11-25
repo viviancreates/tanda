@@ -9,6 +9,17 @@
     <p><strong>Total Contributions:</strong> <%= number_to_currency(chart_data[:total]) %></p>
     <p><strong>Tanda Goal:</strong> <%= number_to_currency(chart_data[:goal]) %></p>
     <p><strong>Remaining Goal:</strong> <%= number_to_currency(chart_data[:remaining_goal]) %></p>
+    <p><strong>Progress:</strong> <%= number_to_percentage((chart_data[:total].to_f / chart_data[:goal]) * 100, precision: 0) %></p>    
   </div>
-<% end %>
+
+  
+  <div>
+    <div style="background-color: grey; border-radius: 5px; height: 20px; width: 100%; overflow: hidden;">
+    <div style="background-color: green; height: 100%; width: <%= (chart_data[:total].to_f / chart_data[:goal]) * 100 %>%;"></div>
+  </div>
+ 
+
+   
+    </div>
+  <% end %>
 </div>
