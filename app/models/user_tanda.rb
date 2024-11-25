@@ -12,4 +12,8 @@ class UserTanda < ApplicationRecord
   belongs_to :user
   belongs_to :tanda
   has_many :transactions
+
+  def tanda_name
+    tanda.name
+  end
 end
