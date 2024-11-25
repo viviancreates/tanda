@@ -3,9 +3,9 @@
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="mb-3">
-    <%= f.label :user_tanda_id, "ID", class: "form-label" %>
-    <%= f.input_field :user_tanda_id, class: "form-control", placeholder: "Enter ID" %>
-  </div>
+    <%= f.label :user_tanda_id, "Select Tanda", class: "form-label" %>
+    <%= f.collection_select :user_tanda_id, @user_tandas, :id, :tanda_name, { prompt: "Choose a Tanda" }, { class: "form-control" } %>
+  </div
   
   <div class="mb-3">
     <%= f.label :amount, "Transaction Amount", class: "form-label" %>

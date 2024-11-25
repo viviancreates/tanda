@@ -3,7 +3,7 @@ class TransactionsController < ApplicationController
 
   # GET /transactions or /transactions.json
   def index
-    @transactions = Transaction.all
+    @transactions = Transaction.joins(user_tanda: :user).where(user_tandas: { user_id: current_user.id })
   end
 
   # GET /transactions/1 or /transactions/1.json
@@ -13,21 +13,26 @@ class TransactionsController < ApplicationController
   # GET /transactions/new
   def new
     @transaction = Transaction.new
+    @user_tandas = current_user.user_tandas
   end
 
   # GET /transactions/1/edit
   def edit
+    @user_tandas = current_user.user_tandas
   end
 
   # POST /transactions or /transactions.json
   def create
     @transaction = Transaction.new(transaction_params)
+    user_tanda = current_user.user_tandas.find_by(id: @transaction.user_tanda_id)
 
     respond_to do |format|
-      if @transaction.save
+      if user_tanda && @transaction.save
         format.html { redirect_to transaction_url(@transaction), notice: "Transaction was successfully created." }
         format.json { render :show, status: :created, location: @transaction }
       else
+        @user_tandas = current_user.user_tandas
+        @transaction.errors.add(:user_tanda_id, "is invalid") unless user_tanda
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @transaction.errors, status: :unprocessable_entity }
       end
@@ -36,6 +41,8 @@ class TransactionsController < ApplicationController
 
   # PATCH/PUT /transactions/1 or /transactions/1.json
   def update
+    user_tanda = current_user.user_tandas.find_by(id: @transaction.user_tanda_id)
+
     respond_to do |format|
       if @transaction.update(transaction_params)
         format.html { redirect_to transaction_url(@transaction), notice: "Transaction was successfully updated." }

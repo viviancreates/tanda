@@ -3,7 +3,7 @@ class TandasController < ApplicationController
   
   # GET /tandas or /tandas.json
   def index
-    @tandas = Tanda.all
+    @tandas = Tanda.joins(:user_tandas).where(user_tandas: { user_id: current_user.id })
   end
 
   # GET /tandas/1 or /tandas/1.json
@@ -29,6 +29,7 @@ class TandasController < ApplicationController
 
     respond_to do |format|
       if @tanda.save
+        UserTanda.create(user_id: current_user.id, tanda_id: @tanda.id)
         format.html { redirect_to tanda_url(@tanda), notice: "Tanda was successfully created." }
         format.json { render :show, status: :created, location: @tanda }
       else
