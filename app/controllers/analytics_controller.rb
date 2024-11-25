@@ -22,5 +22,7 @@ class AnalyticsController < ApplicationController
         remaining_goal: remaining_goal
       }
     end
+    @user_contribution_line = current_user.transactions.group_by_day(:date).sum(:amount)
   end
+  
 end
