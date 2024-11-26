@@ -16,6 +16,7 @@ class TandasController < ApplicationController
   # GET /tandas/new
   def new
     @tanda = Tanda.new
+    @friends = fetch_accepted_friends
   end
 
   # GET /tandas/1/edit
@@ -29,10 +30,20 @@ class TandasController < ApplicationController
 
     respond_to do |format|
       if @tanda.save
+
         UserTanda.create(user_id: current_user.id, tanda_id: @tanda.id)
+      
+        if params[:tanda][:participant_ids].present?
+          params[:tanda][:participant_ids].each do |participant_id|
+            UserTanda.create(user_id: participant_id, tanda_id: @tanda.id)
+          end
+        end
+
+  
         format.html { redirect_to tanda_url(@tanda), notice: "Tanda was successfully created." }
         format.json { render :show, status: :created, location: @tanda }
       else
+        @friends = current_user.accepted_friends
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @tanda.errors, status: :unprocessable_entity }
       end
@@ -71,5 +82,17 @@ class TandasController < ApplicationController
     # Only allow a list of trusted parameters through.
     def tanda_params
       params.require(:tanda).permit(:goal_amount, :creator_id, :name, :due_date)
+    end
+
+    def fetch_accepted_friends
+      sent_friend_ids = FollowRequest.where(sender_id: current_user.id, status: "accepted").pluck(:recipient_id)
+      received_friend_ids = FollowRequest.where(recipient_id: current_user.id, status: "accepted").pluck(:sender_id)
+      User.where(id: sent_friend_ids + received_friend_ids)
+    end
+
+    def accepted_friends
+      sent_friend_ids = FollowRequest.where(sender_id: id, status: "accepted").pluck(:recipient_id)
+      received_friend_ids = FollowRequest.where(recipient_id: id, status: "accepted").pluck(:sender_id)
+      User.where(id: sent_friend_ids + received_friend_ids).distinct
     end
 end
