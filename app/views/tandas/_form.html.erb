@@ -18,6 +18,13 @@
     <%= f.input_field :due_date, class: "form-control", type: "date" %>
   </div>
 
+  <div class="mb-3">
+    <%= f.label :participant_ids, "Add Participants", class: "form-label" %>
+    <%= select_tag "tanda[participant_ids][]",
+                   options_from_collection_for_select(@friends, :id, :username),
+                   multiple: true, class: "form-control" %>
+  </div>
+
   <div class="form-actions">
     <%= f.button :submit, class: "btn btn-primary" %>
   </div>

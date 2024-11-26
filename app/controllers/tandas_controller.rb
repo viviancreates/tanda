@@ -30,8 +30,16 @@ class TandasController < ApplicationController
 
     respond_to do |format|
       if @tanda.save
-        
-        UserTanda.create(user_id: current_user.id, tanda_id: @tanda.id)
+
+        UserTanda.create!(user: current_user, tanda: @tanda)
+
+      
+        if tanda_params[:participant_ids].present?
+          tanda_params[:participant_ids].each do |friend_id|
+            UserTanda.create!(user_id: friend_id, tanda: @tanda) if friend_id.present?
+          end
+        end
+  
         format.html { redirect_to tanda_url(@tanda), notice: "Tanda was successfully created." }
         format.json { render :show, status: :created, location: @tanda }
       else
@@ -72,6 +80,6 @@ class TandasController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def tanda_params
-      params.require(:tanda).permit(:goal_amount, :creator_id, :name, :due_date)
+      params.require(:tanda).permit(:goal_amount, :creator_id, :name, :due_date, participant_ids: [])
     end
 end
