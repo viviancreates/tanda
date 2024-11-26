@@ -1,4 +1,11 @@
 class UsersController < ApplicationController
+  def friends
+    @friends = current_user.accepted_received_follow_requests.map(&:sender) +
+               current_user.accepted_sent_follow_requests.map(&:recipient)
+
+    @friends.uniq!
+  end
+
   def show
     @user = User.find_by(username: params[:username])
 

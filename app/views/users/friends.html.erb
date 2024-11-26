@@ -1,0 +1,13 @@
+<h1>My amigos</h1>
+
+<% if @friends.any? %>
+  <ul class="list-group">
+    <% @friends.each do |friend| %>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <%= friend.username %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>You have no friends yet.</p>
+<% end %>
