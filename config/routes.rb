@@ -10,4 +10,5 @@ Rails.application.routes.draw do
   resources :invitations, only: [:index, :create, :update]
   
   get "/:username" => "users#show", as: :user
+  get '/users/search', to: 'users#search', as: :search_users
 end

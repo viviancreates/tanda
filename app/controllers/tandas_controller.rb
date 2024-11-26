@@ -49,7 +49,7 @@ class TandasController < ApplicationController
     respond_to do |format|
       if @tanda.save
         UserTanda.create(user_id: current_user.id, tanda_id: @tanda.id)
-        
+
         params[:participants]&.each do |user_id|
         UserTanda.create(user_id: current_user.id, tanda_id: @tanda.id)
         end
@@ -83,6 +83,10 @@ class TandasController < ApplicationController
       format.html { redirect_to tandas_url, notice: "Tanda was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def tanda_params
+    params.require(:tanda).permit(:goal_amount, :name, :due_date, participant_ids: [])
   end
 
   private

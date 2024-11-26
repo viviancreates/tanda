@@ -19,15 +19,16 @@
   </div>
 
   <div class="mb-3">
-    <label for="user-search" class="form-label">Add Participants</label>
-    <input id="user-search" type="text" class="form-control" placeholder="Search by username">
-    <div id="user-results" class="mt-2"></div>
-  </div>
+  <%= label_tag :query, "Search Participants", class: "form-label" %>
+  <%= text_field_tag :query, nil, class: "form-control", placeholder: "Enter username to search" %>
+</div>
 
-  <div class="mb-3">
-    <strong>Selected Participants:</strong>
-    <ul id="selected-users" class="list-unstyled"></ul>
-  </div>
+<!-- Render Search Results -->
+<div id="search-results">
+  <% if @users %>
+    <%= render partial: "users/search_results", locals: { users: @users } %>
+  <% end %>
+</div>
 
   <div class="form-actions">
     <%= f.button :submit, class: "btn btn-primary" %>

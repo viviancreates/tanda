@@ -1,0 +1,15 @@
+<% if @users && @users.any? %>
+  <ul class="list-group">
+    <% @users.each do |user| %>
+      <li class="list-group-item">
+        <%= user.username %>
+        <%= hidden_field_tag 'participants[]', user.id %>
+        <%= button_to 'Add', '#', class: 'btn btn-primary btn-sm add-participant', form: false %>
+      </li>
+    <% end %>
+  </ul>
+<% elsif @users.nil? %>
+  <!-- Do not show any message -->
+<% else %>
+  <p>No users found.</p>
+<% end %>

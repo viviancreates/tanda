@@ -15,4 +15,10 @@ class Tanda < ApplicationRecord
   has_many :transactions
   has_many :users, through: :user_tandas
   belongs_to :creator, class_name: 'User', foreign_key: 'creator_id'
+
+  attr_accessor :participant_ids
+
+  def participant_ids
+    @participant_ids ||= users.pluck(:id)
+  end
 end
