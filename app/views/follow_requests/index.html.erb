@@ -4,7 +4,19 @@
 
 <div id="follow_requests">
   <% @follow_requests.each do |follow_request| %>
-    <%= render follow_request %>
+    <p>
+      From: <%= follow_request.sender.username %>
+    </p>
+
+    <p>
+      Status: <%= follow_request.status %>
+    </p>
+
+    <% if follow_request.pending? %>
+      <%= button_to "Accept", follow_request_path(follow_request, status: "accepted"), method: :patch, class: "btn btn-success btn-sm" %>
+      <%= button_to "Deny", follow_request_path(follow_request, status: "rejected"), method: :patch, class: "btn btn-danger btn-sm" %>
+    <% end %>
+
     <p>
       <%= link_to "Show this follow request", follow_request %>
     </p>
