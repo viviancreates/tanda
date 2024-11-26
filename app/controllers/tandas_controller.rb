@@ -16,6 +16,7 @@ class TandasController < ApplicationController
   # GET /tandas/new
   def new
     @tanda = Tanda.new
+    @friends = current_user.accepted_friends
   end
 
   # GET /tandas/1/edit
@@ -29,6 +30,7 @@ class TandasController < ApplicationController
 
     respond_to do |format|
       if @tanda.save
+        
         UserTanda.create(user_id: current_user.id, tanda_id: @tanda.id)
         format.html { redirect_to tanda_url(@tanda), notice: "Tanda was successfully created." }
         format.json { render :show, status: :created, location: @tanda }
