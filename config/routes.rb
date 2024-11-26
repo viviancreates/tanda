@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :transactions
   resources :tandas
   resources :analytics, only: [:index]
+  resources :invitations, only: [:index, :create, :update]
   
   get "/:username" => "users#show", as: :user
 end
