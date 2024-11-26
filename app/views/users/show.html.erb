@@ -3,6 +3,8 @@
     <i class="fa fa-user-circle"></i> <%= @user.username %>
   </h1>
 
+  <%= button_to "Follow", follow_requests_path(follow_request: { recipient_id: @user.id }), method: :post, class: "btn btn-primary" %>
+
   <div class="card mb-4">
     <div class="card-header">
       <h4><i class="fa fa-info-circle"></i> User Info</h4>

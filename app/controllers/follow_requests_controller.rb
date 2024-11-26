@@ -1,9 +1,10 @@
 class FollowRequestsController < ApplicationController
   before_action :set_follow_request, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
 
   # GET /follow_requests or /follow_requests.json
   def index
-    @follow_requests = FollowRequest.all
+    @follow_requests = current_user.received_follow_requests
   end
 
   # GET /follow_requests/1 or /follow_requests/1.json
@@ -21,7 +22,7 @@ class FollowRequestsController < ApplicationController
 
   # POST /follow_requests or /follow_requests.json
   def create
-    @follow_request = FollowRequest.new(follow_request_params)
+    @follow_request = current_user.sent_follow_requests.new(follow_request_params)
 
     respond_to do |format|
       if @follow_request.save
@@ -37,12 +38,20 @@ class FollowRequestsController < ApplicationController
   # PATCH/PUT /follow_requests/1 or /follow_requests/1.json
   def update
     respond_to do |format|
-      if @follow_request.update(follow_request_params)
+
+      if params[:status].present? && %w[accepted rejected].include?(params[:status])
+        @follow_request.update!(status: params[:status])
+        message = params[:status] == "accepted" ? "Follow request accepted!" : "Follow request rejected."
+  
+        respond_to do |format|
         format.html { redirect_to follow_request_url(@follow_request), notice: "Follow request was successfully updated." }
         format.json { render :show, status: :ok, location: @follow_request }
+        end
       else
+        respond_to do |format|
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @follow_request.errors, status: :unprocessable_entity }
+        
       end
     end
   end
