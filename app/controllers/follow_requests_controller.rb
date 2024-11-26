@@ -37,21 +37,18 @@ class FollowRequestsController < ApplicationController
 
   # PATCH/PUT /follow_requests/1 or /follow_requests/1.json
   def update
-    respond_to do |format|
+    if params[:status].present? && %w[accepted rejected].include?(params[:status])
+      @follow_request.update!(status: params[:status])
+      message = params[:status] == "accepted" ? "Follow request accepted!" : "Follow request rejected."
 
-      if params[:status].present? && %w[accepted rejected].include?(params[:status])
-        @follow_request.update!(status: params[:status])
-        message = params[:status] == "accepted" ? "Follow request accepted!" : "Follow request rejected."
-  
-        respond_to do |format|
-        format.html { redirect_to follow_request_url(@follow_request), notice: "Follow request was successfully updated." }
+      respond_to do |format|
+        format.html { redirect_to follow_request_url(@follow_request), notice: message }
         format.json { render :show, status: :ok, location: @follow_request }
-        end
-      else
-        respond_to do |format|
+      end
+    else
+      respond_to do |format|
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @follow_request.errors, status: :unprocessable_entity }
-        
       end
     end
   end
@@ -76,4 +73,5 @@ class FollowRequestsController < ApplicationController
     def follow_request_params
       params.require(:follow_request).permit(:recipient_id, :sender_id, :status)
     end
+  
 end

@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :transactions
   resources :tandas
   resources :analytics, only: [:index]
-  resources :follow_requests
+  resources :follow_requests, only: [:update, :create, :destroy]
   
   get "/:username" => "users#show", as: :user
 end
