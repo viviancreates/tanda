@@ -15,4 +15,12 @@ class UsersController < ApplicationController
                          .distinct
     end
   end
+
+  def search
+    if params[:username].present?
+      @users = User.where("username LIKE ?", "%#{params[:username]}%").where.not(id: current_user.id)
+    else
+      @users = []
+    end
+  end
 end

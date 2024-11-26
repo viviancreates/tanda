@@ -71,7 +71,7 @@ class FollowRequestsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def follow_request_params
-      params.require(:follow_request).permit(:recipient_id, :sender_id, :status)
+      params.require(:follow_request).permit(:recipient_id).merge(sender: current_user)
     end
   
 end

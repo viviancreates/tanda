@@ -1,0 +1,23 @@
+<h1>Search for Friends</h1>
+
+<%= form_with url: search_users_path, method: :get, local: true do %>
+  <div class="mb-3">
+    <%= label_tag :username, "Search by Username", class: "form-label" %>
+    <%= text_field_tag :username, params[:username], class: "form-control", placeholder: "Enter username" %>
+  </div>
+  <%= submit_tag "Search", class: "btn btn-primary" %>
+<% end %>
+
+<% if @users.present? %>
+  <h2>Search Results:</h2>
+  <ul>
+    <% @users.each do |user| %>
+      <li>
+        <%= user.username %>
+        <%= button_to "Send Friend Request", follow_requests_path(follow_request: { recipient_id: user.id }), method: :post, class: "btn btn-success btn-sm" %>
+      </li>
+    <% end %>
+  </ul>
+<% elsif params[:username].present? %>
+  <p>No users found matching "<%= params[:username] %>".</p>
+<% end %>
