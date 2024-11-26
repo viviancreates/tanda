@@ -1,6 +1,25 @@
 class TandasController < ApplicationController
   before_action :set_tanda, only: %i[ show edit update destroy ]
   
+  def invite_user
+    @tanda = Tanda.find(params[:id])
+    user = User.find_by(username: params[:username])
+  
+    respond_to do |format|
+      if user.nil?
+        format.html { redirect_to tanda_url(@tanda), alert: "User not found." }
+        format.json { render json: { error: "User not found." }, status: :not_found }
+      elsif @tanda.users.include?(user)
+        format.html { redirect_to tanda_url(@tanda), alert: "User is already in this Tanda." }
+        format.json { render json: { error: "User is already in this Tanda." }, status: :unprocessable_entity }
+      else
+        @tanda.invitations.create(sender_id: current_user.id, receiver_id: user.id, status: "pending")
+        format.html { redirect_to tanda_url(@tanda), notice: "Invitation sent!" }
+        format.json { render json: { message: "Invitation sent!" }, status: :created }
+      end
+    end
+  end
+
   # GET /tandas or /tandas.json
   def index
     @tandas = Tanda.joins(:user_tandas).where(user_tandas: { user_id: current_user.id })

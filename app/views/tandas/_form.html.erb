@@ -18,6 +18,17 @@
     <%= f.input_field :due_date, class: "form-control", type: "date" %>
   </div>
 
+  <div class="mb-3">
+    <label for="user-search" class="form-label">Add Participants</label>
+    <input id="user-search" type="text" class="form-control" placeholder="Search by username">
+    <div id="user-results" class="mt-2"></div>
+  </div>
+
+  <div class="mb-3">
+    <strong>Selected Participants:</strong>
+    <ul id="selected-users" class="list-unstyled"></ul>
+  </div>
+
   <div class="form-actions">
     <%= f.button :submit, class: "btn btn-primary" %>
   </div>
