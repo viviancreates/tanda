@@ -4,7 +4,7 @@ class FollowRequestsController < ApplicationController
 
   # GET /follow_requests or /follow_requests.json
   def index
-    @follow_requests = current_user.received_follow_requests
+    @follow_requests = current_user.received_follow_requests.pending
   end
 
   # GET /follow_requests/1 or /follow_requests/1.json
