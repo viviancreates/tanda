@@ -1,9 +1,6 @@
 class UsersController < ApplicationController
   def friends
-    @friends = current_user.accepted_received_follow_requests.map(&:sender) +
-               current_user.accepted_sent_follow_requests.map(&:recipient)
-
-    @friends.uniq!
+    @friends = fetch_accepted_friends
   end
 
   def show
@@ -29,5 +26,19 @@ class UsersController < ApplicationController
     else
       @users = []
     end
+  end
+
+  private
+
+  def fetch_accepted_friends
+    sent_friend_ids = FollowRequest.where(sender_id: current_user.id, status: "accepted").pluck(:recipient_id)
+    received_friend_ids = FollowRequest.where(recipient_id: current_user.id, status: "accepted").pluck(:sender_id)
+    User.where(id: sent_friend_ids + received_friend_ids)
+  end
+
+  def accepted_friends
+    sent_friend_ids = FollowRequest.where(sender_id: id, status: "accepted").pluck(:recipient_id)
+    received_friend_ids = FollowRequest.where(recipient_id: id, status: "accepted").pluck(:sender_id)
+    User.where(id: sent_friend_ids + received_friend_ids).distinct
   end
 end
