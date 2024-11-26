@@ -49,6 +49,10 @@ class TandasController < ApplicationController
     respond_to do |format|
       if @tanda.save
         UserTanda.create(user_id: current_user.id, tanda_id: @tanda.id)
+        
+        params[:participants]&.each do |user_id|
+        UserTanda.create(user_id: current_user.id, tanda_id: @tanda.id)
+        end
         format.html { redirect_to tanda_url(@tanda), notice: "Tanda was successfully created." }
         format.json { render :show, status: :created, location: @tanda }
       else
