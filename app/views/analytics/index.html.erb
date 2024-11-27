@@ -1,14 +1,17 @@
+<header class="dashboard">
 <h1>My Dashboard</h1>
+</header>
 
+<body class="dashboard">
 <div class="container">
 <% @charts_data.each do |tanda_name, chart_data| %>
   <h3><%= tanda_name %></h3>
 
-  <div class="container">
+  <div class="card my-4">
   <%= pie_chart chart_data[:user_data], title: "#{tanda_name} Contributions" %>
 </div>
 
-<div class="container>
+<div class="card my-4">
   <div class="metrics">
     <p><strong>Total Contributions:</strong> <%= number_to_currency(chart_data[:total]) %></p>
     <p><strong>Tanda Goal:</strong> <%= number_to_currency(chart_data[:goal]) %></p>
@@ -17,7 +20,7 @@
   </div>
 </div>
   
-  <div class="container>
+  <div class="card-my-4">
     <div style="background-color: grey; border-radius: 5px; height: 20px; width: 100%; overflow: hidden;">
     <div style="background-color: green; height: 100%; width: <%= (chart_data[:total].to_f / chart_data[:goal]) * 100 %>%;"></div>
   </div>
@@ -28,7 +31,9 @@
   <% end %>
 </div>
 
-<div class="container">
+<div class="card-my-4">
 <h2>My Contributions</h2>
 <%= line_chart @user_contribution_line, title: "Contributions" %>
 </div>
+
+</body>
