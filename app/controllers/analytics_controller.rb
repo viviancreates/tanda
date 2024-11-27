@@ -1,5 +1,6 @@
 class AnalyticsController < ApplicationController
   def index
+    @user = current_user.user_tandas
     @user_tandas = current_user.user_tandas.includes(:tanda)
     @charts_data = {}
 

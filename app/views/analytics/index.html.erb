@@ -1,5 +1,6 @@
 <header class="dashboard">
 <h1>My Dashboard</h1>
+<h2>Hi, <%= @user.name %>!</h2>
 </header>
 
 <body class="dashboard">
@@ -20,18 +21,17 @@
   </div>
 </div>
   
-  <div class="card-my-4">
+  <div class="card my-4">
     <div style="background-color: grey; border-radius: 5px; height: 20px; width: 100%; overflow: hidden;">
     <div style="background-color: green; height: 100%; width: <%= (chart_data[:total].to_f / chart_data[:goal]) * 100 %>%;"></div>
   </div>
 </div> 
-
    
     </div>
   <% end %>
 </div>
 
-<div class="card-my-4">
+<div class="card my-4">
 <h2>My Contributions</h2>
 <%= line_chart @user_contribution_line, title: "Contributions" %>
 </div>
