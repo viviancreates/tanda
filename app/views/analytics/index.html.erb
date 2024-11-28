@@ -1,6 +1,16 @@
 <div class="dashboard-title">
   <h1>My Dashboard</h1>
   <h2>Hi, <%= @user.first_name %>!</h2>
+
+  
+</div>
+
+<div class="summary-card">
+  <h2>Tanda Summary</h2>
+  <p><strong>Total Tanda Contributions:</strong> <%= number_to_currency(@charts_data.values.sum { |data| data[:total] }) %></p>
+  <p><strong>Total Tandas:</strong> <%= @charts_data.keys.size %></p>
+  <p><strong>Total Tanda Remaining Goal:</strong> <%= number_to_currency(@charts_data.values.sum { |data| data[:remaining_goal] }) %></p>
+  <p><strong>My Total Contributions:</strong> <%= number_to_currency(@user_total_contributions) %></p>
 </div>
 
 <div class="dashboard-graphs">
@@ -17,10 +27,11 @@
           <p><strong>Total Contributions:</strong> <%= number_to_currency(chart_data[:total]) %></p>
           <p><strong>Tanda Goal:</strong> <%= number_to_currency(chart_data[:goal]) %></p>
           <p><strong>Remaining Goal:</strong> <%= number_to_currency(chart_data[:remaining_goal]) %></p>
+          <p><strong>Progress:</strong> <%= number_to_percentage((chart_data[:total].to_f / chart_data[:goal]) * 100, precision: 0) %></p>
         </div>
         <div class="progress-bar">
-        <div style="background-color: grey; border-radius: 5px; height: 20px; width: 100%; overflow: hidden;">
-            <div style="background-color: green; height: 100%; width: <%= (chart_data[:total].to_f / chart_data[:goal]) * 100 %>%;"> <p><strong>Progress:</strong> <%= number_to_percentage((chart_data[:total].to_f / chart_data[:goal]) * 100, precision: 0) %></p></div>
+        <div style="background-color: #f2f2f2; border-radius: 5px; height: 20px; width: 100%; overflow: hidden;">
+            <div style="background-color: #3A3F87; height: 100%; width: <%= (chart_data[:total].to_f / chart_data[:goal]) * 100 %>%;"> </div>
         
         </div>
       </div>

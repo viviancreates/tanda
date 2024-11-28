@@ -3,6 +3,7 @@ class AnalyticsController < ApplicationController
     @user = current_user
     @user_tandas = current_user.user_tandas.includes(:tanda)
     @charts_data = {}
+    @user_total_contributions = current_user.transactions.sum(:amount)
 
     pastel_colors = [
       "#FFB3BA", # Soft Pink

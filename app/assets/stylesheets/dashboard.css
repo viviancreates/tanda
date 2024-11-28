@@ -1,14 +1,16 @@
 .dashboard-title {
   font-family: "Poppins", sans-serif;
   padding: 30px;
+  color: #3A3F87;
 }
 
-.dashboard-graphs, .line-graph {
+.dashboard-graphs, .line-graph, .summary-card {
   padding: 30px;
   background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin-bottom: 10px;
+  color: #3A3F87;
 }
 
 .dashboard-graphs .container {
@@ -40,4 +42,11 @@
 .progress-bar {
   background-color: #ddd;
   border-radius: 5px;
+}
+
+.summary-card {
+  background: linear-gradient(135deg, #FFE29D, #ffffff);
+  border: 1px solid #ddd;
+  margin-bottom: 30px;
+  text-align: center;
 }
