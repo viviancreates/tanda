@@ -9,7 +9,7 @@
   <h3><%= tanda_name %></h3>
 
   <div class="card my-4">
-  <%= pie_chart chart_data[:user_data], title: "#{tanda_name} Contributions" %>
+  <%= pie_chart chart_data[:user_data], title: "#{tanda_name} Contributions", colors: chart_data[:colors] %>
 </div>
 
 <div class="card my-4">
@@ -34,6 +34,9 @@
 <div class="card my-4">
 <h2>My Contributions</h2>
 <%= line_chart @user_contribution_line, title: "Contributions" %>
+              
 </div>
+
+
 
 </body>
