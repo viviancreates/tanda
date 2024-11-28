@@ -6,37 +6,31 @@
 <div class="dashboard-graphs">
   <div class="container">
     <% @charts_data.each do |tanda_name, chart_data| %>
-      <div class="tanda_dash">
+      <div class="dashboard-card">
         <h3><%= tanda_name %></h3>
-
+     
         <div class="chart">
           <%= pie_chart chart_data[:user_data], title: "#{tanda_name} Contributions", colors: chart_data[:colors] %>
         </div>
 
-          <div class="metrics">
-            <p><strong>Total Contributions:</strong> <%= number_to_currency(chart_data[:total]) %></p>
-            <p><strong>Tanda Goal:</strong> <%= number_to_currency(chart_data[:goal]) %></p>
-            <p><strong>Remaining Goal:</strong> <%= number_to_currency(chart_data[:remaining_goal]) %></p>
-           
-          </div>
-
+        <div class="metrics">
+          <p><strong>Total Contributions:</strong> <%= number_to_currency(chart_data[:total]) %></p>
+          <p><strong>Tanda Goal:</strong> <%= number_to_currency(chart_data[:goal]) %></p>
+          <p><strong>Remaining Goal:</strong> <%= number_to_currency(chart_data[:remaining_goal]) %></p>
+        </div>
         <div class="progress-bar">
-          <div style="background-color: grey; border-radius: 5px; height: 20px; width: 100%; overflow: hidden;">
-            <div style="background-color: green; height: 100%; width: <%= (chart_data[:total].to_f / chart_data[:goal]) * 100 %>%;"></div>
-             <p><strong>Progress:</strong> <%= number_to_percentage((chart_data[:total].to_f / chart_data[:goal]) * 100, precision: 0) %></p>
-          </div>
-          </div>
+        <div style="background-color: grey; border-radius: 5px; height: 20px; width: 100%; overflow: hidden;">
+            <div style="background-color: green; height: 100%; width: <%= (chart_data[:total].to_f / chart_data[:goal]) * 100 %>%;"> <p><strong>Progress:</strong> <%= number_to_percentage((chart_data[:total].to_f / chart_data[:goal]) * 100, precision: 0) %></p></div>
+        
         </div>
       </div>
-    
-  <% end %>
+      </div>
+      
+    <% end %>
   </div>
 </div>
 
-<div class="card my-4">
+<div class="line-graph">
   <h2>My Contributions</h2>
   <%= line_chart @user_contribution_line, title: "Contributions" %>
-
-</div>
-
 </div>

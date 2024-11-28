@@ -1,19 +1,14 @@
 .dashboard-title {
   font-family: "Poppins", sans-serif;
   padding: 30px;
-
 }
 
-.dashboard-graphs {
+.dashboard-graphs, .line-graph {
   padding: 30px;
   background-color: #ffffff;
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
-}
-
-.dashboard-graphs .container {
-  max-width: 800px;
-  margin: 0 auto;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
 }
 
 .dashboard-graphs .container {
@@ -21,20 +16,28 @@
   flex-wrap: wrap;
   gap: 30px;
   justify-content: center;
+  padding: 15px;
+  margin: 15px;
+}
+
+.dashboard-card {
+  background: linear-gradient(135deg, #e8f0ff, #ffffff);
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: calc(50% - 30px);
+  max-width: 400px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px; 
 }
 
 .chart {
   margin-bottom: 15px;
 }
 
-.metrics p {
-  margin: 5px 0;
-}
-
 .progress-bar {
   background-color: #ddd;
   border-radius: 5px;
-  height: 20px;
-  width: 100%;
-  margin-top: 10px;
 }
