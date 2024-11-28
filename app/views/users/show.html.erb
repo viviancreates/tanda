@@ -86,11 +86,14 @@
     </div>
   </div>
 <div>
-  <% if current_user.default_address.nil? %>
-  <%= button_to "Create Wallet", create_wallet_user_path(current_user), method: :post, class: "btn btn-primary" %>
+ <h2>Wallet Information</h2>
+<% if current_user.default_address.present? %>
+  <p><strong>Address:</strong> <%= current_user.default_address %></p>
+  <p><strong>Balance:</strong> <%= current_user.balance %> ETH</p>
+  <%= button_to "Fund Wallet", fund_wallet_path(current_user), method: :post %>
 <% else %>
-  <p>Your wallet address: <%= current_user.default_address %></p>
-  <p>Balance: <%= current_user.balance %> ETH</p>
+  <p>No wallet found. Create one now:</p>
+  <%= button_to "Create Wallet", create_wallet_path(current_user), method: :post %>
 <% end %>
 </div>
 </div>

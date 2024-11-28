@@ -16,4 +16,8 @@ class Tanda < ApplicationRecord
   has_many :transactions
   has_many :users, through: :user_tandas
   belongs_to :creator, class_name: 'User', foreign_key: 'creator_id'
+
+  def creator_wallet_address
+    creator_wallet || "No wallet linked"
+  end
 end

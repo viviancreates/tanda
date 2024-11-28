@@ -28,6 +28,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :username, presence: true, uniqueness: true
+  validates :default_address, uniqueness: true, allow_nil: true
 
   has_many :user_tandas
   has_many :tandas, through: :user_tandas, foreign_key: 'creator_id'

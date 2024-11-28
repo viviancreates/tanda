@@ -43,13 +43,11 @@ class UsersController < ApplicationController
   end
 
   def create_wallet
-    # Configure Coinbase API
     Coinbase.configure do |config|
       config.api_key_name = ENV['COINBASE_API_KEY_NAME']
       config.api_key_private_key = ENV['COINBASE_API_KEY_PRIVATE_KEY']
     end
 
-    # Create wallet for the current user
     wallet = Coinbase::Wallet.create
     if wallet
       current_user.update(default_address: wallet.default_address, balance: 0)
@@ -60,6 +58,7 @@ class UsersController < ApplicationController
     redirect_to user_path(current_user)
   end
 
+  # Fund the user's wallet
   def fund_wallet
     if current_user.default_address.present?
       Coinbase.configure do |config|
@@ -67,7 +66,6 @@ class UsersController < ApplicationController
         config.api_key_private_key = ENV['COINBASE_API_KEY_PRIVATE_KEY']
       end
 
-      # Fund the user's wallet
       wallet = Coinbase::Wallet.find(current_user.default_address)
       faucet_tx = wallet.faucet
       faucet_tx.wait!
