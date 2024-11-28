@@ -1,14 +1,18 @@
 Rails.application.routes.draw do
-  resources :follow_requests
   root to: "home#index"
   
   devise_for :users
+
+  post "/users/:id/create_wallet", to: "users#create_wallet", as: :create_wallet
+  post "/users/:id/fund_wallet", to: "users#fund_wallet", as: :fund_wallet
+  post "/tandas/:id/link_wallet", to: "tandas#link_wallet", as: :link_wallet
+
   resources :user_tandas
   resources :transactions
   resources :tandas
   resources :analytics, only: [:index]
   resources :follow_requests, only: [:update, :create, :destroy]
-  resources :wallets, only: [:show, :fund]
+ 
 
   get "/friends", to: "users#friends", as: :friends
   get "/search_users", to: "users#search", as: :search_users

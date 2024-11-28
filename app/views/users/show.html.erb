@@ -85,6 +85,12 @@
       <% end %>
     </div>
   </div>
-
-  
+<div>
+  <% if current_user.default_address.nil? %>
+  <%= button_to "Create Wallet", create_wallet_user_path(current_user), method: :post, class: "btn btn-primary" %>
+<% else %>
+  <p>Your wallet address: <%= current_user.default_address %></p>
+  <p>Balance: <%= current_user.balance %> ETH</p>
+<% end %>
+</div>
 </div>
