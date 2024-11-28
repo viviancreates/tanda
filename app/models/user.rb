@@ -3,6 +3,8 @@
 # Table name: users
 #
 #  id                     :bigint           not null, primary key
+#  balance                :decimal(10, 2)   default(0.0)
+#  default_address        :string
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  first_name             :string
