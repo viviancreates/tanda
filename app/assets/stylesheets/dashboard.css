@@ -14,12 +14,12 @@ body.dashboard .card {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.container {
+body.dashboard .container {
   max-width: 800px;
   margin: 0 auto;
 }
 
-.tanda-group {
+body.dashboard .tanda-group {
   padding: 20px;
   border: 1px solid #ddd; 
   border-radius: 5px;
