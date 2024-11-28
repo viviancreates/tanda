@@ -90,10 +90,10 @@
 <% if current_user.default_address.present? %>
   <p><strong>Address:</strong> <%= current_user.default_address %></p>
   <p><strong>Balance:</strong> <%= current_user.balance %> ETH</p>
-  <%= button_to "Fund Wallet", fund_wallet_path(current_user), method: :post %>
+  <%= button_to "Fund Wallet", fund_wallet_path(current_user.id), method: :post %>
 <% else %>
   <p>No wallet found. Create one now:</p>
-  <%= button_to "Create Wallet", create_wallet_path(current_user), method: :post %>
+  <%= button_to "Create Wallet", create_wallet_path(current_user.id), method: :post %>
 <% end %>
 </div>
 </div>

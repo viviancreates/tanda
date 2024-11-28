@@ -1,4 +1,23 @@
 class UsersController < ApplicationController
+  def create_wallet
+    Coinbase.configure do |config|
+      config.api_key_name = ENV['COINBASE_API_KEY_NAME']
+      config.api_key_private_key = ENV['COINBASE_API_KEY_PRIVATE_KEY']
+    end
+
+    wallet = Coinbase::Wallet.create
+    if wallet
+      current_user.update(default_address: wallet.default_address, balance: 0)
+      flash[:success] = "Wallet created successfully!"
+    else
+      flash[:error] = "Failed to create wallet."
+    end
+    redirect_to user_path(current_user)
+
+    Rails.logger.info "create_wallet method called"
+
+  end
+
   def friends
     @friends = fetch_accepted_friends
   end
@@ -42,21 +61,6 @@ class UsersController < ApplicationController
     User.where(id: sent_friend_ids + received_friend_ids).distinct
   end
 
-  def create_wallet
-    Coinbase.configure do |config|
-      config.api_key_name = ENV['COINBASE_API_KEY_NAME']
-      config.api_key_private_key = ENV['COINBASE_API_KEY_PRIVATE_KEY']
-    end
-
-    wallet = Coinbase::Wallet.create
-    if wallet
-      current_user.update(default_address: wallet.default_address, balance: 0)
-      flash[:success] = "Wallet created successfully!"
-    else
-      flash[:error] = "Failed to create wallet."
-    end
-    redirect_to user_path(current_user)
-  end
 
   # Fund the user's wallet
   def fund_wallet
