@@ -1,47 +1,15 @@
 <div class="dashboard-title">
-  <h1>My Dashboard</h1>
-  <h2>Hi, <%= @user.first_name %>!</h2>
-
-  
+  <h1>Hi, <%= @user.first_name %>!</h1>
 </div>
 
-<div class="summary-card">
-  <h2>Tanda Summary</h2>
-  <p><i class="fas fa-money-check-alt"></i> <strong>Total Tanda Contributions:</strong> <%= number_to_currency(@charts_data.values.sum { |data| data[:total] }) %></p>
-  <p><i class="fas fa-chart-pie"></i> <strong>Total Tandas:</strong> <%= @charts_data.keys.size %></p>
-  <p><i class="fa-solid fa-circle-half-stroke"></i> <strong>Total Tanda Remaining Goal:</strong> <%= number_to_currency(@charts_data.values.sum { |data| data[:remaining_goal] }) %></p>
-  <p><i class="fa-solid fa-dollar-sign"></i> <strong>My Total Contributions:</strong> <%= number_to_currency(@user_total_contributions) %></p>
-</div>
+<%= render 'analytics/summary' %>
 
 <div class="dashboard-graphs">
   <div class="container">
     <% @charts_data.each do |tanda_name, chart_data| %>
-      <div class="dashboard-card">
-        <h3><%= tanda_name %></h3>
-     
-        <div class="chart">
-          <%= pie_chart chart_data[:user_data], title: "#{tanda_name} Contributions", colors: chart_data[:colors] %>
-        </div>
-
-        <div class="metrics">
-          <p><strong>Total Contributions:</strong> <%= number_to_currency(chart_data[:total]) %></p>
-          <p><strong>Tanda Goal:</strong> <%= number_to_currency(chart_data[:goal]) %></p>
-          <p><strong>Remaining Goal:</strong> <%= number_to_currency(chart_data[:remaining_goal]) %></p>
-          <p><strong>Progress:</strong> <%= number_to_percentage((chart_data[:total].to_f / chart_data[:goal]) * 100, precision: 0) %></p>
-        </div>
-        <div class="progress-bar">
-        <div style="background-color: #f2f2f2; border-radius: 5px; height: 20px; width: 100%; overflow: hidden;">
-            <div style="background-color: #3A3F87; height: 100%; width: <%= (chart_data[:total].to_f / chart_data[:goal]) * 100 %>%;"> </div>
-        
-        </div>
-      </div>
-      </div>
-      
+      <%= render 'analytics/dashboard', tanda_name: tanda_name, chart_data: chart_data %>
     <% end %>
   </div>
 </div>
 
-<div class="line-graph">
-  <h2>My Contributions</h2>
-  <%= line_chart @user_contribution_line, title: "Contributions" %>
-</div>
+<%= render 'analytics/line_graph' %>

@@ -1,0 +1,9 @@
+<div class="dashboard-card">
+  <h3><%= tanda_name %></h3>
+
+  <%= render 'analytics/pie_chart', tanda_name: tanda_name, chart_data: chart_data %>
+
+  <%= render 'analytics/metrics', chart_data: chart_data %>
+
+  <%= render 'analytics/progress_bar', chart_data: chart_data %>
+</div>

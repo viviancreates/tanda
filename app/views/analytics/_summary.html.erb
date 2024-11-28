@@ -1,0 +1,7 @@
+<div class="summary-card">
+  <h2>Tanda Summary</h2>
+  <p><i class="fas fa-money-check-alt"></i> <strong>Total Tanda Contributions:</strong> <%= number_to_currency(@charts_data.values.sum { |data| data[:total] }) %></p>
+  <p><i class="fas fa-chart-pie"></i> <strong>Total Tandas:</strong> <%= @charts_data.keys.size %></p>
+  <p><i class="fa-solid fa-circle-half-stroke"></i> <strong>Total Tanda Remaining Goal:</strong> <%= number_to_currency(@charts_data.values.sum { |data| data[:remaining_goal] }) %></p>
+  <p><i class="fa-solid fa-dollar-sign"></i> <strong>My Total Contributions:</strong> <%= number_to_currency(@user_total_contributions) %></p>
+</div>
