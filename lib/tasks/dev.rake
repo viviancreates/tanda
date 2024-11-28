@@ -2,6 +2,7 @@ task sample_data: :environment do
   p "Creating sample data"
 
   if Rails.env.development?
+    FollowRequest.destroy_all
     Transaction.destroy_all
     UserTanda.destroy_all
     Tanda.destroy_all
@@ -20,6 +21,43 @@ task sample_data: :environment do
   end
   
   p "There are now #{User.count} users."
+
+  users = User.all
+
+  # Create first batch of follow requests
+  users.each do |first_user|
+    users.each do |second_user|
+      next if first_user == second_user
+      if rand < 0.75
+        first_user.sent_follow_requests.create(
+          recipient: second_user,
+          status: ["pending", "accepted", "rejected"].sample,
+        )
+      end
+    end
+  end
+
+  # Create second batch of follow requests
+  users.each do |first_user|
+    users.each do |second_user|
+      next if first_user == second_user
+      if rand < 0.75
+        first_user.sent_follow_requests.create(
+          recipient: second_user,
+          status: FollowRequest.statuses.keys.sample,
+        )
+      end
+
+      if rand < 0.75
+        second_user.sent_follow_requests.create(
+          recipient: first_user,
+          status: FollowRequest.statuses.keys.sample,
+        )
+      end
+    end
+  end
+
+  p "There are now #{FollowRequest.count} follow requests."
 
   10.times do
     
