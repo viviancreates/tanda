@@ -11,6 +11,7 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin-bottom: 10px;
   color: #3A3F87;
+  font-family: "Poppins", sans-serif;
 }
 
 .dashboard-graphs .container {
@@ -33,6 +34,7 @@
   display: flex;
   flex-direction: column;
   gap: 15px; 
+  text-align: center;
 }
 
 .chart {
@@ -45,8 +47,7 @@
 }
 
 .summary-card {
-  background: linear-gradient(135deg, #FFE29D, #ffffff);
-  border: 1px solid #ddd;
+  background: linear-gradient(135deg, #FFF4CC, #ffffff);
   margin-bottom: 30px;
   text-align: center;
 }
