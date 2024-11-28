@@ -1,0 +1,25 @@
+<h1>Wallet Details</h1>
+
+<p><strong>Wallet Address:</strong> <%= @wallet.default_address %></p>
+<p><strong>Balance:</strong> <%= @wallet.balance(:eth).amount %> ETH</p>
+
+<%= link_to "Fund Wallet", fund_wallet_path(@wallet.id), method: :post %>
+
+<h2>Transfer Funds</h2>
+
+<%= form_with url: transfer_wallet_path(@wallet.id), method: :post do |form| %>
+  <%= form.hidden_field :from_wallet_id, value: @wallet.id %>
+  <%= form.label :to_wallet_id, "To Wallet Address:" %>
+  <%= form.text_field :to_wallet_id %>
+
+  <%= form.label :amount, "Amount (ETH):" %>
+  <%= form.number_field :amount, step: "0.00000001" %>
+
+  <%= form.submit "Transfer Funds" %>
+<% end %>
+
+<% if flash[:success] %>
+  <p style="color: green;"><%= flash[:success] %></p>
+<% elsif flash[:error] %>
+  <p style="color: red;"><%= flash[:error] %></p>
+<% end %>

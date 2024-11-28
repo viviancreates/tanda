@@ -1,0 +1,11 @@
+<h1>Create a New Wallet</h1>
+
+<%= form_with url: wallets_path, method: :post, local: true do |form| %>
+  <%= form.submit "Create Wallet" %>
+<% end %>
+
+<% if flash[:success] %>
+  <p style="color: green;"><%= flash[:success] %></p>
+<% elsif flash[:error] %>
+  <p style="color: red;"><%= flash[:error] %></p>
+<% end %>

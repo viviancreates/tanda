@@ -1,5 +1,5 @@
 # config/initializers/coinbase.rb
-
+require 'coinbase'
 api_key_name = ENV['COINBASE_API_KEY_NAME']
 api_key_private_key = ENV['COINBASE_API_KEY_PRIVATE_KEY']
 
