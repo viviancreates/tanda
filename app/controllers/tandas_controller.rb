@@ -21,6 +21,7 @@ class TandasController < ApplicationController
 
   # GET /tandas/1/edit
   def edit
+    @friends = fetch_accepted_friends
   end
 
   # POST /tandas or /tandas.json

@@ -2,6 +2,7 @@ task sample_data: :environment do
   p "Creating sample data"
 
   if Rails.env.development?
+    FollowRequest.destroy_all
     Transaction.destroy_all
     UserTanda.destroy_all
     Tanda.destroy_all
@@ -21,7 +22,44 @@ task sample_data: :environment do
   
   p "There are now #{User.count} users."
 
-  4.times do
+  users = User.all
+
+  # Create first batch of follow requests
+  users.each do |first_user|
+    users.each do |second_user|
+      next if first_user == second_user
+      if rand < 0.75
+        first_user.sent_follow_requests.create(
+          recipient: second_user,
+          status: ["pending", "accepted", "rejected"].sample,
+        )
+      end
+    end
+  end
+
+  # Create second batch of follow requests
+  users.each do |first_user|
+    users.each do |second_user|
+      next if first_user == second_user
+      if rand < 0.75
+        first_user.sent_follow_requests.create(
+          recipient: second_user,
+          status: FollowRequest.statuses.keys.sample,
+        )
+      end
+
+      if rand < 0.75
+        second_user.sent_follow_requests.create(
+          recipient: first_user,
+          status: FollowRequest.statuses.keys.sample,
+        )
+      end
+    end
+  end
+
+  p "There are now #{FollowRequest.count} follow requests."
+
+  10.times do
     
     Tanda.create(
       name: ["Wedding", "Vacation", "House", "Fun", "Car", "Family", "Budget", "Debt"].sample + " " + "Fund",
@@ -34,7 +72,7 @@ task sample_data: :environment do
   p "There are now #{Tanda.count} tandas."
 
   Tanda.all.each do |tanda|
-    User.all.sample(rand(2..5)).each do |user|
+    User.all.sample(rand(5..9)).each do |user|
       UserTanda.create(
         user_id: user.id,
         tanda_id: tanda.id,
@@ -48,7 +86,7 @@ task sample_data: :environment do
       Transaction.create(
         user_tanda_id: user_tanda.id,
         amount: rand(20..100),
-        date: Date.today,
+        date: Date.today - rand(30..60),
         description: Faker::Lorem.sentence,
         transaction_type: ["deposit", "withdrawal"].sample
       )

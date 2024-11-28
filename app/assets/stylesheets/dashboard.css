@@ -1,0 +1,53 @@
+.dashboard-title {
+  font-family: "Poppins", sans-serif;
+  padding: 30px;
+  color: #3A3F87;
+}
+
+.dashboard-graphs, .line-graph, .summary-card {
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+  color: #3A3F87;
+  font-family: "Poppins", sans-serif;
+}
+
+.dashboard-graphs .container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+  padding: 15px;
+  margin: 15px;
+}
+
+.dashboard-card {
+  background: linear-gradient(135deg, #e8f0ff, #ffffff);
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: calc(50% - 30px);
+  max-width: 400px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px; 
+  text-align: center;
+}
+
+.chart {
+  margin-bottom: 15px;
+}
+
+.progress-bar {
+  background-color: #ddd;
+  border-radius: 5px;
+}
+
+.summary-card {
+  background: linear-gradient(135deg, #FFF4CC, #ffffff);
+  margin-bottom: 30px;
+  text-align: center;
+}
