@@ -1,14 +1,27 @@
 header.dashboard {
-
+font-family: poppins;
+padding: 30px;
 }
 
 body.dashboard {
-  
+  padding: 30px;
 }
 
 body.dashboard .card {
   background: linear-gradient(135deg, #e8f0ff, #ffffff);
   border-radius: 4px;
   padding: 30px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.tanda-group {
+  padding: 20px;
+  border: 1px solid #ddd; 
+  border-radius: 5px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }

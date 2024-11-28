@@ -6,6 +6,7 @@
 <body class="dashboard">
 <div class="container">
 <% @charts_data.each do |tanda_name, chart_data| %>
+<div class="tanda_dash">
   <h3><%= tanda_name %></h3>
 
   <div class="card my-4">
@@ -26,7 +27,7 @@
     <div style="background-color: green; height: 100%; width: <%= (chart_data[:total].to_f / chart_data[:goal]) * 100 %>%;"></div>
   </div>
 </div> 
-   
+   </div>
     </div>
   <% end %>
 </div>
