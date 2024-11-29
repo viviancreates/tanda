@@ -9,13 +9,3 @@ Coinbase.configure do |config|
 end
 
 puts "Coinbase SDK has been successfully configured with CDP API key."
-
-# Create a wallet with one address by default.
-wallet1 = Coinbase::Wallet.create
-
-# A wallet has a default address.
-address = wallet1.default_address
-puts "Created wallet with address: #{address}"
-
-puts ENV['API_KEY_NAME']  # Should print the actual API key name
-puts ENV['API_KEY_PRIVATE_KEY'].inspect  # Should print the actual private key
