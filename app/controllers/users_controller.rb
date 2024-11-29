@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :configure_coinbase, only: [:create_wallet, :fund_wallet]
+  before_action :configure_coinbase, only: [:create_wallet, :fund_wallet, :transfer]
 
   def create_wallet
     wallet = Coinbase::Wallet.create
@@ -44,8 +44,41 @@ class UsersController < ApplicationController
     redirect_to user_path(current_user.username)
   end
   
-
   
+  def transfer
+    if current_user.wallet_data.present?
+      # Extract wallet data
+      wallet_id = current_user.wallet_data['wallet_id']
+      seed = current_user.wallet_data['seed']
+  
+      # Initialize Coinbase::Wallet::Data
+      wallet_data = Coinbase::Wallet::Data.new(wallet_id: wallet_id, seed: seed)
+  
+      # Import wallet
+      wallet = Coinbase::Wallet.import(wallet_data)
+  
+      begin
+        # Initiate the transfer
+        transfer = wallet.transfer(params[:amount].to_f, params[:currency].to_sym, params[:recipient_address])
+        transfer.wait! # Wait for the transaction to settle
+  
+        # Fetch the updated balance
+        updated_balance = wallet.balance(params[:currency].to_sym)
+  
+        # Update the user's balance in the database
+        current_user.update(balance: updated_balance.to_f)
+  
+        flash[:success] = "Transfer successful! Your updated balance is #{updated_balance.to_f} #{params[:currency].upcase}."
+      rescue StandardError => e
+        Rails.logger.error "Error during transfer: #{e.message}"
+        flash[:error] = "Transfer failed: #{e.message}"
+      end
+    else
+      flash[:error] = "You need to create a wallet before making transfers."
+    end
+  
+    redirect_to user_path(current_user.username)
+  end
   
 
   def friends

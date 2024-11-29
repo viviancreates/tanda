@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   post "/users/:id/create_wallet", to: "users#create_wallet", as: :create_wallet
   post "/users/:id/fund_wallet", to: "users#fund_wallet", as: :fund_wallet
+  post "/users/:id/transfer", to: "users#transfer", as: :transfer_wallet
+
 
   resources :user_tandas
   resources :transactions
