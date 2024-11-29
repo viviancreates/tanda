@@ -28,30 +28,26 @@ class TandasController < ApplicationController
   def create
     @tanda = Tanda.new(tanda_params)
     @tanda.creator_id = current_user.id
-    @tanda.creator_wallet = current_user.default_address
-
+    @tanda.creator_wallet = current_user.wallet_data["wallet_id"]
+  
     respond_to do |format|
       if @tanda.save
-
         UserTanda.create(user_id: current_user.id, tanda_id: @tanda.id)
-      
-        if params[:tanda][:participant_ids].present?
-          params[:tanda][:participant_ids].each do |participant_id|
-            UserTanda.create(user_id: participant_id, tanda_id: @tanda.id)
+        if params[:tanda][:participant_ids].present?         
+           params[:tanda][:participant_ids].each do |participant_id|
+            UserTanda.create(user_id: participant_id, tanda_id: @tanda.id)          
           end
         end
-
-  
         format.html { redirect_to tanda_url(@tanda), notice: "Tanda was successfully created." }
         format.json { render :show, status: :created, location: @tanda }
       else
-        @friends = current_user.accepted_friends
+        @friends = fetch_accepted_friends
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @tanda.errors, status: :unprocessable_entity }
       end
     end
   end
-
+  
   # PATCH/PUT /tandas/1 or /tandas/1.json
   def update
     respond_to do |format|
