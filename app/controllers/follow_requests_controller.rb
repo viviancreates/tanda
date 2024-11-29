@@ -28,9 +28,11 @@ class FollowRequestsController < ApplicationController
 
     respond_to do |format|
       if @follow_request.save
-        format.html { redirect_to follow_request_url(@follow_request), notice: "Follow request was successfully created." }
+        flash[:notice] = "Follow request sent successfully!"
+        format.html { redirect_to follow_requests_path}
         format.json { render :show, status: :created, location: @follow_request }
       else
+        flash[:alert] = "Failed to send follow request. Please try again."
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @follow_request.errors, status: :unprocessable_entity }
       end
