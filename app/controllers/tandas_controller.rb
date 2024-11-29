@@ -75,16 +75,6 @@ class TandasController < ApplicationController
     end
   end
 
-  def link_wallet
-    if current_user.default_address.present?
-      @tanda.update(creator_wallet: current_user.default_address)
-      flash[:success] = "Wallet linked successfully to the tanda!"
-    else
-      flash[:error] = "No wallet found. Please create a wallet first."
-    end
-    redirect_to tanda_path(@tanda)
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_tanda
