@@ -16,24 +16,26 @@ class UsersController < ApplicationController
   end
  
   def fund_wallet
-    if current_user.wallet_data.present?
+    if current_user.wallet_data.present? # Check if wallet data exists
       begin
-        # Create a Coinbase::Wallet::Data object from stored wallet_data
+        # Recreate the wallet object
         wallet_data = Coinbase::Wallet::Data.new(
           wallet_id: current_user.wallet_data["wallet_id"],
           seed: current_user.wallet_data["seed"]
         )
-  
-        # Import the wallet using the Wallet::Data object
         wallet = Coinbase::Wallet.import(wallet_data)
   
-        # Fund the wallet
-        faucet_tx = wallet.faucet.wait!
+        # Request faucet funds
+        faucet_tx = wallet.faucet.wait! # Automatically funds the wallet with a fixed testnet amount
   
-        flash[:success] = "Wallet funded successfully!" if faucet_tx
+        # Fetch the updated balance
+        balance = wallet.balance(:eth)
+        current_user.update(balance: balance.to_f)
+  
+        flash[:success] = "Wallet funded successfully! New Balance: #{balance.to_f} ETH"
       rescue StandardError => e
         Rails.logger.error "Error funding wallet: #{e.message}"
-        flash[:error] = "An error occurred while funding the wallet: #{e.message}"
+        flash[:error] = "An error occurred while funding the wallet. Please try again."
       end
     else
       flash[:error] = "No wallet found. Please create a wallet first."
@@ -41,6 +43,8 @@ class UsersController < ApplicationController
   
     redirect_to user_path(current_user.username)
   end
+  
+
   
   
 
