@@ -7,12 +7,12 @@ Rails.application.routes.draw do
   post "/users/:id/fund_wallet", to: "users#fund_wallet", as: :fund_wallet
   post "/users/:id/transfer", to: "users#transfer", as: :transfer_wallet
 
-
+  resources :follow_requests
   resources :user_tandas
   resources :transactions
   resources :tandas
   resources :analytics, only: [:index]
-  resources :follow_requests, only: [:update, :create, :destroy]
+  
  
 
   get "/friends", to: "users#friends", as: :friends
