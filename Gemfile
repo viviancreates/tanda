@@ -87,7 +87,9 @@ gem "simple_form"
 gem "carrierwave"
 gem 'chartkick'
 gem 'groupdate'
-
+gem 'dotenv-rails', groups: [:development, :test]
+gem 'coinbase-sdk'
+gem 'dotenv-rails'
 
 group :development do
   gem "annotate"

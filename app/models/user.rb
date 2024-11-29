@@ -3,6 +3,8 @@
 # Table name: users
 #
 #  id                     :bigint           not null, primary key
+#  balance                :decimal(10, 2)   default(0.0)
+#  default_address        :string
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  first_name             :string
@@ -11,6 +13,7 @@
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
 #  username               :string
+#  wallet_data            :jsonb
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #
@@ -26,6 +29,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :username, presence: true, uniqueness: true
+  validates :default_address, uniqueness: true, allow_nil: true
 
   has_many :user_tandas
   has_many :tandas, through: :user_tandas, foreign_key: 'creator_id'

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_11_26_040325) do
+ActiveRecord::Schema[7.1].define(version: 2024_11_29_084947) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -24,18 +24,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_26_040325) do
     t.index ["sender_id"], name: "index_follow_requests_on_sender_id"
   end
 
-  create_table "invitations", force: :cascade do |t|
-    t.integer "sender_id", null: false
-    t.integer "receiver_id", null: false
-    t.integer "tanda_id", null: false
-    t.string "status", default: "pending", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["receiver_id"], name: "index_invitations_on_receiver_id"
-    t.index ["sender_id"], name: "index_invitations_on_sender_id"
-    t.index ["tanda_id"], name: "index_invitations_on_tanda_id"
-  end
-
   create_table "tandas", force: :cascade do |t|
     t.integer "goal_amount"
     t.integer "creator_id"
@@ -43,6 +31,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_26_040325) do
     t.datetime "due_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "creator_wallet"
   end
 
   create_table "transactions", force: :cascade do |t|
@@ -73,6 +62,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_26_040325) do
     t.string "username"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "default_address"
+    t.decimal "balance", precision: 10, scale: 2, default: "0.0"
+    t.jsonb "wallet_data"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

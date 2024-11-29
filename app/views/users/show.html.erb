@@ -3,6 +3,9 @@
     <i class="fa fa-user-circle"></i> <%= @user.username %>
   </h1>
 
+<p>Your Wallet Address: <%= current_user.default_address %></p>
+<p>Send ETH to this address to fund your wallet.</p>
+
   <%= button_to "Follow", follow_requests_path(follow_request: { recipient_id: @user.id }), method: :post, class: "btn btn-primary" %>
 
   <div class="card mb-4">
@@ -85,6 +88,37 @@
       <% end %>
     </div>
   </div>
-
-  
+<div>
+ <h2>Wallet Information</h2>
+<% if current_user.default_address.present? %>
+  <p><strong>Address:</strong> <%= current_user.default_address %></p>
+  <p><strong>Balance:</strong> <%= current_user.balance %> ETH</p>
+  <%= button_to "Fund Wallet", fund_wallet_path(current_user.id), method: :post %>
+<% else %>
+  <p>No wallet found. Create one now:</p>
+  <%= button_to "Create Wallet", create_wallet_path(current_user.id), method: :post %>
+<% end %>
 </div>
+</div>
+
+<h3>Transfer Funds</h3>
+<%= form_with url: transfer_wallet_path(current_user.id), method: :post, local: true do |f| %>
+  <div class="mb-3">
+    <%= f.label :recipient_address, "Recipient Wallet Address", class: "form-label" %>
+    <%= f.text_field :recipient_address, class: "form-control", required: true %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :amount, "Amount", class: "form-label" %>
+    <%= f.number_field :amount, class: "form-control", step: 0.00001, required: true %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :currency, "Currency", class: "form-label" %>
+    <%= f.select :currency, options_for_select([["ETH", :eth], ["USDC", :usdc]]), {}, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.submit "Send Funds", class: "btn btn-primary" %>
+  </div>
+<% end %>

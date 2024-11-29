@@ -1,5 +1,5 @@
 class TandasController < ApplicationController
-  before_action :set_tanda, only: %i[ show edit update destroy ]
+  before_action :set_tanda, only: %i[ show edit update destroy link_wallet ]
   
   # GET /tandas or /tandas.json
   def index
@@ -28,6 +28,7 @@ class TandasController < ApplicationController
   def create
     @tanda = Tanda.new(tanda_params)
     @tanda.creator_id = current_user.id
+    @tanda.creator_wallet = current_user.default_address
 
     respond_to do |format|
       if @tanda.save
@@ -72,6 +73,16 @@ class TandasController < ApplicationController
       format.html { redirect_to tandas_url, notice: "Tanda was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def link_wallet
+    if current_user.default_address.present?
+      @tanda.update(creator_wallet: current_user.default_address)
+      flash[:success] = "Wallet linked successfully to the tanda!"
+    else
+      flash[:error] = "No wallet found. Please create a wallet first."
+    end
+    redirect_to tanda_path(@tanda)
   end
 
   private

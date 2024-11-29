@@ -19,6 +19,10 @@
   </div>
 
   <div class="mb-3">
+    <%= f.hidden_field :creator_wallet, value: current_user.default_address %>
+  </div>
+
+  <div class="mb-3">
     <%= f.label :participant_ids, "Add Participants", class: "form-label" %>
     <%= select_tag "tanda[participant_ids][]",
                    options_from_collection_for_select(@friends, :id, :username),
