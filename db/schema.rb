@@ -24,18 +24,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_28_085234) do
     t.index ["sender_id"], name: "index_follow_requests_on_sender_id"
   end
 
-  create_table "invitations", force: :cascade do |t|
-    t.integer "sender_id", null: false
-    t.integer "receiver_id", null: false
-    t.integer "tanda_id", null: false
-    t.string "status", default: "pending", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["receiver_id"], name: "index_invitations_on_receiver_id"
-    t.index ["sender_id"], name: "index_invitations_on_sender_id"
-    t.index ["tanda_id"], name: "index_invitations_on_tanda_id"
-  end
-
   create_table "tandas", force: :cascade do |t|
     t.integer "goal_amount"
     t.integer "creator_id"
