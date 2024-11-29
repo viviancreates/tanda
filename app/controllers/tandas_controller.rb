@@ -83,7 +83,7 @@ class TandasController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def tanda_params
-      params.require(:tanda).permit(:goal_amount, :creator_id, :name, :due_date)
+      params.require(:tanda).permit(:goal_amount, :creator_id, :name, :due_date, :creator_wallet)
     end
 
     def fetch_accepted_friends
