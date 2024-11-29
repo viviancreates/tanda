@@ -5,28 +5,42 @@ class UsersController < ApplicationController
     wallet = Coinbase::Wallet.create
   
     if wallet
-      current_user.update(default_address: wallet.default_address.id, balance: 0)
+      # Export and store the complete wallet data
+      current_user.update(wallet_data: wallet.export.to_hash, balance: 0)
       flash[:success] = "Wallet created successfully!"
     else
       flash[:error] = "Failed to create wallet."
     end
   
     redirect_to user_path(current_user.username)
-  end  
-
+  end
+ 
   def fund_wallet
-    wallet = Coinbase::Wallet.create # Create a new wallet each time
-    faucet_tx = wallet.faucet.wait!
+    if current_user.wallet_data.present?
+      begin
+        # Create a Coinbase::Wallet::Data object from stored wallet_data
+        wallet_data = Coinbase::Wallet::Data.new(
+          wallet_id: current_user.wallet_data["wallet_id"],
+          seed: current_user.wallet_data["seed"]
+        )
   
-    if faucet_tx
-      flash[:success] = "Wallet funded successfully!"
+        # Import the wallet using the Wallet::Data object
+        wallet = Coinbase::Wallet.import(wallet_data)
+  
+        # Fund the wallet
+        faucet_tx = wallet.faucet.wait!
+  
+        flash[:success] = "Wallet funded successfully!" if faucet_tx
+      rescue StandardError => e
+        Rails.logger.error "Error funding wallet: #{e.message}"
+        flash[:error] = "An error occurred while funding the wallet: #{e.message}"
+      end
     else
-      flash[:error] = "Failed to fund wallet."
+      flash[:error] = "No wallet found. Please create a wallet first."
     end
   
     redirect_to user_path(current_user.username)
   end
-  
   
   
 
