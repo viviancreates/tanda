@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   resources :transactions
   resources :tandas
   resources :analytics, only: [:index]
-  resources :follow_requests, only: [:update, :create, :destroy]
+  resources :follow_requests, only: [:update, :create, :destroy, :show]
  
 
   get "/friends", to: "users#friends", as: :friends
