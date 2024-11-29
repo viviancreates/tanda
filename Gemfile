@@ -68,7 +68,6 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
-  gem "webdrivers"
 end
 
 # AppDev Gems
@@ -89,7 +88,6 @@ gem 'chartkick'
 gem 'groupdate'
 gem 'dotenv-rails', groups: [:development, :test]
 gem 'coinbase-sdk'
-gem 'dotenv-rails'
 
 group :development do
   gem "annotate"
