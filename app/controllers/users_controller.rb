@@ -14,6 +14,10 @@ class UsersController < ApplicationController
     redirect_to user_path(current_user.username)
   end  
 
+  def fund_wallet
+
+  end
+
   def friends
     @friends = fetch_accepted_friends
   end

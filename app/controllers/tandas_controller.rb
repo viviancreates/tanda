@@ -107,4 +107,11 @@ class TandasController < ApplicationController
       received_friend_ids = FollowRequest.where(recipient_id: id, status: "accepted").pluck(:sender_id)
       User.where(id: sent_friend_ids + received_friend_ids).distinct
     end
+
+    def configure_coinbase
+      Coinbase.configure do |config|
+        config.api_key_name = ENV['API_KEY_NAME']
+        config.api_key_private_key = ENV['API_KEY_PRIVATE_KEY']
+      end
+    end
 end
