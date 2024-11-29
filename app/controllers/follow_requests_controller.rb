@@ -19,6 +19,7 @@ class FollowRequestsController < ApplicationController
 
   # GET /follow_requests/1/edit
   def edit
+    @follow_request = FollowRequest.find(params[:id])
   end
 
   # POST /follow_requests or /follow_requests.json
