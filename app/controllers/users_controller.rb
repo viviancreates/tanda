@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :configure_coinbase, only: [:create_wallet]
+  before_action :configure_coinbase, only: [:create_wallet, :fund_wallet]
 
   def create_wallet
     wallet = Coinbase::Wallet.create
@@ -15,8 +15,20 @@ class UsersController < ApplicationController
   end  
 
   def fund_wallet
-
+    wallet = Coinbase::Wallet.create # Create a new wallet each time
+    faucet_tx = wallet.faucet.wait!
+  
+    if faucet_tx
+      flash[:success] = "Wallet funded successfully!"
+    else
+      flash[:error] = "Failed to fund wallet."
+    end
+  
+    redirect_to user_path(current_user.username)
   end
+  
+  
+  
 
   def friends
     @friends = fetch_accepted_friends
