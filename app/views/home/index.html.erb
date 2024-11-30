@@ -10,8 +10,15 @@
       </h1>
       <h2>Save Together, Achieve More</h2>
       <p class="description">
-        A simple, collaborative way to save with friends and family.
+        A simple, collaborative way to save with friends and family, powered by secure Crypto Wallets.
       </p>
+
+      <% if user_signed_in? %>
+        <%= link_to "Profile", user_path(current_user), class: "cta-button" %>
+      <% else %>
+        <%= link_to "Get Started", new_user_session_path, class: "cta-button" %>
+      <% end %>
+
     </div>
   </header>
 
@@ -20,7 +27,7 @@
     <div class="steps">
       <div class="step">
         <h3>📱 Create Your Account</h3>
-        <p>Sign up and create your personalized savings goal.</p>
+        <p>Sign up and set up your secure cryto wallet.</p>
       </div>
       <div class="step">
         <h3>👥 Form a Group</h3>
@@ -28,25 +35,60 @@
       </div>
       <div class="step">
         <h3>🎯 Set a Goal</h3>
-        <p>Define your savings target and set a timeline.</p>
+        <p>Create your personalized savings goal and set a timeline.</p>
       </div>
       <div class="step">
-        <h3>💰 Save Together</h3>
-        <p>Contribute regularly and track your group's progress.</p>
+        <h3>💰 Contribute Securely</h3>
+        <p>Use your crypto wallet to contribute funds and track progress.</p>
       </div>
       <div class="step">
         <h3>🎉 Celebrate Success</h3>
-        <p>Reach your goal and celebrate with your group!</p>
+        <p>Reach your goal, withdraw your savings, and celebrate with your group!</p>
       </div>
     </div>
   </section>
 
-  <footer>
-    <nav>
-      <ul class="footer-links">
-        <li><a href="#contact">Contact</a></li>
-        <li><a href="#blog">Blog</a></li>
-      </ul>
-    </nav>
-  </footer>
+  <section class="faq">
+  <h2>Frequently Asked Questions</h2>
+  
+  <div class="faq-item">
+    <h3>What is TANDA?</h3>
+    <p>TANDA is a platform for group savings, leveraging secure crypto wallets powered by Coinbase. It offers low-cost, instant, and global access to funds, making it perfect for shared goals and even remittances to support loved ones abroad.</p>
+  </div>
+
+  <div class="faq-item">
+    <h3>Who is TANDA for?</h3>
+    <p>TANDA is ideal for families, friends, and communities looking to save collaboratively, whether for a vacation, an emergency fund, or any shared financial goal.</p>
+  </div>
+
+  <div class="faq-item">
+    <h3>Is using a crypto wallet safe?</h3>
+    <p>Yes, TANDA uses Coinbase wallets, providing industry-leading security and blockchain transparency to protect your funds and ensure peace of mind.</p>
+  </div>
+
+  <div class="faq-item">
+    <h3>What currencies are supported?</h3>
+    <p>You can use Ethereum (ETH), Tether (USDT), and other ERC-20 tokens to contribute to savings or send funds instantly across borders.</p>
+  </div>
+
+  <div class="faq-item">
+    <h3>How do I get started?</h3>
+    <p>Sign up, set up your crypto wallet, and start saving with your group. TANDA makes it simple and accessible for everyone, even beginners.</p>
+  </div>
+</section>
+
+<section class="social-proof">
+  <h2>What Our Users Say</h2>
+  <blockquote>"So glad I've come across TANDA and excited to get started; this exactly what I need to get my financial journey started on the right foot!" - Ali.</blockquote>
+
+</section>
+
+<footer>
+  <nav>
+    <ul class="footer-links">
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#blog">Blog</a></li>
+    </ul>
+  </nav>
+</footer>
 </body>

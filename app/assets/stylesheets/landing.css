@@ -150,3 +150,19 @@ body.landing-page .footer-links a {
 body.landing-page .footer-links a:hover {
   color: #f0983e;
 }
+
+.cta-button {
+  color: #3A3F87 !important;
+  background-color: #529651;
+  display: inline-block;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 4px;
+}
+
+.cta-button:hover {
+  background-color: #3A3F87;
+  color: #529651 !important;
+  transform: scale(1.05);
+}
