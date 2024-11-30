@@ -166,3 +166,19 @@ body.landing-page .footer-links a:hover {
   color: #529651 !important;
   transform: scale(1.05);
 }
+
+body.landing-page .faq {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 60px 20px;
+  background: linear-gradient(135deg, #e8f0ff, #ffffff);
+  border-radius: 8px;
+  text-align: center;
+}
+
+body.landing-page .social-proof {
+  padding: 60px 20px;
+  background: #ffffff;
+}
