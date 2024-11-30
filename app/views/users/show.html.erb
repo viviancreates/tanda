@@ -90,26 +90,6 @@
     </div>
   </div>
 
-  <div class="card mb-4">
-    <div class="card-header">
-      <h4><i class="fa fa-users"></i> Connections</h4>
-    </div>
-    <div class="card-body">
-      <% if @connections.any? %>
-        <ul class="list-group">
-          <% @connections.each do |connection| %>
-            <li class="list-group-item">
-              <i class="fa fa-user-circle"></i> 
-              <%= connection.username %>
-            </li>
-          <% end %>
-        </ul>
-      <% else %>
-        <p>No connections yet.</p>
-      <% end %>
-    </div>
-  </div>
-
 
 <h3>Transfer Funds</h3>
 <%= form_with url: transfer_wallet_path(current_user.id), method: :post, local: true do |f| %>
