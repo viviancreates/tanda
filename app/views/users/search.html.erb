@@ -1,8 +1,14 @@
+<div class="container mt-4">
+  <div class="text-center mb-4">
 <h1>Search for Friends</h1>
+ </div>
 
+  
+<div class="card mb-4">
+    <div class="card-body">
 <%= form_with url: search_users_path, method: :get, local: true do %>
   <div class="mb-3">
-    <%= label_tag :username, "Search by Username", class: "form-label" %>
+    <%= label_tag :username, "Search by Username:", class: "form-label" %>
     <%= text_field_tag :username, params[:username], class: "form-control", placeholder: "Enter username" %>
   </div>
   <%= submit_tag "Search", class: "btn btn-primary" %>
@@ -21,3 +27,5 @@
 <% elsif params[:username].present? %>
   <p>No users found matching "<%= params[:username] %>".</p>
 <% end %>
+</div>
+</div>

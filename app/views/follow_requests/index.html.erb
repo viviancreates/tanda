@@ -1,26 +1,32 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Pending Follow requests</h1>
-
-<div id="follow_requests">
-  <% @follow_requests.each do |follow_request| %>
-    <p>
-      From: <%= follow_request.sender.username %>
-    </p>
-
-    <p>
-      Status: <%= follow_request.status %>
-    </p>
-
-    <% if follow_request.pending? %>
-      <%= button_to "Accept", follow_request_path(follow_request, status: "accepted"), method: :patch, class: "btn btn-success btn-sm" %>
-      <%= button_to "Deny", follow_request_path(follow_request, status: "rejected"), method: :patch, class: "btn btn-danger btn-sm" %>
+<div class="container mt-4">
+  <div class="text-center mb-4">
+    <h1>Pending Follow Requests</h1>
+    <% if notice.present? %>
+      <p class="text-success"><%= notice %></p>
     <% end %>
+  </div>
 
-    <p>
-      <%= link_to "Show this follow request", follow_request %>
-    </p>
+  <% if @follow_requests.any? %>
+    <% @follow_requests.each do |follow_request| %>
+      <div class="card mb-4">
+        <div class="card-body">
+          <h5 class="card-title">From: <%= follow_request.sender.username %></h5>
+          <p class="card-text">Status: <%= follow_request.status.capitalize %></p>
+
+          <% if follow_request.pending? %>
+            <div class="d-flex gap-2">
+              <%= button_to "Accept", follow_request_path(follow_request, status: "accepted"), method: :patch, class: "btn btn-success btn-sm" %>
+              <%= button_to "Deny", follow_request_path(follow_request, status: "rejected"), method: :patch, class: "btn btn-danger btn-sm" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="card">
+      <div class="card-body text-center">        
+      <p class="text-muted mb-0">No pending follow requests.</p>
+      </div>
+    </div>
   <% end %>
 </div>
-
-<%= link_to "New follow request", new_follow_request_path %>
