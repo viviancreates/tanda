@@ -13,7 +13,8 @@ Rails.application.routes.draw do
   resources :tandas
   resources :analytics, only: [:index]
   
- 
+  get "/service-worker.js", to: "pwa#service_worker"
+  get "/manifest.json", to: "pwa#manifest"
   get "/wallet", to: "users#wallet", as: :user_wallet
   get "/friends", to: "users#friends", as: :friends
   get "/search_users", to: "users#search", as: :search_users
