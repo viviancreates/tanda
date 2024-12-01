@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
   before_action :configure_coinbase, only: [:create_wallet, :fund_wallet, :transfer]
 
+  def wallet
+  @user = current_user
+  end
+
   def create_wallet
     wallet = Coinbase::Wallet.create
   
@@ -12,7 +16,7 @@ class UsersController < ApplicationController
       flash[:error] = "Failed to create wallet."
     end
   
-    redirect_to user_path(current_user.username)
+    redirect_to user_wallet_path(current_user.username)
   end
  
   def fund_wallet
@@ -41,7 +45,7 @@ class UsersController < ApplicationController
       flash[:error] = "No wallet found. Please create a wallet first."
     end
   
-    redirect_to user_path(current_user.username)
+    redirect_to user_wallet_path(current_user.username)
   end
   
   
@@ -77,7 +81,7 @@ class UsersController < ApplicationController
       flash[:error] = "You need to create a wallet before making transfers."
     end
   
-    redirect_to user_path(current_user.username)
+    redirect_to user_wallet_path(current_user.username)
   end
   
 

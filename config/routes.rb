@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   resources :analytics, only: [:index]
   
  
-
+  get "/wallet", to: "users#wallet", as: :user_wallet
   get "/friends", to: "users#friends", as: :friends
   get "/search_users", to: "users#search", as: :search_users
   get "/:username" => "users#show", as: :user
