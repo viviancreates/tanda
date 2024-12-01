@@ -9,36 +9,27 @@
     <div class="card-body">
       <p><strong>Name:</strong> <%= [@user.first_name, @user.last_name].compact.join(" ") %></p>
       <p><strong>Email:</strong> <%= @user.email %></p>
+      <p><strong>Your Wallet Address:</strong> 
+    <% if current_user.wallet_data.present? %>
+    <%= current_user.wallet_data['wallet_id'] %>
+  <% else %>
+    No wallet 
+  <% end %>
+  </p>
     </div>
     <div>
- <h2>Wallet Information</h2>
-  <% if current_user.wallet_data.present? %>
-    <p><strong>Wallet ID:</strong> <%= current_user.wallet_data['wallet_id'] %></p>
-    <p><strong>Balance:</strong> <%= current_user.balance %> ETH</p>
-    <%= button_to "Fund Wallet", fund_wallet_path(current_user.id), method: :post %>
-  <% else %>
-    <p>No wallet found. Create one now:</p>
-    <%= button_to "Create Wallet", create_wallet_path(current_user.id), method: :post %>
-  <% end %>
+
+  
+<p>Send ETH or USDT to this address to fund your wallet.</p>
+
+
+ 
 </div>
   </div>
 
 </div>
 
 <div class="container user-show-page mt-4">
-<p>
-  Your Wallet Address: 
-  <% if current_user.wallet_data.present? %>
-    <%= current_user.wallet_data['wallet_id'] %>
-  <% else %>
-    No wallet 
-  <% end %>
-</p>
-<p>Send ETH or USDT to this address to fund your wallet.</p>
-
- 
-
- 
 
   <div class="card mb-4">
     <div class="card-header">
@@ -92,5 +83,5 @@
   </div>
 
 <%= render "transfer_funds" %>
-
+<%= render "user_wallet" %>
 </div>

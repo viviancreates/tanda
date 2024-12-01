@@ -1,0 +1,9 @@
+<h2>Wallet Information</h2>
+  <% if current_user.wallet_data.present? %>
+    <p><strong>Wallet ID:</strong> <%= current_user.wallet_data['wallet_id'] %></p>
+    <p><strong>Balance:</strong> <%= current_user.balance %> ETH</p>
+    <%= button_to "Fund Wallet", fund_wallet_path(current_user.id), method: :post %>
+  <% else %>
+    <p>No wallet found. Create one now:</p>
+    <%= button_to "Create Wallet", create_wallet_path(current_user.id), method: :post %>
+  <% end %>

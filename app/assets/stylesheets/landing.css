@@ -23,7 +23,7 @@ body.landing-page .hero {
   justify-content: center;
   flex-direction: column;
   padding: 60px 20px;
-  background: linear-gradient(135deg, #e8f0ff, #ffffff);
+  background: linear-gradient(135deg, #d1dbf7, #ffffff);
   border-radius: 8px;
   text-align: center;
 }
@@ -173,7 +173,7 @@ body.landing-page .faq {
   justify-content: center;
   flex-direction: column;
   padding: 60px 20px;
-  background: linear-gradient(135deg, #e8f0ff, #ffffff);
+  background: linear-gradient(135deg, #d1dbf7, #ffffff);
   border-radius: 8px;
   text-align: center;
 }
