@@ -11,12 +11,12 @@ class UsersController < ApplicationController
     if wallet
       # Export and store the complete wallet data
       current_user.update(wallet_data: wallet.export.to_hash, balance: 0)
-      flash[:success] = "Wallet created successfully!"
+      notice = "Wallet created successfully!"
     else
-      flash[:error] = "Failed to create wallet."
+      alert = "Failed to create wallet."
     end
   
-    redirect_to user_wallet_path(current_user.username)
+    redirect_to user_wallet_path(current_user.username), notice: notice, alert: alert
   end
  
   def fund_wallet
@@ -36,16 +36,16 @@ class UsersController < ApplicationController
         balance = wallet.balance(:eth)
         current_user.update(balance: balance.to_f)
   
-        flash[:success] = "Wallet funded successfully! New Balance: #{balance.to_f} ETH"
+        notice = "Wallet funded successfully! New Balance: #{balance.to_f} ETH"
       rescue StandardError => e
         Rails.logger.error "Error funding wallet: #{e.message}"
-        flash[:error] = "An error occurred while funding the wallet. Please try again."
+        alert = "An error occurred while funding the wallet. Please try again."
       end
     else
-      flash[:error] = "No wallet found. Please create a wallet first."
+      alert = "No wallet found. Please create a wallet first."
     end
   
-    redirect_to user_wallet_path(current_user.username)
+    redirect_to user_wallet_path(current_user.username),  notice: notice, alert: alert
   end
   
   
@@ -72,16 +72,16 @@ class UsersController < ApplicationController
         # Update the user's balance in the database
         current_user.update(balance: updated_balance.to_f)
   
-        flash[:success] = "Transfer successful! Your updated balance is #{updated_balance.to_f} #{params[:currency].upcase}."
+        notice = "Transfer successful! Your updated balance is #{updated_balance.to_f} #{params[:currency].upcase}."
       rescue StandardError => e
         Rails.logger.error "Error during transfer: #{e.message}"
-        flash[:error] = "Transfer failed: #{e.message}"
+        alert = "Transfer failed: #{e.message}"
       end
     else
-      flash[:error] = "You need to create a wallet before making transfers."
+      alert = "You need to create a wallet before making transfers."
     end
   
-    redirect_to user_wallet_path(current_user.username)
+    redirect_to user_wallet_path(current_user.username),  notice: notice, alert: alert
   end
   
 
