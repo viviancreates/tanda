@@ -5,6 +5,7 @@
     <div class="card-body">
       <p><strong>Name:</strong> <%= [@user.first_name.capitalize, @user.last_name.capitalize].compact.join(" ") %></p>
       <p><strong>Email:</strong> <%= @user.email %></p>
+      <p><strong>Send ETH or USDT to this address to fund your wallet.</strong></p>
       <p><strong>Your Wallet Address:</strong> 
     <% if current_user.wallet_data.present? %>
     <%= current_user.wallet_data['wallet_id'] %>
@@ -16,8 +17,7 @@
     <div>
 
   
-<p>Send ETH or USDT to this address to fund your wallet.</p>
-<%= link_to "My Wallet", user_wallet_path, class: "btn btn-primary mb-4" %>
+
 
 
  

@@ -9,10 +9,11 @@
 <%= render "user_info" %>
 
 <div class="buttons-section mb-4">
+<%= link_to "My Wallet", user_wallet_path, class: "btn btn-outline-warning" %>
   <%= link_to "Search Friends", search_users_path, class: "btn btn-outline-primary me-2" %>
   <%= link_to "Pending Friend Requests", follow_requests_path, class: "btn btn-outline-secondary me-2" %>
   <%= link_to "Dashboard", analytics_path, class: "btn btn-outline-success" %>
-  <%= link_to "My Wallet", user_wallet_path, class: "btn btn-outline-warning" %>
+  
 </div>
 
 <%= render "user_tandas" %>
