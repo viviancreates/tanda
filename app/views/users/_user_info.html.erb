@@ -1,0 +1,25 @@
+ <div class="card mb-4">
+    <div class="card-header">
+      <h4><i class="fa fa-info-circle"></i> User Info</h4>
+    </div>
+    <div class="card-body">
+      <p><strong>Name:</strong> <%= [@user.first_name, @user.last_name].compact.join(" ") %></p>
+      <p><strong>Email:</strong> <%= @user.email %></p>
+      <p><strong>Your Wallet Address:</strong> 
+    <% if current_user.wallet_data.present? %>
+    <%= current_user.wallet_data['wallet_id'] %>
+  <% else %>
+    No wallet 
+  <% end %>
+  </p>
+    </div>
+    <div>
+
+  
+<p>Send ETH or USDT to this address to fund your wallet.</p>
+<%= link_to "My Wallet", user_wallet_path, class: "btn btn-primary mb-4" %>
+
+
+ 
+</div>
+  </div>
