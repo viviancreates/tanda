@@ -1,0 +1,29 @@
+ <div class="card mb-4">
+    <div class="card-header">
+      <h4 class="mb-0"><i class="fa fa-wallet"></i> Your Transactions</h4>
+    </div>
+    <div class="card-body">
+      <% if @transactions.any? %>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Description</th>
+              <th>Amount</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @transactions.each do |transaction| %>
+              <tr>
+                <td><i class="fa fa-tag"></i> <%= transaction.description %></td>
+                <td>$<%= transaction.amount %></td>
+                <td><%= transaction.date.strftime("%B %d, %Y") %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% else %>
+        <p>No transactions yet.</p>
+      <% end %>
+    </div>
+  </div>
