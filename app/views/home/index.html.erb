@@ -14,7 +14,7 @@
       </p>
 
       <% if user_signed_in? %>
-        <%= link_to "Profile", user_path(current_user), class: "cta-button" %>
+        <%= link_to "Profile", user_path(current_user.username), class: "cta-button" %>
       <% else %>
         <%= link_to "Get Started", new_user_session_path, class: "cta-button" %>
       <% end %>
