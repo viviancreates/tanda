@@ -1,0 +1,21 @@
+<h3>Transfer Funds</h3>
+<%= form_with url: transfer_wallet_path(current_user.id), method: :post, local: true do |f| %>
+  <div class="mb-3">
+    <%= f.label :recipient_address, "Recipient Wallet Address", class: "form-label" %>
+    <%= f.text_field :recipient_address, class: "form-control", required: true %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :amount, "Amount", class: "form-label" %>
+    <%= f.number_field :amount, class: "form-control", step: 0.00001, required: true %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :currency, "Currency", class: "form-label" %>
+    <%= f.select :currency, options_for_select([["ETH", :eth], ["USDC", :usdc]]), {}, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.submit "Send Funds", class: "btn btn-primary" %>
+  </div>
+<% end %>

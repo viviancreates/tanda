@@ -1,14 +1,14 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Transactions</h1>
+<div class="d-flex justify-content-between align-items-center mb-4">
+<h1>My Transactions</h1>
+<%= link_to "New Tanda", new_tanda_path, class: "btn btn-primary" %>
+</div>
 
 <div id="transactions">
   <% @transactions.each do |transaction| %>
+  <div class="mb-5">
     <%= render transaction %>
-    <p>
-      <%= link_to "Show this transaction", transaction %>
-    </p>
+    </div>
   <% end %>
 </div>
-
-<%= link_to "New transaction", new_transaction_path %>

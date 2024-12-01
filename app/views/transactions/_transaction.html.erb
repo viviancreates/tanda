@@ -2,15 +2,16 @@
   
   <div class="card shadow-sm">
     <div class="card-header bg-light text-black">
-      <h5 class="mb-0"><%=  %></h5>
+      <h5 class="mb-0"><%= transaction.description %></h5>
     </div>
 
-  <p>
+<div class="card-body">
+  <p class="card-text">
     <strong>User:</strong>
     <%= transaction.user_tanda.user.username %>
   </p>
 
-  <div class="card-body">
+
     <p class="card-text">
       <strong>User tanda:</strong>
       <%= transaction.user_tanda_id %>
@@ -35,6 +36,10 @@
       <strong>Transaction type:</strong>
       <%= transaction.transaction_type %>
     </p>
+
+    <div class="d-flex justify-content-start">
+        <%= link_to "Show Details", transaction_path(transaction), class: "btn btn-primary btn-sm" %>
+      </div>
   </div>
 
 </div>

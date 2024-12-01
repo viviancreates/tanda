@@ -23,7 +23,7 @@ body.landing-page .hero {
   justify-content: center;
   flex-direction: column;
   padding: 60px 20px;
-  background: linear-gradient(135deg, #e8f0ff, #ffffff);
+  background: linear-gradient(135deg, #d1dbf7, #ffffff);
   border-radius: 8px;
   text-align: center;
 }
@@ -149,4 +149,36 @@ body.landing-page .footer-links a {
 
 body.landing-page .footer-links a:hover {
   color: #f0983e;
+}
+
+.cta-button {
+  color: #3A3F87 !important;
+  background-color: #529651;
+  display: inline-block;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 4px;
+}
+
+.cta-button:hover {
+  background-color: #3A3F87;
+  color: #529651 !important;
+  transform: scale(1.05);
+}
+
+body.landing-page .faq {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 60px 20px;
+  background: linear-gradient(135deg, #d1dbf7, #ffffff);
+  border-radius: 8px;
+  text-align: center;
+}
+
+body.landing-page .social-proof {
+  padding: 60px 20px;
+  background: #ffffff;
 }

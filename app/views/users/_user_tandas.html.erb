@@ -1,0 +1,24 @@
+</div>
+
+<div class="container user-show-page mt-4">
+
+  <div class="card mb-4">
+    <div class="card-header">
+      <h4><i class="fa fa-users"></i> Your Tandas</h4>
+    </div>
+    <div class="card-body">
+      <% if @tandas.any? %>
+        <ul class="list-group">
+          <% @tandas.each do |tanda| %>
+            <li class="list-group-item">
+              <i class="fa fa-piggy-bank"></i> 
+              <%= link_to tanda.name, tanda_path(tanda), class: "text-decoration-none" %>
+              - Goal: $<%= tanda.goal_amount %>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p>No tandas created yet.</p>
+      <% end %>
+    </div>
+  </div>
