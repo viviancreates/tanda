@@ -4,13 +4,13 @@
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
 <div class="mb-3">
-    <%= f.label :goal_amount, "Goal Amount", class: "form-label" %>
-    <%= f.input_field :goal_amount, class: "form-control", placeholder: "Enter goal amount" %>
-  </div>
-
-  <div class="mb-3">
     <%= f.label :name, "Name", class: "form-label" %>
     <%= f.input_field :name, class: "form-control", placeholder: "Enter name" %>
+  </div>
+
+<div class="mb-3">
+    <%= f.label :goal_amount, "Goal Amount", class: "form-label" %>
+    <%= f.input_field :goal_amount, class: "form-control", placeholder: "Enter goal amount" %>
   </div>
 
   <div class="mb-3">
