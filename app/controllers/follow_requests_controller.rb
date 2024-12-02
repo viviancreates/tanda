@@ -48,11 +48,13 @@ class FollowRequestsController < ApplicationController
       @follow_requests = current_user.received_follow_requests.where(status: "pending")
 
       respond_to do |format|
+        flash[:notice] = message
         format.html { render :index, notice: message }
         format.json { render :show, status: :ok, location: @follow_request }
       end
     else
       respond_to do |format|
+        flash[:alert] = "Invalid action. Please try again."
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @follow_request.errors, status: :unprocessable_entity }
       end
