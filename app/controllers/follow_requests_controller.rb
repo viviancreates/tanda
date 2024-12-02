@@ -29,8 +29,8 @@ class FollowRequestsController < ApplicationController
     respond_to do |format|
       if @follow_request.save
         flash[:notice] = "Follow request sent successfully!"
-        format.html { redirect_to follow_requests_path}
-        format.json { render :show, status: :created, location: @follow_request }
+        format.html { redirect_to search_users_path}
+        format.json { render :search_users, status: :created, location: @follow_request }
       else
         flash[:alert] = "Failed to send follow request. Please try again."
         format.html { render :new, status: :unprocessable_entity }
@@ -45,12 +45,16 @@ class FollowRequestsController < ApplicationController
       @follow_request.update!(status: params[:status])
       message = params[:status] == "accepted" ? "Follow request accepted!" : "Follow request rejected."
 
+      @follow_requests = current_user.received_follow_requests.where(status: "pending")
+
       respond_to do |format|
-        format.html { redirect_to follow_request_url(@follow_request), notice: message }
+        flash[:notice] = message
+        format.html { render :index, notice: message }
         format.json { render :show, status: :ok, location: @follow_request }
       end
     else
       respond_to do |format|
+        flash[:alert] = "Invalid action. Please try again."
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @follow_request.errors, status: :unprocessable_entity }
       end
