@@ -28,7 +28,7 @@ class TandasController < ApplicationController
   def create
     @tanda = Tanda.new(tanda_params)
     @tanda.creator_id = current_user.id
-    @tanda.creator_wallet = current_user.wallet_data["wallet_id"]
+    @tanda.creator_wallet = current_user.wallet_data["seed"]
   
     respond_to do |format|
       if @tanda.save
