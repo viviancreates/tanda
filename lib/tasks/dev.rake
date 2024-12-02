@@ -9,6 +9,16 @@ task sample_data: :environment do
     User.destroy_all
   end
   
+  vivian = User.create(
+    email: "vivian@example.com",
+    password: "password",
+    first_name: "Vivian",
+    last_name: "Davila",
+    username: "Vivian",
+  )
+
+  p "Created specific user: Vivian Davila"
+
   12.times do
     name = Faker::Name.first_name
     User.create(
