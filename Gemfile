@@ -88,6 +88,7 @@ gem 'chartkick'
 gem 'groupdate'
 gem 'dotenv-rails', groups: [:development, :test]
 gem 'coinbase-sdk'
+gem 'kaminari'
 
 group :development do
   gem "annotate"
