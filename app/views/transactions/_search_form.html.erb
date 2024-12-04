@@ -1,0 +1,18 @@
+<%= search_form_for @q do |f| %>
+  <p>Narrow results:</p>
+
+  <div>
+    <%= f.label :description_cont, "Description containing" %>
+    <%= f.text_field :description_cont, :placeholder => "Enter a few characters" %>
+  </div>
+
+  <div>
+    <%= f.label :date_eq, "Date" %>
+    <%= f.date_field :date_eq, :placeholder => "Select a date" %>
+  </div>
+
+  <%= f.submit :class => "btn btn-primary btn-block" %>
+  
+  <a href="/movies">Clear filters</a>
+  <%= link_to "Clear", tansactions_path %>
+<% end %>
