@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_11_29_084947) do
+ActiveRecord::Schema[7.1].define(version: 2024_12_04_031318) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -32,6 +32,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_29_084947) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "creator_wallet"
+  end
+
+  create_table "tasks", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_tasks_on_user_id"
   end
 
   create_table "transactions", force: :cascade do |t|
@@ -71,4 +79,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_29_084947) do
 
   add_foreign_key "follow_requests", "users", column: "recipient_id"
   add_foreign_key "follow_requests", "users", column: "sender_id"
+  add_foreign_key "tasks", "users"
 end
