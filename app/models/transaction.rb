@@ -13,5 +13,8 @@
 #
 class Transaction < ApplicationRecord
   belongs_to :user_tanda
- 
+  def self.ransackable_associations(auth_object = nil)
+    ["amount", "date", "description, " "transaction_type"]
+  end
+
 end
