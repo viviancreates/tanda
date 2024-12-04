@@ -1,16 +1,8 @@
-<%= search_form_for @q do |f| %>
-  <p>Narrow results:</p>
-
-  <div>
-    <%= f.label :description_cont, "Description containing" %>
-    <%= f.text_field :description_cont, :placeholder => "Enter a few characters" %>
+<%= search_form_for @q, html: { class: "mb-4" } do |f| %>
+  <div class="input-group">
+    <%= f.text_field :description_cont, class: "form-control", placeholder: "Search transactions description" %>
+    <%= f.date_field :date_eq, class: "form-control", placeholder: "Exact Date" %>
+    <button type="submit" class="btn btn-primary">Search</button>
+    <%= link_to "Clear", transactions_path, class: "btn btn-outline-secondary" %>
   </div>
-
-  <div>
-    <%= f.label :date_eq, "Date" %>
-    <%= f.date_field :date_eq %>
-  </div>
-
-  <%= f.submit :class => "btn btn-primary btn-block" %>
-  <%= link_to "Clear", transactions_path %>
 <% end %>
