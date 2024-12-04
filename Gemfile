@@ -89,6 +89,7 @@ gem 'groupdate'
 gem 'dotenv-rails', groups: [:development, :test]
 gem 'coinbase-sdk'
 gem 'kaminari'
+gem "ransack"
 
 group :development do
   gem "annotate"
