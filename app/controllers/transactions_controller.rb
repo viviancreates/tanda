@@ -33,6 +33,7 @@ class TransactionsController < ApplicationController
       if user_tanda && @transaction.save
         format.html { redirect_to transaction_url(@transaction), notice: "Transaction was successfully created." }
         format.json { render :show, status: :created, location: @transaction }
+        format.js 
       else
         @user_tandas = current_user.user_tandas
         @transaction.errors.add(:user_tanda_id, "is invalid") unless user_tanda
@@ -50,6 +51,7 @@ class TransactionsController < ApplicationController
       if @transaction.update(transaction_params)
         format.html { redirect_to transaction_url(@transaction), notice: "Transaction was successfully updated." }
         format.json { render :show, status: :ok, location: @transaction }
+        format.js
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @transaction.errors, status: :unprocessable_entity }
@@ -64,6 +66,7 @@ class TransactionsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to transactions_url, notice: "Transaction was successfully destroyed." }
       format.json { head :no_content }
+      format.js
     end
   end
 

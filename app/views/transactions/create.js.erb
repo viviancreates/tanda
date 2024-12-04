@@ -1,0 +1,5 @@
+var transactionsContainer = $("#<%= dom_id(@like.photo) %>_likes");
+
+var newLikesContent = "<%= j(render partial: 'photos/likes', locals: { photo: @like.photo }) %>";
+
+transactionsContainer.replaceWith(newLikesContent);
