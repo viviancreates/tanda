@@ -90,6 +90,8 @@ gem 'dotenv-rails', groups: [:development, :test]
 gem 'coinbase-sdk'
 gem 'kaminari'
 gem "ransack"
+gem "mailgun-ruby"
+gem "twilio-ruby"
 
 group :development do
   gem "annotate"

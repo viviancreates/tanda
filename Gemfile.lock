@@ -216,6 +216,7 @@ GEM
       http-cookie (~> 1.0)
       http-form_data (~> 2.2)
       llhttp-ffi (~> 0.5.0)
+    http-accept (1.7.0)
     http-cookie (1.0.7)
       domain_name (~> 0.5)
     http-form_data (2.3.0)
@@ -271,9 +272,15 @@ GEM
       net-imap
       net-pop
       net-smtp
+    mailgun-ruby (1.2.16)
+      rest-client (>= 2.0.2)
     marcel (1.0.4)
     matrix (0.4.2)
     method_source (1.1.0)
+    mime-types (3.6.0)
+      logger
+      mime-types-data (~> 3.2015)
+    mime-types-data (3.2024.1203)
     mini_magick (4.13.2)
     mini_mime (1.1.5)
     mini_portile2 (2.8.8)
@@ -295,6 +302,7 @@ GEM
       timeout
     net-smtp (0.5.0)
       net-protocol
+    netrc (0.11.0)
     nio4r (2.7.4)
     nokogiri (1.16.7-x86_64-darwin)
       racc (~> 1.4)
@@ -387,6 +395,11 @@ GEM
     responders (3.1.1)
       actionpack (>= 5.2)
       railties (>= 5.2)
+    rest-client (2.1.0)
+      http-accept (>= 1.7.0, < 2.0)
+      http-cookie (>= 1.0.2, < 2.0)
+      mime-types (>= 1.16, < 4.0)
+      netrc (~> 0.8)
     rexml (3.3.9)
     rouge (4.5.1)
     rspec (3.13.0)
@@ -462,6 +475,10 @@ GEM
     turbo-rails (2.0.11)
       actionpack (>= 6.0.0)
       railties (>= 6.0.0)
+    twilio-ruby (7.3.6)
+      faraday (>= 0.9, < 3.0)
+      jwt (>= 1.5, < 3.0)
+      nokogiri (>= 1.6, < 2.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.6.0)
@@ -518,6 +535,7 @@ DEPENDENCIES
   jbuilder
   kaminari
   letter_opener
+  mailgun-ruby
   pg (~> 1.1)
   pry-rails
   puma
@@ -538,6 +556,7 @@ DEPENDENCIES
   stimulus-rails
   table_print
   turbo-rails
+  twilio-ruby
   tzinfo-data
   web-console
   webmock
