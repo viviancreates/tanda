@@ -1,9 +1,12 @@
 class TransactionsController < ApplicationController
   before_action :set_transaction, only: %i[ show edit update destroy ]
 
+  
   # GET /transactions or /transactions.json
   def index
-    @transactions = Transaction.joins(user_tanda: :user).where(user_tandas: { user_id: current_user.id })
+    @q = Transaction.ransack(params[:q])
+
+    @transactions = @q.result(distinct: true).joins(user_tanda: :user).where(user_tandas: { user_id: current_user.id }).order(:date).page(params[:page]).per(5)
   end
 
   # GET /transactions/1 or /transactions/1.json

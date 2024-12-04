@@ -17,6 +17,11 @@
             </li>
           <% end %>
         </ul>
+        <nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    <%= paginate @tandas %>
+  </ul>
+</nav>
       <% else %>
         <p>No tandas created yet.</p>
       <% end %>

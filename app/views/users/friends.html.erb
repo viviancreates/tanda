@@ -11,3 +11,9 @@
 <% else %>
   <p>You have no friends yet.</p>
 <% end %>
+
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    <%= paginate @friends %>
+  </ul>
+</nav>

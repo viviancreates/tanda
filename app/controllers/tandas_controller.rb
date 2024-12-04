@@ -3,7 +3,8 @@ class TandasController < ApplicationController
   
   # GET /tandas or /tandas.json
   def index
-    @tandas = Tanda.joins(:user_tandas).where(user_tandas: { user_id: current_user.id })
+    @q = Tanda.ransack(params[:q])
+    @tandas = @q.result(distinct: true).joins(:user_tandas).where(user_tandas: { user_id: current_user.id }).order(:created_at).page(params[:page]).per(5)
   end
 
   # GET /tandas/1 or /tandas/1.json

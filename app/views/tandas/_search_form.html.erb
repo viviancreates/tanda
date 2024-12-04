@@ -1,0 +1,8 @@
+<%= search_form_for @q, html: { class: "mb-4" } do |f| %>
+  <div class="input-group">
+    <%= f.text_field :name_cont, class: "form-control", placeholder: "Search Tanda name" %>
+    <%= f.date_field :due_date_eq, class: "form-control", placeholder: "Exact Date" %>
+    <button type="submit" class="btn btn-primary">Search</button>
+    <%= link_to "Clear", tandas_path, class: "btn btn-outline-secondary" %>
+  </div>
+<% end %>
