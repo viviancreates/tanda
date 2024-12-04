@@ -8,11 +8,9 @@
 
   <div>
     <%= f.label :date_eq, "Date" %>
-    <%= f.date_field :date_eq, :placeholder => "Select a date" %>
+    <%= f.date_field :date_eq %>
   </div>
 
   <%= f.submit :class => "btn btn-primary btn-block" %>
-  
-  <a href="/movies">Clear filters</a>
-  <%= link_to "Clear", tansactions_path %>
+  <%= link_to "Clear", transactions_path %>
 <% end %>
