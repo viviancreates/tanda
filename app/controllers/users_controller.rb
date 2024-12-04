@@ -86,7 +86,7 @@ class UsersController < ApplicationController
   
 
   def friends
-    @friends = fetch_accepted_friends
+    @friends = fetch_accepted_friends.page(params[:page]).per(10)
   end
 
   def show
