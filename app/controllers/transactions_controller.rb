@@ -4,7 +4,7 @@ class TransactionsController < ApplicationController
   
   # GET /transactions or /transactions.json
   def index
-    @transactions = Transaction.joins(user_tanda: :user).where(user_tandas: { user_id: current_user.id }).order(:date).page(params[:page]).per(8)
+    @transactions = Transaction.joins(user_tanda: :user).where(user_tandas: { user_id: current_user.id }).order(:date).page(params[:page]).per(5)
   end
 
   # GET /transactions/1 or /transactions/1.json

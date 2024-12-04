@@ -14,4 +14,8 @@
   <% end %>
 </div>
 
-<%= paginate @transactionss %>
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-end">
+    <%= paginate @transactions %>
+  </ul>
+</nav>
