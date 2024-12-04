@@ -103,6 +103,7 @@ group :development do
   gem "rails-erd"
   gem "rufo"
   gem "specs_to_readme"
+  gem "letter_opener"
 end
 
 group :development, :test do
