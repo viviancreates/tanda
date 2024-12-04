@@ -22,6 +22,11 @@
             <% end %>
           </tbody>
         </table>
+        <nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    <%= paginate @transactions %>
+  </ul>
+</nav>
       <% else %>
         <p>No transactions yet.</p>
       <% end %>

@@ -96,8 +96,8 @@ class UsersController < ApplicationController
     if @user.nil?
       redirect_to root_path, alert: "User not found."
     else
-      @tandas = @user.tandas
-      @transactions = @user.transactions
+      @tandas = @user.tandas.page(params[:page]).per(5)
+      @transactions = @user.transactions.page(params[:page]).per(5)
 
       @connections = User.joins(:tandas)
                          .where(tandas: { id: @tandas.pluck(:id) })
