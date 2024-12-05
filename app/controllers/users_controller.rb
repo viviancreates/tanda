@@ -60,6 +60,7 @@ class UsersController < ApplicationController
   
   def transfer
     if current_user.wallet_data.present?
+      # Extract wallet data
       wallet_data = Coinbase::Wallet::Data.new(
         wallet_id: current_user.wallet_data['wallet_id'],
         seed: current_user.wallet_data['seed']
@@ -71,21 +72,19 @@ class UsersController < ApplicationController
         transfer = wallet.transfer(params[:amount].to_f, params[:currency].to_sym, params[:recipient_address])
         transfer.wait! # Wait for the transaction to settle
   
-        # Log the full transfer object
+        # Log the transfer object
         Rails.logger.info "Transfer Object: #{transfer.inspect}"
   
-        # Log the transaction hash
-        transaction_hash = transfer.tx_hash
-        Rails.logger.info "Transaction Hash: #{transaction_hash}"
-  
-        # Generate and log the Etherscan link
-        transaction_link = "https://sepolia.etherscan.io/tx/#{transaction_hash}"
+        # Use the transaction link
+        transaction_link = transfer.transaction_link
         Rails.logger.info "Transaction Link: #{transaction_link}"
   
+        # Fetch the updated balance
         updated_balance = wallet.balance(params[:currency].to_sym)
         current_user.update(balance: updated_balance.to_f)
   
-        notice = "Transfer successful! Your updated balance is #{updated_balance.to_f} #{params[:currency].upcase}. Transaction Hash: #{transaction_hash}"
+        notice = "Transfer successful! Your updated balance is #{updated_balance.to_f} #{params[:currency].upcase}. 
+                  <a href='#{transaction_link}' target='_blank'>View Transaction</a>".html_safe
       rescue StandardError => e
         Rails.logger.error "Error during transfer: #{e.message}"
         alert = "Transfer failed: #{e.message}"
@@ -96,7 +95,6 @@ class UsersController < ApplicationController
   
     redirect_to user_wallet_path(current_user.username), notice: notice, alert: alert
   end
-  
   
 
   def friends
