@@ -25,3 +25,25 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin: 15px 0;
 }
+
+.tanda-header {
+  font-family: 'Poppins', sans-serif;
+  background: #11186f !important; 
+  color: #ffffff; 
+  padding: 20px; 
+  font-size: 1.25rem; 
+  font-weight: bold;
+  text-align: left;
+  line-height: 1.5;
+  border-radius: 4px 4px 0 0;
+}
+
+.tanda-body {
+  font-size: 1rem;
+  background: linear-gradient(135deg, #e8edf7, #ffffff);
+  border: 1px solid #ddd;
+  padding: 15px 20px;
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 0px !important;
+}

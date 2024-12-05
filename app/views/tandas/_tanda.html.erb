@@ -1,37 +1,37 @@
 <div id="<%= dom_id tanda %>" class="mb-4">
 
-  <div class="card shadow-sm">
-    <div class="card-header bg-light text-black">
+  <div class="tanda-card shadow-sm">
+    <div class="tanda-header">
       <h5 class="mb-0"><%= tanda.name %></h5>
     </div>
 
-    <div class="card-body">
-      <p class="card-text"> 
+    <div class="tanda-body">
+      <p class="tanda-text"> 
         <strong>Goal amount:</strong>
         <%= tanda.goal_amount %>
       </p>
 
-      <p class="card-text">
+      <p class="tanda-text">
         <strong>Current amount:</strong>
         <%= @current_amount %>
       </p>
 
-      <p class="card-text">
+      <p class="tanda-text">
         <strong>Due date:</strong>
         <%= tanda.due_date.strftime("%B %d, %Y") %>
       </p>
 
-      <p class="card-text">
+      <p class="tanda-text">
         <strong>Created by:</strong>
         <%= tanda.creator.username %>
       </p>
 
-      <p class="card-text">
+      <p class="tanda-text">
         <strong>Wallet:</strong>
         <%= tanda.creator_wallet || "No wallet linked" %>
       </p>
 
-      <p class="card-text">
+      <p class="tanda-text">
         <strong>Participants:</strong>
         <ul class="list-unstyled">
           <% tanda.users.each do |user| %>
