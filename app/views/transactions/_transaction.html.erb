@@ -11,6 +11,10 @@
     <%= transaction.user_tanda.user.username %>
   </p>
 
+<p class="card-text">
+    <strong>Belongs to Tanda:</strong>
+    <%= transaction.user_tanda.tanda.name %>
+  </p>
 
     <p class="card-text">
      <%= hidden_field_tag :user_tanda_id, transaction.user_tanda_id %>
