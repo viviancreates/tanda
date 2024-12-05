@@ -1,5 +1,7 @@
-var transactionsContainer = $("#<%= dom_id(@like.photo) %>_likes");
+var transactionsContainer = $("#<%= dom_id(@transaction.user_tanda) %>_transactions");
 
-var newLikesContent = "<%= j(render partial: 'photos/likes', locals: { photo: @like.photo }) %>";
+var newTransactionContent = "<%= j(render partial: 'transaction', locals: { transaction: @transaction }) %>";
 
-transactionsContainer.replaceWith(newLikesContent);
+transactionsContainer.append(newTransactionContent);
+
+$("#new_transaction_form")[0].reset();
