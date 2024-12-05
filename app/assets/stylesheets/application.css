@@ -1,12 +1,13 @@
-.transaction-card {
-  background: linear-gradient(135deg, #d1dbf7, #ffffff);
-  border: 1px solid #ccc;
+.transactions.card {
+ 
+  border: 1px solid #ddd;
   border-radius: 10px;
   padding: 15px 20px;
   margin-bottom: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-
 .transaction-header {
+  background: #3A3F87 !important;
   padding: 10px 15px;
   font-size: 1.25rem;
   font-weight: bold;
@@ -16,4 +17,5 @@
 .transaction-body p {
   margin: 8px 0;
   font-size: 1rem;
+  background: linear-gradient(135deg, #d3dff4, #ffffff);
 }
