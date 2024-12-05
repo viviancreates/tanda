@@ -10,7 +10,7 @@
 <%= link_to "New Transaction", new_transaction_path, class: "btn btn-primary" %>
 </div>
 
-<div id="transactions">
+<div id="transactions" class="transactions-page">
   <% @transactions.each do |transaction| %>
   <div class="mb-5">
     <%= render transaction %>
