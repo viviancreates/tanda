@@ -1,21 +1,27 @@
-.transactions.card {
- 
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  padding: 15px 20px;
-  margin-bottom: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-.transaction-header {
-  background: #3A3F87 !important;
-  padding: 10px 15px;
-  font-size: 1.25rem;
-  font-weight: bold;
-  border-radius: 8px 8px 0 0;
+body {
+  font-family: 'Poppins', sans-serif; 
 }
 
-.transaction-body p {
-  margin: 8px 0;
+.transaction-header {
+  font-family: poppins;
+  background: #11186f !important; 
+  color: #ffffff; 
+  padding: 20px; 
+  font-size: 1.25rem;
+  font-weight: bold;
+  text-align: left; 
+  line-height: 1.5;
+  border-radius: 4px 4px 0 0; 
+}
+
+.transaction-body {
+  margin: 0px !important;
   font-size: 1rem;
-  background: linear-gradient(135deg, #d3dff4, #ffffff);
+  background: linear-gradient(135deg, #e8edf7, #ffffff);
+  border: 1px solid #ddd;
+  padding: 15px 20px;
+  margin-bottom: 0px;
+  border-radius: 0 0 4px 4px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 15px 0;
 }
