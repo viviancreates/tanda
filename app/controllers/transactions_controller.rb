@@ -33,6 +33,7 @@ class TransactionsController < ApplicationController
       if user_tanda && @transaction.save
         format.html { redirect_to transaction_url(@transaction), notice: "Transaction was successfully created." }
         format.json { render :show, status: :created, location: @transaction }
+        format.js 
       else
         @user_tandas = current_user.user_tandas
         @transaction.errors.add(:user_tanda_id, "is invalid") unless user_tanda

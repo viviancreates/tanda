@@ -1,0 +1,7 @@
+var transactionsContainer = $("#<%= dom_id(@transaction.user_tanda) %>_transactions");
+
+var newTransactionContent = "<%= j(render partial: 'transaction', locals: { transaction: @transaction }) %>";
+
+transactionsContainer.append(newTransactionContent);
+
+$("#new_transaction_form")[0].reset();

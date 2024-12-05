@@ -31,4 +31,9 @@
         <p>No transactions yet.</p>
       <% end %>
     </div>
+
+     <div>
+      <%= link_to "View All", transactions_path, class: "btn btn-outline-primary btn-sm me-2" %>
+      <%= link_to "Add Transaction", new_transaction_path, class: "btn btn-outline-success btn-sm" %>
+    </div>
   </div>

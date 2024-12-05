@@ -50,3 +50,11 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 Vivian Davila - [viviananddav@gmail.com](mailto:youremail@example.com)
 Project Link: [https://github.com/yourusername/yourproject](https://github.com/yourusername/yourproject)
+
+RAILS C
+user = User.find_by(username: "Vivian")
+
+# Check wallet data
+puts user.wallet_data
+puts user.balance
+puts user.balance
