@@ -32,11 +32,18 @@ class UsersController < ApplicationController
         # Request faucet funds
         faucet_tx = wallet.faucet.wait! # Automatically funds the wallet with a fixed testnet amount
   
+        # Log and use the correct transaction hash and link
+        faucet_tx_hash = faucet_tx.transaction_hash
+        faucet_tx_link = faucet_tx.transaction_link
+        Rails.logger.info "Faucet Transaction Hash: #{faucet_tx_hash}"
+        Rails.logger.info "Faucet Transaction Link: #{faucet_tx_link}"
+  
         # Fetch the updated balance
         balance = wallet.balance(:eth)
         current_user.update(balance: balance.to_f)
   
-        notice = "Wallet funded successfully! New Balance: #{balance.to_f} ETH"
+        notice = "Wallet funded successfully! New Balance: #{balance.to_f} ETH. 
+                  <a href='#{faucet_tx_link}' target='_blank'>View Transaction</a>".html_safe
       rescue StandardError => e
         Rails.logger.error "Error funding wallet: #{e.message}"
         alert = "An error occurred while funding the wallet. Please try again."
@@ -45,20 +52,18 @@ class UsersController < ApplicationController
       alert = "No wallet found. Please create a wallet first."
     end
   
-    redirect_to user_wallet_path(current_user.username),  notice: notice, alert: alert
+    redirect_to user_wallet_path(current_user.username), notice: notice, alert: alert
   end
+  
+  
   
   
   def transfer
     if current_user.wallet_data.present?
-      # Extract wallet data
-      wallet_id = current_user.wallet_data['wallet_id']
-      seed = current_user.wallet_data['seed']
-  
-      # Initialize Coinbase::Wallet::Data
-      wallet_data = Coinbase::Wallet::Data.new(wallet_id: wallet_id, seed: seed)
-  
-      # Import wallet
+      wallet_data = Coinbase::Wallet::Data.new(
+        wallet_id: current_user.wallet_data['wallet_id'],
+        seed: current_user.wallet_data['seed']
+      )
       wallet = Coinbase::Wallet.import(wallet_data)
   
       begin
@@ -66,13 +71,21 @@ class UsersController < ApplicationController
         transfer = wallet.transfer(params[:amount].to_f, params[:currency].to_sym, params[:recipient_address])
         transfer.wait! # Wait for the transaction to settle
   
-        # Fetch the updated balance
-        updated_balance = wallet.balance(params[:currency].to_sym)
+        # Log the full transfer object
+        Rails.logger.info "Transfer Object: #{transfer.inspect}"
   
-        # Update the user's balance in the database
+        # Log the transaction hash
+        transaction_hash = transfer.tx_hash
+        Rails.logger.info "Transaction Hash: #{transaction_hash}"
+  
+        # Generate and log the Etherscan link
+        transaction_link = "https://sepolia.etherscan.io/tx/#{transaction_hash}"
+        Rails.logger.info "Transaction Link: #{transaction_link}"
+  
+        updated_balance = wallet.balance(params[:currency].to_sym)
         current_user.update(balance: updated_balance.to_f)
   
-        notice = "Transfer successful! Your updated balance is #{updated_balance.to_f} #{params[:currency].upcase}."
+        notice = "Transfer successful! Your updated balance is #{updated_balance.to_f} #{params[:currency].upcase}. Transaction Hash: #{transaction_hash}"
       rescue StandardError => e
         Rails.logger.error "Error during transfer: #{e.message}"
         alert = "Transfer failed: #{e.message}"
@@ -81,8 +94,9 @@ class UsersController < ApplicationController
       alert = "You need to create a wallet before making transfers."
     end
   
-    redirect_to user_wallet_path(current_user.username),  notice: notice, alert: alert
+    redirect_to user_wallet_path(current_user.username), notice: notice, alert: alert
   end
+  
   
 
   def friends
