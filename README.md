@@ -71,3 +71,6 @@ Distributed under the MIT License. See `LICENSE` for more information.
 ## Contact
 Vivian Davila - [viviananddav@gmail.com](mailto:youremail@example.com)
 Project Link: [https://github.com/yourusername/yourproject](https://github.com/yourusername/yourproject)
+
+## Notice
+Transfers show up on the transactions, will update functionality and USD based on current exchange rates at a later date

@@ -85,7 +85,7 @@ class UsersController < ApplicationController
         # Create the transaction record
         @transaction = Transaction.create!(
           user_tanda_id: user_tanda.id,
-          amount: params[:amount],
+          amount: params[:amount].to_f,
           transaction_type: 'transfer',
           date: Time.zone.now,
           description: "Transfer to #{params[:recipient_address]}"
@@ -102,6 +102,7 @@ class UsersController < ApplicationController
   
     respond_to do |format|
       format.js
+      format.html
     end
   end
   
