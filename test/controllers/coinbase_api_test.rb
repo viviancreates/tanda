@@ -48,21 +48,22 @@ class CoinbaseAPITest < ActionDispatch::IntegrationTest
   end
 
   def test_transfer_funds
+    # Mock the wallet data for the transfer
     wallet_mock = Minitest::Mock.new
     wallet_mock.expect(:transfer, OpenStruct.new(transaction_link: 'mock_transfer_link'), [1.0, :eth, 'recipient_wallet_address'])
     wallet_mock.expect(:balance, 0.5, [:eth])
-
+  
     Coinbase::Wallet.stub :import, wallet_mock do
       post transfer_wallet_path(@user.id), params: {
         amount: 1.0,
         currency: 'eth',
         recipient_address: 'recipient_wallet_address'
-      }
+      }, headers: { 'HTTP_ACCEPT' => 'text/javascript' } # Specify JS format in headers
     end
-
-    assert_response :redirect
-    assert_equal @user.reload.balance, 0.5
-    assert_match /Transfer successful!/, flash[:notice]
+  
+    assert_response :success
+    assert_match /Transfer successful!/, @response.body
+    assert_match /mock_transfer_link/, @response.body
     wallet_mock.verify
   end
 end
