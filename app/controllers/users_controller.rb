@@ -52,6 +52,7 @@ class UsersController < ApplicationController
       alert = "No wallet found. Please create a wallet first."
     end
   
+    
     redirect_to user_wallet_path(current_user.username), notice: notice, alert: alert
   end
   
@@ -59,42 +60,40 @@ class UsersController < ApplicationController
   
   
   def transfer
-    if current_user.wallet_data.present?
-      # Extract wallet data
+    @user = current_user
+  
+    if @user.wallet_data.present?
       wallet_data = Coinbase::Wallet::Data.new(
-        wallet_id: current_user.wallet_data['wallet_id'],
-        seed: current_user.wallet_data['seed']
+        wallet_id: @user.wallet_data['wallet_id'],
+        seed: @user.wallet_data['seed']
       )
       wallet = Coinbase::Wallet.import(wallet_data)
   
       begin
-        # Initiate the transfer
         transfer = wallet.transfer(params[:amount].to_f, params[:currency].to_sym, params[:recipient_address])
-        transfer.wait! # Wait for the transaction to settle
+        transfer.wait!
   
-        # Log the transfer object
-        Rails.logger.info "Transfer Object: #{transfer.inspect}"
-  
-        # Use the transaction link
         transaction_link = transfer.transaction_link
-        Rails.logger.info "Transaction Link: #{transaction_link}"
   
-        # Fetch the updated balance
         updated_balance = wallet.balance(params[:currency].to_sym)
-        current_user.update(balance: updated_balance.to_f)
+        @user.update(balance: updated_balance.to_f)
   
-        notice = "Transfer successful! Your updated balance is #{updated_balance.to_f} #{params[:currency].upcase}. 
-                  <a href='#{transaction_link}' target='_blank'>View Transaction</a>".html_safe
+        @notice = "Transfer successful! Your updated balance is #{updated_balance.to_f} #{params[:currency].upcase}. " \
+                  "<a href='#{transaction_link}' target='_blank'>View Transaction on Sepolia</a>".html_safe
       rescue StandardError => e
-        Rails.logger.error "Error during transfer: #{e.message}"
-        alert = "Transfer failed: #{e.message}"
+        @alert = "Transfer failed: #{e.message}"
       end
     else
-      alert = "You need to create a wallet before making transfers."
+      @alert = "You need to create a wallet before making transfers."
     end
   
-    redirect_to user_wallet_path(current_user.username), notice: notice, alert: alert
+    respond_to do |format|
+      format.js
+    end
   end
+  
+  
+  
   
 
   def friends

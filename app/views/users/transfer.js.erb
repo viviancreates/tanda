@@ -1,0 +1,13 @@
+// Update the balance section dynamically
+$("#wallet-balance").html("<strong>Balance:</strong> <%= @user.balance %> ETH");
+
+// Display the notice or alert messages
+<% if @notice %>
+  $("#flash-notice").html("<%= j @notice %>").fadeIn().delay(3000)
+<% end %>
+<% if @alert %>
+  $("#flash-alert").html("<%= j @alert %>").fadeIn().delay(3000)
+<% end %>
+
+// Reset the transfer form fields
+$("#transfer_funds_form")[0].reset();
