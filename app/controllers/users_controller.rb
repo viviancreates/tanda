@@ -52,49 +52,65 @@ class UsersController < ApplicationController
       alert = "No wallet found. Please create a wallet first."
     end
   
+    
     redirect_to user_wallet_path(current_user.username), notice: notice, alert: alert
   end
   
-  
-  
-  
   def transfer
-    if current_user.wallet_data.present?
-      # Extract wallet data
+    @user = current_user
+  
+    if @user.wallet_data.present?
       wallet_data = Coinbase::Wallet::Data.new(
-        wallet_id: current_user.wallet_data['wallet_id'],
-        seed: current_user.wallet_data['seed']
+        wallet_id: @user.wallet_data['wallet_id'],
+        seed: @user.wallet_data['seed']
       )
       wallet = Coinbase::Wallet.import(wallet_data)
   
       begin
-        # Initiate the transfer
         transfer = wallet.transfer(params[:amount].to_f, params[:currency].to_sym, params[:recipient_address])
-        transfer.wait! # Wait for the transaction to settle
+        transfer.wait!
   
-        # Log the transfer object
-        Rails.logger.info "Transfer Object: #{transfer.inspect}"
-  
-        # Use the transaction link
         transaction_link = transfer.transaction_link
-        Rails.logger.info "Transaction Link: #{transaction_link}"
   
-        # Fetch the updated balance
         updated_balance = wallet.balance(params[:currency].to_sym)
-        current_user.update(balance: updated_balance.to_f)
+        @user.update(balance: updated_balance.to_f)
   
-        notice = "Transfer successful! Your updated balance is #{updated_balance.to_f} #{params[:currency].upcase}. 
-                  <a href='#{transaction_link}' target='_blank'>View Transaction</a>".html_safe
+        # Find the user's default Tanda (or a specific one if params are passed)
+        user_tanda = UserTanda.find_by(user: @user, tanda_id: params[:tanda_id])
+  
+        if user_tanda.nil?
+          raise StandardError, "No valid Tanda found to associate with this transaction."
+        end
+  
+        # Create the transaction record
+        @transaction = Transaction.create!(
+          user_tanda_id: user_tanda.id,
+          amount: params[:amount].to_f,
+          transaction_type: 'transfer',
+          date: Time.zone.now,
+          description: "Transfer to #{params[:recipient_address]}"
+        )
+  
+        @notice = "Transfer successful! Your updated balance is #{updated_balance.to_f} #{params[:currency].upcase}. " \
+                  "<a href='#{transaction_link}' target='_blank'>View Transaction on Sepolia</a>".html_safe
       rescue StandardError => e
-        Rails.logger.error "Error during transfer: #{e.message}"
-        alert = "Transfer failed: #{e.message}"
+        @alert = "Transfer failed: #{e.message}"
       end
     else
-      alert = "You need to create a wallet before making transfers."
+      @alert = "You need to create a wallet before making transfers."
     end
   
-    redirect_to user_wallet_path(current_user.username), notice: notice, alert: alert
+    respond_to do |format|
+      format.js
+      format.html
+    end
   end
+  
+  
+  
+  
+  
+  
   
 
   def friends

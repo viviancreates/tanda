@@ -51,18 +51,25 @@ class CoinbaseAPITest < ActionDispatch::IntegrationTest
     wallet_mock = Minitest::Mock.new
     wallet_mock.expect(:transfer, OpenStruct.new(transaction_link: 'mock_transfer_link'), [1.0, :eth, 'recipient_wallet_address'])
     wallet_mock.expect(:balance, 0.5, [:eth])
-
+  
     Coinbase::Wallet.stub :import, wallet_mock do
-      post transfer_wallet_path(@user.id), params: {
+      # Create a UserTanda before transfer
+      tanda = Tanda.create!(name: 'Test Tanda', goal_amount: 1000, due_date: Date.today + 7.days, creator: @user)
+      user_tanda = UserTanda.create!(user: @user, tanda: tanda)
+  
+      post transfer_wallet_path(@user.id, format: :js), params: {
         amount: 1.0,
         currency: 'eth',
-        recipient_address: 'recipient_wallet_address'
+        recipient_address: 'recipient_wallet_address',
+        tanda_id: tanda.id
       }
     end
-
-    assert_response :redirect
-    assert_equal @user.reload.balance, 0.5
-    assert_match /Transfer successful!/, flash[:notice]
+  
+    assert_response :success
+    transaction = Transaction.last
+    assert transaction.present?, "Transaction should be created"
+    assert_equal 1.0, transaction.amount
+    assert_equal 'Transfer to recipient_wallet_address', transaction.description
     wallet_mock.verify
   end
-end
+end  

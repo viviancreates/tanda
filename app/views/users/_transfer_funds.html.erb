@@ -1,5 +1,5 @@
 <h3>Transfer Funds</h3>
-<%= form_with url: transfer_wallet_path(current_user.id), method: :post, local: true do |f| %>
+<%= form_with url: transfer_wallet_path(current_user.id), method: :post, local: false, html: { id: "transfer_funds_form" } do |f| %>
   <div class="mb-3">
     <%= f.label :recipient_address, "Recipient Wallet Address", class: "form-label" %>
     <%= f.text_field :recipient_address, class: "form-control", required: true %>
@@ -13,6 +13,11 @@
   <div class="mb-3">
     <%= f.label :currency, "Currency", class: "form-label" %>
     <%= f.select :currency, options_for_select([["ETH", :eth], ["USDC", :usdc]]), {}, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :tanda_id, "Tanda Name", class: "form-label" %>
+    <%= f.collection_select :tanda_id, current_user.tandas, :id, :name, { prompt: "Select a Tanda" }, class: "form-control" %>
   </div>
 
   <div class="form-group">

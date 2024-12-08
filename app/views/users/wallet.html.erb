@@ -1,4 +1,8 @@
-<div class="container mt-4">
+<div id="flash-notice" class="alert alert-success" style="display: none;"></div>
+<div id="flash-alert" class="alert alert-danger" style="display: none;"></div>
+
+<div class="container mt-4" id="notice">
+
   <div class="text-center mb-4">
     <h1><%= @user.first_name.present? ? @user.first_name.capitalize : "User" %>'s Wallet</h1>
     <p>Manage your wallet and transfer funds securely.</p>

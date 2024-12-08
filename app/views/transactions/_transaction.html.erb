@@ -1,45 +1,31 @@
 <div id="<%= dom_id(transaction) %>" class="mb-4">
-  
   <div class="card shadow-sm">
     <div class="transaction-header bg-light text-white">
       <h5 class="mb-0"><%= transaction.description %></h5>
     </div>
-
-<div class="transaction-body">
-  <p class="card-text">
-    <strong>User:</strong>
-    <%= transaction.user_tanda.user.username %>
-  </p>
-
-<p class="card-text">
-    <strong>Belongs to Tanda:</strong>
-    <%= transaction.user_tanda.tanda.name %>
-  </p>
-
-    <p class="card-text">
-     <%= hidden_field_tag :user_tanda_id, transaction.user_tanda_id %>
+    <div class="transaction-body">
+      <p class="card-text">
+        <strong>User:</strong>
+        <%= transaction.user_tanda.user.username %>
       </p>
-
-    <p class="card-text">
-      <strong>Amount:</strong>
-      <span class="<%= transaction.transaction_type == 'withdrawal' ? 'text-danger' : 'text-success' %>"><%= number_to_currency(transaction.amount) %></span>
-    </p>
-
-    <p class="card-text">
-      <strong>Date:</strong>
-      <%= l(transaction.date, format: :long) %>
-    </p>
-
-    <p class="card-text">
-      <strong>Description:</strong>
-      <%= transaction.description %>
-    </p>
-
-    <p class="card-text">
-      <strong>Transaction type:</strong>
-      <%= transaction.transaction_type.capitalize %>
-    </p>
-
+      <p class="card-text">
+        <strong>Belongs to Tanda:</strong>
+        <%= transaction.user_tanda.tanda.name %>
+      </p>
+      <p class="card-text">
+        <strong>Amount:</strong>
+        <span class="<%= transaction.transaction_type == 'withdrawal' ? 'text-danger' : 'text-success' %>">
+          <%= number_to_currency(transaction.amount) %>
+        </span>
+      </p>
+      <p class="card-text">
+        <strong>Date:</strong>
+        <%= l(transaction.date, format: :long) %>
+      </p>
+      <p class="card-text">
+        <strong>Transaction type:</strong>
+        <%= transaction.transaction_type.capitalize %>
+      </p>
+    </div>
   </div>
-
 </div>
