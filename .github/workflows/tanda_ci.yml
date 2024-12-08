@@ -19,6 +19,8 @@ jobs:
     env:
       RAILS_ENV: test
       DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
+      API_KEY_NAME: 'dummy_key_name'
+      API_KEY_PRIVATE_KEY: 'dummy_private_key'
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
