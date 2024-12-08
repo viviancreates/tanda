@@ -8,7 +8,8 @@ class CoinbaseAPITest < ActionDispatch::IntegrationTest
       username: 'testuser',
       email: 'test@example.com',
       password: 'password',
-      first_name: 'Test'
+      first_name: 'Test',
+      wallet_data: { 'wallet_id' => 'mock_wallet_id', 'seed' => 'mock_seed' }
     )
     sign_in @user
   end
@@ -43,6 +44,25 @@ class CoinbaseAPITest < ActionDispatch::IntegrationTest
 
     assert_redirected_to user_wallet_path(@user.username)
     assert_match /Wallet funded successfully!/, flash[:notice]
+    wallet_mock.verify
+  end
+
+  def test_transfer_funds
+    wallet_mock = Minitest::Mock.new
+    wallet_mock.expect(:transfer, OpenStruct.new(transaction_link: 'mock_transfer_link'), [1.0, :eth, 'recipient_wallet_address'])
+    wallet_mock.expect(:balance, 0.5, [:eth])
+
+    Coinbase::Wallet.stub :import, wallet_mock do
+      post transfer_wallet_path(@user.id), params: {
+        amount: 1.0,
+        currency: 'eth',
+        recipient_address: 'recipient_wallet_address'
+      }
+    end
+
+    assert_response :redirect
+    assert_equal @user.reload.balance, 0.5
+    assert_match /Transfer successful!/, flash[:notice]
     wallet_mock.verify
   end
 end
