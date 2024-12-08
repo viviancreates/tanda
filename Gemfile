@@ -91,6 +91,7 @@ gem 'coinbase-sdk'
 gem 'kaminari'
 gem "ransack"
 
+
 group :development do
   gem "annotate"
   gem "better_errors"
@@ -115,4 +116,6 @@ group :test do
   gem "shoulda-matchers", "~> 4.0"
   gem "rspec-html-matchers"
   gem "webmock"
+  gem 'mocha', '~> 1.16'
+  gem 'minitest'
 end
