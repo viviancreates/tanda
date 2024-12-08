@@ -56,9 +56,6 @@ class UsersController < ApplicationController
     redirect_to user_wallet_path(current_user.username), notice: notice, alert: alert
   end
   
-  
-  
-  
   def transfer
     @user = current_user
   
@@ -78,6 +75,22 @@ class UsersController < ApplicationController
         updated_balance = wallet.balance(params[:currency].to_sym)
         @user.update(balance: updated_balance.to_f)
   
+        # Find the user's default Tanda (or a specific one if params are passed)
+        user_tanda = UserTanda.find_by(user: @user, tanda_id: params[:tanda_id])
+  
+        if user_tanda.nil?
+          raise StandardError, "No valid Tanda found to associate with this transaction."
+        end
+  
+        # Create the transaction record
+        @transaction = Transaction.create!(
+          user_tanda_id: user_tanda.id,
+          amount: params[:amount],
+          transaction_type: 'transfer',
+          date: Time.zone.now,
+          description: "Transfer to #{params[:recipient_address]}"
+        )
+  
         @notice = "Transfer successful! Your updated balance is #{updated_balance.to_f} #{params[:currency].upcase}. " \
                   "<a href='#{transaction_link}' target='_blank'>View Transaction on Sepolia</a>".html_safe
       rescue StandardError => e
@@ -91,6 +104,9 @@ class UsersController < ApplicationController
       format.js
     end
   end
+  
+  
+  
   
   
   
