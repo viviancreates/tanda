@@ -171,10 +171,8 @@ rails test
 - The ETH and other assets obtained in this environment hold **no real-world monetary value** and are intended for testing purposes only
 
 ## License
-Distributed under the MIT License. See `LICENSE` for more information.
+This project is licensed under the [MIT License](LICENSE).
 
 ## Contact
 Vivian Davila - [viviananddav@gmail.com](mailto:youremail@example.com)
 Project Link: [GitHub Repository](https://github.com/viviancreates/tanda)
-
-
