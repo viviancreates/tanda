@@ -11,17 +11,17 @@
         <ul class="list-group">
           <% @tandas.each do |tanda| %>
             <li class="list-group-item">
-              <i class="fa fa-piggy-bank"></i> 
+              <i class="fa fa-piggy-bank"></i>
               <%= link_to tanda.name, tanda_path(tanda), class: "text-decoration-none" %>
               - Goal: $<%= tanda.goal_amount %>
             </li>
           <% end %>
         </ul>
         <nav aria-label="Page navigation example">
-  <ul class="pagination justify-content-center">
-    <%= paginate @tandas %>
-  </ul>
-</nav>
+          <ul class="pagination justify-content-center">
+            <%= paginate @tandas %>
+          </ul>
+        </nav>
       <% else %>
         <p>No tandas created yet.</p>
       <% end %>

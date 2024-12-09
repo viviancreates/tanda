@@ -54,7 +54,7 @@ task sample_data: :environment do
 
   p "There are now #{FollowRequest.count} follow requests."
 
-  10.times do
+  5.times do
     
     Tanda.create(
       name: ["Wedding", "Vacation", "House", "Fun", "Car", "Family", "Budget", "Debt"].sample + " " + "Fund",

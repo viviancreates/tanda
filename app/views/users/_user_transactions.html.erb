@@ -1,39 +1,40 @@
- <div class="card mb-4">
-    <div class="card-header">
-      <h4 class="mb-0"><i class="fa fa-wallet"></i> Your Transactions</h4>
-    </div>
-    <div class="card-body">
-      <% if @transactions.any? %>
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Description</th>
-              <th>Amount</th>
-              <th>Date</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @transactions.each do |transaction| %>
-              <tr>
-                <td><i class="fa fa-tag"></i> <%= transaction.description %></td>
-                <td>$<%= transaction.amount %></td>
-                <td><%= transaction.date.strftime("%B %d, %Y") %></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-        <nav aria-label="Page navigation example">
-  <ul class="pagination justify-content-center">
-    <%= paginate @transactions %>
-  </ul>
-</nav>
-      <% else %>
-        <p>No transactions yet.</p>
-      <% end %>
-    </div>
-
-     <div>
-      <%= link_to "View All", transactions_path, class: "btn btn-outline-primary btn-sm me-2" %>
-      <%= link_to "Add Transaction", new_transaction_path, class: "btn btn-outline-success btn-sm" %>
-    </div>
+ 
+<div class="card mb-4">
+  <div class="card-header">
+    <h4 class="mb-0"><i class="fa fa-wallet"></i> Your Transactions</h4>
   </div>
+  <div class="card-body">
+    <% if @transactions.any? %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Description</th>
+            <th>Amount</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @transactions.each do |transaction| %>
+            <tr>
+              <td><i class="fa fa-tag"></i> <%= transaction.description %></td>
+              <td>$<%= transaction.amount %></td>
+              <td><%= transaction.date.strftime("%B %d, %Y") %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <%= paginate @transactions %>
+        </ul>
+      </nav>
+    <% else %>
+      <p>No transactions yet.</p>
+    <% end %>
+  </div>
+
+  <div>
+    <%= link_to "View All", transactions_path, class: "btn btn-outline-primary btn-sm me-2" %>
+    <%= link_to "Add Transaction", new_transaction_path, class: "btn btn-outline-success btn-sm" %>
+  </div>
+</div>

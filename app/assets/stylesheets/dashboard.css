@@ -4,7 +4,9 @@
   color: #3A3F87;
 }
 
-.dashboard-graphs, .line-graph, .summary-card {
+.dashboard-graphs,
+.line-graph,
+.summary-card {
   padding: 30px;
   background-color: #ffffff;
   border-radius: 8px;
@@ -33,7 +35,7 @@
   padding: 20px;
   display: flex;
   flex-direction: column;
-  gap: 15px; 
+  gap: 15px;
   text-align: center;
 }
 

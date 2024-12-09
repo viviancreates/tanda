@@ -1,7 +1,7 @@
 require "coinbase"
-# Replace with your actual API key and private key.
-api_key_name = ENV['API_KEY_NAME']  # Set your API key name in environment variables or directly
-api_key_private_key = ENV['API_KEY_PRIVATE_KEY']  # Set your private key in environment variables or directly
+
+api_key_name = ENV['API_KEY_NAME']
+api_key_private_key = ENV['API_KEY_PRIVATE_KEY'] 
 
 Coinbase.configure do |config|
   config.api_key_name = api_key_name

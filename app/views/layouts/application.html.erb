@@ -4,7 +4,7 @@
     <title>Tanda</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="/manifest.json" />
-    
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -12,23 +12,23 @@
 
     <%= render partial: "shared/cdn_assets" %>
 
-     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
     <%= stylesheet_link_tag 'index', 'landing', 'profile', 'dashboard', 'tandas_index' %>
   </head>
 
   <body>
     <%= render partial: "shared/navbar" %>
-     <div class="container">
+    <div class="container">
       <% if notice.present? %>
         <%= render partial: "shared/flash_messages", locals: { message: notice, css_class: "success" } %>
       <% end %>
-      
+
       <% if alert.present? %>
         <%= render partial: "shared/flash_messages", locals: { message: alert, css_class: "danger" } %>
       <% end %>
 
       <%= yield %>
     </div>
-    </body>
+  </body>
 </html>
