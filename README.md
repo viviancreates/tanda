@@ -169,6 +169,8 @@ rails test
 - Transfers show up on the transactions, will update functionality and USD based on current exchange rates at a later date
 - The Coinbase API provides a playground environment with a faucet to help test out wallet functionality
 - The ETH and other assets obtained in this environment hold **no real-world monetary value** and are intended for testing purposes only
+- Only Ethereum (ETH) is supported for transactions. Future updates will include a gasless option to minimize transaction costs and support for stablecoins to provide a more predictable payment option.
+- Encryption for user data has not been implemented yet but is planned for a future update to ensure privacy and security
 
 ## License
 This project is licensed under the [MIT License](LICENSE).
