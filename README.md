@@ -12,7 +12,6 @@ The Tanda App is a Ruby on Rails application that allows users to set savings go
 - [Usage](#usage)
 - [Contributing](#contributing)
 - [Visual Aids](#visual-aids)
-- [ERD](#erd)
 - [API Implementation](#api-implementation)
 - [End To End Testing](#end-to-end-testing)
 - [Troubleshooting](#troubleshooting)
@@ -73,8 +72,9 @@ Contributions are welcome! Please follow these guidelines:
 5. Open a pull request
 
 ## Visual Aids
+### ERD
 
-## ERD
+![erd](https://github.com/user-attachments/assets/7f4b5289-e2ef-41be-8eec-0f7898442a16)
 
 
 
