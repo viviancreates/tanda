@@ -1,7 +1,7 @@
 class AnalyticsController < ApplicationController
   def index
     @user = current_user
-    @user_tandas = current_user.user_tandas.includes(:tanda)
+    @user_tandas = current_user.user_tandas.includes(:tanda).where.not(tanda: nil)
     @charts_data = {}
     @user_total_contributions = current_user.transactions.sum(:amount)
 
@@ -20,6 +20,7 @@ class AnalyticsController < ApplicationController
 
     @user_tandas.each do |user_tanda|
       tanda = user_tanda.tanda
+      next if tanda.nil?
       user_contributions = tanda.user_tandas
         .joins(:transactions) 
         .joins(:user)

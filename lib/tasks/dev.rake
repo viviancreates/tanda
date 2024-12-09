@@ -15,6 +15,8 @@ task sample_data: :environment do
     first_name: "Vivian",
     last_name: "Davila",
     username: "Vivian",
+    default_address: "0x12345",
+    balance: 500.0
   )
 
   p "Created specific user: Vivian Davila"
@@ -27,6 +29,8 @@ task sample_data: :environment do
       first_name: name,
       last_name: Faker::Name.last_name,
       username: name,
+      default_address: Faker::Blockchain::Ethereum.address,
+      balance: rand(100.0..1000.0)
     )
   end
   
@@ -34,21 +38,8 @@ task sample_data: :environment do
 
   users = User.all
 
-  # Create first batch of follow requests
-  users.each do |first_user|
-    users.each do |second_user|
-      next if first_user == second_user
-      if rand < 0.75
-        first_user.sent_follow_requests.create(
-          recipient: second_user,
-          status: ["pending", "accepted", "rejected"].sample,
-        )
-      end
-    end
-  end
-
-  # Create second batch of follow requests
-  users.each do |first_user|
+   # Create follow requests
+   users.each do |first_user|
     users.each do |second_user|
       next if first_user == second_user
       if rand < 0.75
@@ -57,15 +48,9 @@ task sample_data: :environment do
           status: FollowRequest.statuses.keys.sample,
         )
       end
-
-      if rand < 0.75
-        second_user.sent_follow_requests.create(
-          recipient: first_user,
-          status: FollowRequest.statuses.keys.sample,
-        )
-      end
     end
   end
+ 
 
   p "There are now #{FollowRequest.count} follow requests."
 
@@ -75,7 +60,8 @@ task sample_data: :environment do
       name: ["Wedding", "Vacation", "House", "Fun", "Car", "Family", "Budget", "Debt"].sample + " " + "Fund",
       goal_amount: rand(1000..5000),
       creator_id: User.all.sample.id,
-      due_date: Date.today + rand(30..60), 
+      creator_wallet: Faker::Blockchain::Ethereum.address,
+      due_date: Date.today + rand(30..60).days
     )
   end
   

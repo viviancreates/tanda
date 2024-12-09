@@ -12,8 +12,8 @@
 #  creator_id     :integer
 #
 class Tanda < ApplicationRecord
-  has_many :user_tandas
-  has_many :transactions
+  has_many :user_tandas, dependent: :destroy
+  has_many :transactions, through: :user_tandas, dependent: :destroy
   has_many :users, through: :user_tandas
   belongs_to :creator, class_name: 'User', foreign_key: 'creator_id'
 
