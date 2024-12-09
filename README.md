@@ -1,7 +1,10 @@
 # Tanda
 
 ## Description
-The Tanda App is a Ruby application that allows users to set saving goals and track them with friends and family.
+The Tanda App is a Ruby on Rails application that allows users to set savings goals and track them collaboratively with friends and family, powered by cryptocurrency wallets. It is designed to promote financial accountability and transparency within groups.
+
+## PM To Do List and Board
+[Project Management Board](https://daily-glider-ca4.notion.site/TANDA-Project-Board-15689123f3bb80b5a8d7d169d15d795e?pvs=4)
 
 ## Table of Contents
 - [Installation](#installation)
@@ -10,13 +13,14 @@ The Tanda App is a Ruby application that allows users to set saving goals and tr
 - [Contributing](#contributing)
 - [Visual Aids](#visual-aids)
 - [ERD](#erd)
-- [Troubleshooting](#troubleshooting)
 - [API Implementation](#api-implementation)
 - [End To End Testing](#end-to-end-testing)
-- [Contact](#contact)
+- [Troubleshooting](#troubleshooting)
+- [Notes](#notes)
 - [License](#license)
+- [Contact](#contact)
 
-## Installation Instructions
+## Installation
 1. Clone the repository:
 `git clone https://github.com/viviancreates/tanda`
 
@@ -32,7 +36,23 @@ The Tanda App is a Ruby application that allows users to set saving goals and tr
 5. Start the Rails server:
 `rails server`
 
+6. Open your browser and navigate to:
+`http://localhost:3000`
+
 ## Configuration
+### Environment Variables
+Ensure the following environment variables are set up in a `.env` file or in your deployment environment:
+`API_KEY_NAME=<Your API Key Name> `
+`API_KEY_PRIVATE_KEY=<Your API Private Key>`
+
+
+### Database Configuration
+1. Verify and update `config/database.yml` with the correct database credentials if necessary.
+2. Run the following commands to set up the database:
+   ```bash
+   rails db:create
+   rails db:migrate
+   rails db:seed
 
 ## Usage
 
@@ -56,7 +76,7 @@ Contributions are welcome! Please follow these guidelines:
 
 ## ERD
 
-## Troubleshooting
+
 
 ## API Implementation
 This project integrates with the Coinbase API to provide wallet creation, funding, and cryptocurrency transfers. These functionalities ensure secure and efficient cryptocurrency transaction handling. 
@@ -104,16 +124,14 @@ To use the API, ensure the following environment variables are set:
     "recipient_address": "<recipient_address>",
     "tanda_id": "<tanda_id>"
   }
-  - **Response Body:**
+  ```
+- **Response Body:**
   ```json
   {
     "status": "success",
     "transaction_link": "<transaction_link>",
     "updated_balance": "<updated_balance>"
   }
-
-
-
 
 ## End-to-End Testing
 This project includes end-to-end tests to validate key workflows and ensure robust application functionality. The tests are implemented using `Minitest` and are designed to simulate real-world usage scenarios.
@@ -136,12 +154,27 @@ This project includes end-to-end tests to validate key workflows and ensure robu
 To execute the test suite, run the following command:
 rails test
 
+## Troubleshooting
+### Common Issues
+1. **Database Setup Issues:**
+   Ensure your PostgreSQL service is running and credentials are correctly configured in `config/database.yml`.
+
+2. **Missing API Keys:**
+   Verify that `API_KEY_NAME` and `API_KEY_PRIVATE_KEY` are set in the environment.
+
+3. **Server Not Starting:**
+   Run `rails db:migrate` to ensure the database schema is up-to-date.
+
+## Notes
+- Transfers show up on the transactions, will update functionality and USD based on current exchange rates at a later date
+- The Coinbase API provides a playground environment with a faucet to help test out wallet functionality
+- The ETH and other assets obtained in this environment hold **no real-world monetary value** and are intended for testing purposes only
+
 ## License
 Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Contact
 Vivian Davila - [viviananddav@gmail.com](mailto:youremail@example.com)
-Project Link: [https://github.com/yourusername/yourproject](https://github.com/yourusername/yourproject)
+Project Link: [GitHub Repository](https://github.com/viviancreates/tanda)
 
-## Notice
-Transfers show up on the transactions, will update functionality and USD based on current exchange rates at a later date
+
