@@ -1,7 +1,7 @@
 # Tanda
 
 ## Description
-The Tanda App is a Ruby on Rails application that allows users to set savings goals and track them collaboratively with friends and family, powered by cryptocurrency wallets. It is designed to promote financial accountability and transparency within groups.
+The Tanda App is a Ruby on Rails application that allows users to set savings goals and track them collaboratively with friends and family, promoting financial accountability and transparency within groups, powered by cryptocurrency wallets.
 
 ## PM To Do List and Board
 [Project Management Board](https://daily-glider-ca4.notion.site/TANDA-Project-Board-15689123f3bb80b5a8d7d169d15d795e?pvs=4)
