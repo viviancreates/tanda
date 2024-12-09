@@ -1,7 +1,7 @@
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
-  background-color: #f8f9fa; 
+  background-color: #f8f9fa;
   color: #333;
   line-height: 1.6;
 }
@@ -53,7 +53,7 @@ body {
   color: #333;
   font-size: 1rem;
   line-height: 1.6;
-  border-top: 4px solid #3A3F87; 
+  border-top: 4px solid #3A3F87;
 }
 
 .user-show-page .list-group-item {
@@ -85,7 +85,8 @@ body {
   margin-top: 20px;
 }
 
-.user-show-page .table th, .user-show-page .table td {
+.user-show-page .table th,
+.user-show-page .table td {
   padding: 12px;
   text-align: left;
   border-bottom: 1px solid #ddd;

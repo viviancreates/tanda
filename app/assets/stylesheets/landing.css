@@ -1,7 +1,7 @@
 body.landing-page {
   margin: 0;
   font-family: 'Poppins', sans-serif;
-  background-color: white; 
+  background-color: white;
   color: #333;
   text-align: center;
   line-height: 1.6;
@@ -244,7 +244,7 @@ body.landing-page .social-proof blockquote {
 
 .hero-video {
   width: 100%;
-  max-width: 600px; 
+  max-width: 600px;
   margin: 5%;
 }
 

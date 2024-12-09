@@ -1,18 +1,18 @@
 body {
-  font-family: 'Poppins', sans-serif; 
+  font-family: 'Poppins', sans-serif;
   color: #3A3F87 !important;
 }
 
 .transaction-header {
   font-family: poppins;
-  background: #11186f !important; 
-  color: #ffffff; 
-  padding: 20px; 
+  background: #11186f !important;
+  color: #ffffff;
+  padding: 20px;
   font-size: 1.25rem;
   font-weight: bold;
-  text-align: left; 
+  text-align: left;
   line-height: 1.5;
-  border-radius: 4px 4px 0 0; 
+  border-radius: 4px 4px 0 0;
 }
 
 .transaction-body {
@@ -22,17 +22,17 @@ body {
   border: 1px solid #ddd;
   padding: 15px 20px;
   margin-bottom: 0px;
-  border-radius: 0 0 4px 4px; 
+  border-radius: 0 0 4px 4px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin: 15px 0;
 }
 
 .tanda-header {
   font-family: 'Poppins', sans-serif;
-  background: #11186f !important; 
-  color: #ffffff; 
-  padding: 20px; 
-  font-size: 1.25rem; 
+  background: #11186f !important;
+  color: #ffffff;
+  padding: 20px;
+  font-size: 1.25rem;
   font-weight: bold;
   text-align: left;
   line-height: 1.5;
