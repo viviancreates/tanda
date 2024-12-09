@@ -241,3 +241,15 @@ body.landing-page .social-proof blockquote {
   margin: 0 auto;
   max-width: 600px;
 }
+
+.hero-video {
+  width: 100%;
+  max-width: 600px; 
+  margin: 5%;
+}
+
+.demo-video {
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
