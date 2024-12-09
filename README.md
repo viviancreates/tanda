@@ -5,11 +5,18 @@ The Tanda App is a Ruby application that allows users to set saving goals and tr
 
 ## Table of Contents
 - [Installation](#installation)
+- [Configuration](#configuration)
 - [Usage](#usage)
 - [Contributing](#contributing)
+- [Visual Aids](#visual-aids)
+- [ERD](#erd)
+- [Troubleshooting](#troubleshooting)
+- [API Implementation](#api-implementation)
+- [End To End Testing](#end-to-end-testing)
+- [Contact](#contact)
 - [License](#license)
 
-## Installation
+## Installation Instructions
 1. Clone the repository:
 `git clone https://github.com/viviancreates/tanda`
 
@@ -24,6 +31,8 @@ The Tanda App is a Ruby application that allows users to set saving goals and tr
 
 5. Start the Rails server:
 `rails server`
+
+## Configuration
 
 ## Usage
 
@@ -42,6 +51,68 @@ Contributions are welcome! Please follow these guidelines:
 3. Commit your changes (`git commit -m 'Add some feature'`)
 4. Push to the branch (`git push origin feature-branch`)
 5. Open a pull request
+
+## Visual Aids
+
+## ERD
+
+## Troubleshooting
+
+## API Implementation
+This project integrates with the Coinbase API to provide wallet creation, funding, and cryptocurrency transfers. These functionalities ensure secure and efficient cryptocurrency transaction handling. 
+
+### Authentication
+To use the API, ensure the following environment variables are set:
+- `API_KEY_NAME`
+- `API_KEY_PRIVATE_KEY`
+
+### Endpoints
+### Create Wallet
+- **Description:** Creates a wallet for the user.
+- **Method:** `POST`
+- **Endpoint:** `/users/:id/create_wallet`
+- **Request Body:** None
+- **Response:**
+  ```json
+  {
+    "status": "success",
+    "wallet_id": "mock_wallet_id",
+    "balance": 0
+  }
+### Fund Wallet
+- **Description:** Adds testnet funds to the user's wallet.
+- **Method:** `POST`
+- **Endpoint:** `/users/:id/fund_wallet`
+- **Request Body:** None
+- **Response:**
+  ```json
+  {
+    "status": "success",
+    "transaction_hash": "<transaction_hash>",
+    "transaction_link": "<transaction_link>",
+    "balance": "<new_balance>"
+  }
+### Transfer Funds
+- **Description:** Transfers cryptocurrency to a recipient's wallet.
+- **Method:** `POST`
+- **Endpoint:** `/users/:id/transfer`
+- **Request Body:**
+  ```json
+  {
+    "amount": "<amount>",
+    "currency": "eth",
+    "recipient_address": "<recipient_address>",
+    "tanda_id": "<tanda_id>"
+  }
+  - **Response Body:**
+  ```json
+  {
+    "status": "success",
+    "transaction_link": "<transaction_link>",
+    "updated_balance": "<updated_balance>"
+  }
+
+
 
 
 ## End-to-End Testing
