@@ -4,12 +4,12 @@
 
   <div class="mb-3">
     <%= f.label :name, "Name", class: "form-label" %>
-    <%= f.input_field :name, class: "form-control", placeholder: "Enter name" %>
+    <%= f.input_field :name, class: "form-control", placeholder: "Enter name", required: true, minlength: 3 %>
   </div>
 
   <div class="mb-3">
     <%= f.label :goal_amount, "Goal Amount", class: "form-label" %>
-    <%= f.input_field :goal_amount, class: "form-control", placeholder: "Enter goal amount" %>
+    <%= f.input_field :goal_amount, class: "form-control", placeholder: "Enter goal amount", type: "number", required: true, min: 1 %>
   </div>
 
   <div class="mb-3">
