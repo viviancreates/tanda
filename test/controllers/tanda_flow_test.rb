@@ -7,13 +7,15 @@ class TandaFlowsTest < ActionDispatch::IntegrationTest
       username: 'testuser',
       email: 'test@example.com',
       password: 'password',
-      first_name: 'Test'
+      first_name: 'Test',
+      last_name: 'Last'
     )
     @friend = User.create!(
       username: 'frienduser',
       email: 'friend@example.com',
       password: 'password',
-      first_name: 'Friend'
+      first_name: 'Friend',
+      last_name: 'Flast'
     )
     sign_in @user
 

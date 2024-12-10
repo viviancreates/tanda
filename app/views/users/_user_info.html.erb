@@ -9,7 +9,7 @@
     <p><strong>Send ETH or USDC to this address to fund your wallet.</strong></p>
     <p><strong>Your Wallet Address:</strong>
       <% if current_user.wallet_data.present? %>
-        <%= current_user.wallet_data['seed'] %>
+        <%= current_user.default_address %>
       <% else %>
         No wallet 
       <% end %>

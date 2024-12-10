@@ -13,6 +13,12 @@
 #
 class Transaction < ApplicationRecord
   belongs_to :user_tanda
+
+  validates :amount, presence: true, numericality: { greater_than: 0 }
+  validates :date, presence: true
+  validates :description, presence: true
+  validates :transaction_type, presence: true
+
   def self.ransackable_attributes(auth_object = nil)
     ["amount", "date", "description", "transaction_type"]
   end

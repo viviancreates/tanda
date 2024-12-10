@@ -16,6 +16,9 @@ class Tanda < ApplicationRecord
   has_many :transactions, through: :user_tandas, dependent: :destroy
   has_many :users, through: :user_tandas
   belongs_to :creator, class_name: 'User', foreign_key: 'creator_id'
+  validates :name, presence: true, length: { minimum: 3 }
+  validates :goal_amount, presence: true, numericality: { greater_than_or_equal_to: 1 }
+  validates :due_date, presence: true
 
   def self.ransackable_attributes(auth_object = nil)
     ["due_date", "name"]

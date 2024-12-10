@@ -10,16 +10,19 @@
   <div class="mb-3">
   <%= f.label :amount, "Transaction Amount", class: "form-label" %>
   <%= f.input_field :amount, class: "form-control", placeholder: "Enter Amount" %>
+  <%= f.error :amount, class: "text-danger" %>
 </div>
 
 <div class="mb-3">
   <%= f.label :date, "Transaction Date", class: "form-label" %>
   <%= f.input_field :date, class: "form-control", placeholder: "Enter Date" %>
+  <%= f.error :date, class: "text-danger" %>
 </div>
 
 <div class="mb-3">
   <%= f.label :description, "Transaction Description", class: "form-label" %>
   <%= f.input_field :description, class: "form-control", placeholder: "Enter Description" %>
+  <%= f.error :description, class: "text-danger" %>
 </div>
 
 <div class="form-check">

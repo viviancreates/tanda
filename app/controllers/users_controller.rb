@@ -9,8 +9,12 @@ class UsersController < ApplicationController
     wallet = Coinbase::Wallet.create
 
     if wallet
-      # Export and store the complete wallet data
-      current_user.update(wallet_data: wallet.export.to_hash, balance: 0)
+     
+    current_user.update(
+      wallet_data: wallet.export.to_hash,
+      balance: 0,
+      default_address: wallet.default_address.id 
+    )
       notice = "Wallet created successfully!"
     else
       alert = "Failed to create wallet."
@@ -58,7 +62,7 @@ class UsersController < ApplicationController
   def transfer
     if current_user.wallet_data.present?
       begin
-        # Step 1: Initialize wallet
+        
         wallet_data = current_user.wallet_data
         wallet = Coinbase::Wallet.import(
           Coinbase::Wallet::Data.new(
@@ -67,16 +71,13 @@ class UsersController < ApplicationController
           )
         )
         raise "Wallet not initialized" if wallet.nil?
-
-        # Step 2: Perform the transfer
+       
         transfer = wallet.transfer(params[:amount].to_f, :eth, params[:recipient_address])
         transfer.wait!
         updated_balance = wallet.balance(:eth)
-
-        # Update the user's wallet balance
+       
         current_user.update!(balance: updated_balance.to_f)
 
-        # Step 3: Validate Tanda
         Rails.logger.debug "Checking UserTanda: user_id=#{current_user.id}, tanda_id=#{params[:tanda_id]}"
         user_tanda = current_user.user_tandas.find_by(tanda_id: params[:tanda_id])
         if user_tanda.nil?
@@ -84,7 +85,6 @@ class UsersController < ApplicationController
           raise "Invalid Tanda selection. You are not a participant in this Tanda."
         end
 
-        # Step 4: Create the transaction
         eth_to_usd_rate = fetch_eth_to_usd_rate
         amount_usd = (params[:amount].to_f * eth_to_usd_rate).round(2)
         @transaction = Transaction.create!(
@@ -96,7 +96,6 @@ class UsersController < ApplicationController
         )
         Rails.logger.debug "Transaction created: #{@transaction.inspect}"
 
-        # Step 5: Render success
         transaction_link = transfer.transaction_link
         @notice = "Transfer successful! Your updated balance is #{updated_balance.to_f} ETH. " \
                   "<a href='#{transaction_link}' target='_blank'>View Transaction</a>".html_safe

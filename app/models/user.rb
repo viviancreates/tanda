@@ -30,6 +30,8 @@ class User < ApplicationRecord
 
   validates :username, presence: true, uniqueness: true
   validates :default_address, uniqueness: true, allow_nil: true
+  validates :first_name, presence: true
+  validates :last_name, presence: true
 
   has_many :user_tandas
   has_many :tandas, through: :user_tandas, foreign_key: 'creator_id'
