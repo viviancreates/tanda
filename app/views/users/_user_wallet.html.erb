@@ -1,6 +1,6 @@
 <h2>Wallet Information</h2>
 <% if current_user.wallet_data.present? %>
-  <p><strong>Wallet Address:</strong> <%= current_user.wallet_data['seed'] %></p>
+  <p><strong>Wallet Address:</strong> <%= current_user.default_address %></p>
   <p><strong>Balance:</strong> <span id="wallet_balance"><%= current_user.balance %></span> ETH</p>
   <%= button_to "Fund Wallet", fund_wallet_path(current_user.id), method: :post %>
 <% else %>

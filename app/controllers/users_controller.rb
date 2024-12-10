@@ -9,8 +9,12 @@ class UsersController < ApplicationController
     wallet = Coinbase::Wallet.create
 
     if wallet
-      # Export and store the complete wallet data
-      current_user.update(wallet_data: wallet.export.to_hash, balance: 0)
+      # Save the wallet data and default address to the user
+    current_user.update(
+      wallet_data: wallet.export.to_hash,
+      balance: 0,
+      default_address: wallet.default_address.id # Store the real wallet address
+    )
       notice = "Wallet created successfully!"
     else
       alert = "Failed to create wallet."
