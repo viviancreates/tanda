@@ -5,11 +5,17 @@
   <div class="mb-3">
     <%= f.label :name, "Name", class: "form-label" %>
     <%= f.input_field :name, class: "form-control", placeholder: "Enter name", required: true, minlength: 3 %>
+    <% if @tanda.errors[:name].present? %>
+      <div class="text-danger"><%= @tanda.errors[:name].join(", ") %></div>
+    <% end %>
   </div>
 
   <div class="mb-3">
     <%= f.label :goal_amount, "Goal Amount", class: "form-label" %>
     <%= f.input_field :goal_amount, class: "form-control", placeholder: "Enter goal amount", type: "number", required: true, min: 1 %>
+    <% if @tanda.errors[:goal_amount].present? %>
+      <div class="text-danger"><%= @tanda.errors[:goal_amount].join(", ") %></div>
+    <% end %>
   </div>
 
   <div class="mb-3">
