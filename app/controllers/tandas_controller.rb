@@ -10,6 +10,11 @@ class TandasController < ApplicationController
     @current_amount = Transaction.joins(user_tanda: :tanda)
       .where(tandas: { id: @tanda.id })
       .sum(:amount)
+
+    @progress_percentage = calculate_percentage(@current_amount, @tanda.goal_amount)
+
+    # Generate greeting
+    @greeting = TandaGreetingService.new(current_user, @tanda, @progress_percentage).call
   end
 
   def new
@@ -66,6 +71,11 @@ class TandasController < ApplicationController
   end
 
   private
+
+  def calculate_percentage(current, total)
+    return 0 if total.to_f.zero?
+    ((current.to_f / total.to_f) * 100).round(2)
+  end
 
   def set_tanda
     @tanda = Tanda.find(params[:id])
