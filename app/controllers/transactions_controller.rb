@@ -62,6 +62,10 @@ class TransactionsController < ApplicationController
 
   private
 
+  def transaction_params
+    params.require(:transaction).permit(:user_tanda_id, :amount, :date, :description, :transaction_type)
+  end  
+
   def set_transaction
     @transaction = Transaction.find(params[:id])
   end
