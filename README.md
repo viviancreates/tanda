@@ -51,7 +51,7 @@ Ensure the following environment variables are set up in a `.env` file or in you
    ```bash
    rails db:create
    rails db:migrate
-   rails db:seed
+   rails db:seed or rake sample_data
 
 ## Usage
 
