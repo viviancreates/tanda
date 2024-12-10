@@ -166,7 +166,7 @@ rails test
    Run `rails db:migrate` to ensure the database schema is up-to-date.
 
 ## Notes
-- Transfers show up on the transactions, will update functionality and USD based on current exchange rates at a later date
+- Transfers show up on the transactions, converted to USD! :D Will add withdrawal functionality at a later date
 - The Coinbase API provides a playground environment with a faucet to help test out wallet functionality
 - The ETH and other assets obtained in this environment hold **no real-world monetary value** and are intended for testing purposes only
 - Only Ethereum (ETH) is supported for transactions. Future updates will include a gasless option to minimize transaction costs and support for stablecoins to provide a more predictable payment option.

@@ -1,14 +1,14 @@
-$("#wallet-balance").html("<strong>Balance:</strong> <%= @user.balance %> ETH");
-
-<% if @notice %>
+<% if @transaction.present? && @notice.present? %>
   $("#flash-notice").html("<%= j @notice %>").fadeIn().delay(3000);
-<% end %>
-<% if @alert %>
+  $("#wallet-balance").html("<strong>Balance:</strong> <%= current_user.balance %> ETH");
+
+  var transactionsListContainer = $("#transactions");
+  var newTransactionContent = "<%= j(render partial: 'transactions/transaction', locals: { transaction: @transaction }) %>";
+  transactionsListContainer.append(newTransactionContent);
+<% elsif @alert.present? %>
   $("#flash-alert").html("<%= j @alert %>").fadeIn().delay(3000);
+<% else %>
+  console.error("Transaction rendering failed: Transaction object is nil.");
 <% end %>
 
 $("#transfer_funds_form")[0].reset();
-
-var transactionsListContainer = $("#transactions");
-var newTransactionContent = "<%= j(render partial: 'transactions/transaction', locals: { transaction: @transaction }) %>";
-transactionsListContainer.append(newTransactionContent);

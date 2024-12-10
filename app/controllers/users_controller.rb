@@ -56,47 +56,56 @@ class UsersController < ApplicationController
   end
 
   def transfer
-    @user = current_user
-
-    if @user.wallet_data.present?
-      wallet_data = Coinbase::Wallet::Data.new(
-        wallet_id: @user.wallet_data["wallet_id"],
-        seed: @user.wallet_data["seed"],
-      )
-      wallet = Coinbase::Wallet.import(wallet_data)
-
+    if current_user.wallet_data.present?
       begin
-        transfer = wallet.transfer(params[:amount].to_f, params[:currency].to_sym, params[:recipient_address])
+        # Step 1: Initialize wallet
+        wallet_data = current_user.wallet_data
+        wallet = Coinbase::Wallet.import(
+          Coinbase::Wallet::Data.new(
+            wallet_id: wallet_data["wallet_id"],
+            seed: wallet_data["seed"],
+          )
+        )
+        raise "Wallet not initialized" if wallet.nil?
+
+        # Step 2: Perform the transfer
+        transfer = wallet.transfer(params[:amount].to_f, :eth, params[:recipient_address])
         transfer.wait!
+        updated_balance = wallet.balance(:eth)
 
-        transaction_link = transfer.transaction_link
+        # Update the user's wallet balance
+        current_user.update!(balance: updated_balance.to_f)
 
-        updated_balance = wallet.balance(params[:currency].to_sym)
-        @user.update(balance: updated_balance.to_f)
-
-        # Find the user's default Tanda (or a specific one if params are passed)
-        user_tanda = UserTanda.find_by(user: @user, tanda_id: params[:tanda_id])
-
+        # Step 3: Validate Tanda
+        Rails.logger.debug "Checking UserTanda: user_id=#{current_user.id}, tanda_id=#{params[:tanda_id]}"
+        user_tanda = current_user.user_tandas.find_by(tanda_id: params[:tanda_id])
         if user_tanda.nil?
-          raise StandardError, "No valid Tanda found to associate with this transaction."
+          Rails.logger.error "Invalid Tanda: UserTanda not found for user_id=#{current_user.id}, tanda_id=#{params[:tanda_id]}"
+          raise "Invalid Tanda selection. You are not a participant in this Tanda."
         end
 
-        # Create the transaction record
+        # Step 4: Create the transaction
+        eth_to_usd_rate = fetch_eth_to_usd_rate
+        amount_usd = (params[:amount].to_f * eth_to_usd_rate).round(2)
         @transaction = Transaction.create!(
-          user_tanda_id: user_tanda.id,
-          amount: params[:amount].to_f,
+          user_tanda: user_tanda,
+          amount: amount_usd,
           transaction_type: "transfer",
           date: Time.zone.now,
           description: "Transfer to #{params[:recipient_address]}",
         )
+        Rails.logger.debug "Transaction created: #{@transaction.inspect}"
 
-        @notice = "Transfer successful! Your updated balance is #{updated_balance.to_f} #{params[:currency].upcase}. " \
-                  "<a href='#{transaction_link}' target='_blank'>View Transaction on Sepolia</a>".html_safe
+        # Step 5: Render success
+        transaction_link = transfer.transaction_link
+        @notice = "Transfer successful! Your updated balance is #{updated_balance.to_f} ETH. " \
+                  "<a href='#{transaction_link}' target='_blank'>View Transaction</a>".html_safe
       rescue StandardError => e
         @alert = "Transfer failed: #{e.message}"
+        Rails.logger.error "Error during transfer: #{e.message}"
       end
     else
-      @alert = "You need to create a wallet before making transfers."
+      @alert = "No wallet found. Please create a wallet before transferring funds."
     end
 
     respond_to do |format|
@@ -134,6 +143,13 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def fetch_eth_to_usd_rate
+    url = URI.parse("https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd")
+    response = Net::HTTP.get(url)
+    data = JSON.parse(response)
+    data.dig("ethereum", "usd") || raise("Failed to fetch ETH to USD rate.")
+  end
 
   def fetch_accepted_friends
     sent_friend_ids = FollowRequest.where(sender_id: current_user.id, status: "accepted").pluck(:recipient_id)

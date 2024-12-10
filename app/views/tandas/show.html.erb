@@ -1,6 +1,13 @@
 <p style="color: green"><%= notice %></p>
 
+<h1><%= @greeting %></h1>
+
 <%= render @tanda %>
+
+<h2>Progress Details</h2>
+<p><strong>Progress Percentage:</strong> <%= @progress_percentage %>%</p>
+
+<progress value="<%= @progress_percentage %>" max="100"></progress>
 
 <div>
   <%= link_to "Edit this tanda", edit_tanda_path(@tanda) %> |
