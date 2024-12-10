@@ -1,0 +1,17 @@
+<% if @breadcrumbs.present? %>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <% @breadcrumbs.each do |breadcrumb| %>
+        <% if breadcrumb == @breadcrumbs.last %>
+          <li class="breadcrumb-item active" aria-current="page">
+            <%= breadcrumb.fetch(:content) %>
+          </li>
+        <% else %>
+          <li class="breadcrumb-item">
+            <%= link_to breadcrumb.fetch(:content), breadcrumb[:href] %>
+          </li>
+        <% end %>
+      <% end %>
+    </ol>
+  </nav>
+<% end %>

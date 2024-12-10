@@ -21,6 +21,9 @@ class Tanda < ApplicationRecord
     ["due_date", "name"]
   end
   
+  def to_s
+    name
+  end
 
   def creator_wallet_address
     creator_wallet || "No wallet linked"

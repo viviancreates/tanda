@@ -2,11 +2,19 @@ class TandasController < ApplicationController
   before_action :set_tanda, only: %i[ show edit update destroy ]
 
   def index
+    @breadcrumbs = [
+      { content: "Tandas", href: tandas_path }
+    ]
     @q = Tanda.ransack(params[:q])
     @tandas = @q.result(distinct: true).joins(:user_tandas).where(user_tandas: { user_id: current_user.id }).order(:created_at).page(params[:page]).per(5)
   end
 
   def show
+    @breadcrumbs = [
+      { content: "Tandas", href: tandas_path },
+      { content: @tanda.name }
+    ]
+
     @current_amount = Transaction.joins(user_tanda: :tanda)
       .where(tandas: { id: @tanda.id })
       .sum(:amount)
@@ -18,11 +26,22 @@ class TandasController < ApplicationController
   end
 
   def new
+    @breadcrumbs = [
+      { content: "Tandas", href: tandas_path },
+      { content: "New" }
+    ]
+
     @tanda = Tanda.new
     @friends = fetch_accepted_friends
   end
 
   def edit
+    @breadcrumbs = [
+      { content: "Tandas", href: tandas_path },
+      { content: @tanda.name, href: tanda_path(@tanda) },
+      { content: "Edit" }
+    ]
+
     @friends = fetch_accepted_friends
   end
 
@@ -95,5 +114,11 @@ class TandasController < ApplicationController
     sent_friend_ids = FollowRequest.where(sender_id: id, status: "accepted").pluck(:recipient_id)
     received_friend_ids = FollowRequest.where(recipient_id: id, status: "accepted").pluck(:sender_id)
     User.where(id: sent_friend_ids + received_friend_ids).distinct
+  end
+
+  def set_breadcrumbs
+    @breadcrumbs ||= [
+      { content: "Home", href: root_path }
+    ]
   end
 end
