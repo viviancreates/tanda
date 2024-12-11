@@ -3,6 +3,7 @@
 # Table name: users
 #
 #  id                     :bigint           not null, primary key
+#  admin                  :boolean          default(FALSE), not null
 #  balance                :decimal(10, 2)   default(0.0)
 #  default_address        :string
 #  email                  :string           default(""), not null
