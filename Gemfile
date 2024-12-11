@@ -90,6 +90,8 @@ gem 'dotenv-rails', groups: [:development, :test]
 gem 'coinbase-sdk'
 gem 'kaminari'
 gem "ransack"
+gem 'rails_admin', '~> 3.0'
+gem 'blazer'
 
 
 group :development do
@@ -119,3 +121,4 @@ group :test do
   gem 'mocha', '~> 1.16'
   gem 'minitest'
 end
+gem "sassc-rails"
