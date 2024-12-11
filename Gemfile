@@ -91,6 +91,7 @@ gem 'coinbase-sdk'
 gem 'kaminari'
 gem "ransack"
 gem 'rails_admin', '~> 3.0'
+gem 'blazer'
 
 
 group :development do
