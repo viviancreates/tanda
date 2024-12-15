@@ -1,4 +1,3 @@
- 
 <div class="container user-show-page mt-4">
   <h1>
     <i class="fa fa-user-circle"></i> <%= @user.username.capitalize %>
@@ -18,6 +17,9 @@
     <% end %>
   </div>
 
+
   <%= render "user_tandas" %>
   <%= render "user_transactions" %>
+  <%= render "analytics/line_graph" %>
+
 </div>

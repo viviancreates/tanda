@@ -9,12 +9,11 @@ class UsersController < ApplicationController
     wallet = Coinbase::Wallet.create
 
     if wallet
-     
-    current_user.update(
-      wallet_data: wallet.export.to_hash,
-      balance: 0,
-      default_address: wallet.default_address.id 
-    )
+      current_user.update(
+        wallet_data: wallet.export.to_hash,
+        balance: 0,
+        default_address: wallet.default_address.id,
+      )
       notice = "Wallet created successfully!"
     else
       alert = "Failed to create wallet."
@@ -62,7 +61,6 @@ class UsersController < ApplicationController
   def transfer
     if current_user.wallet_data.present?
       begin
-        
         wallet_data = current_user.wallet_data
         wallet = Coinbase::Wallet.import(
           Coinbase::Wallet::Data.new(
@@ -71,11 +69,11 @@ class UsersController < ApplicationController
           )
         )
         raise "Wallet not initialized" if wallet.nil?
-       
+
         transfer = wallet.transfer(params[:amount].to_f, :eth, params[:recipient_address])
         transfer.wait!
         updated_balance = wallet.balance(:eth)
-       
+
         current_user.update!(balance: updated_balance.to_f)
 
         Rails.logger.debug "Checking UserTanda: user_id=#{current_user.id}, tanda_id=#{params[:tanda_id]}"
@@ -131,6 +129,8 @@ class UsersController < ApplicationController
                          .where.not(id: @user.id)
                          .distinct
     end
+
+    @user_contribution_line = @user.transactions.group_by_day(:date).sum(:amount)
   end
 
   def search
