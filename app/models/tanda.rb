@@ -19,6 +19,7 @@ class Tanda < ApplicationRecord
   validates :name, presence: true, length: { minimum: 3 }
   validates :goal_amount, presence: true, numericality: { greater_than_or_equal_to: 1 }
   validates :due_date, presence: true
+  include MetaTaggable
 
   def self.ransackable_attributes(auth_object = nil)
     ["due_date", "name"]

@@ -92,7 +92,7 @@ gem 'kaminari'
 gem "ransack"
 gem 'rails_admin', '~> 3.0'
 gem 'blazer'
-
+gem "meta-tags", "~> 2.22"
 
 group :development do
   gem "annotate"
