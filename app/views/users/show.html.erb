@@ -6,13 +6,13 @@
   <%= render "user_info" %>
 
   <div class="buttons-section mb-4">
-    <%= link_to user_wallet_path, class: "btn btn-outline-warning me-2" do %>
+    <%= link_to user_wallet_path, class: "btn btn-outline-warning me-2", aria: { label: "View My Wallet" } do %>
       <i class="fa fa-wallet"></i> My Wallet
     <% end %>
-    <%= link_to friends_path, class: "btn btn-outline-primary me-2" do %>
+    <%= link_to friends_path, class: "btn btn-outline-primary me-2", aria: { label: "View My Friends" } do %>
       <i class="fa fa-users"></i> My Friends
     <% end %>
-    <%= link_to analytics_path, class: "btn btn-outline-success me-2" do %>
+    <%= link_to analytics_path, class: "btn btn-outline-success me-2", aria: { label: "View My Dashboard" } do %>
       <i class="fa fa-chart-line"></i> Dashboard
     <% end %>
   </div>
