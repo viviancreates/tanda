@@ -16,4 +16,12 @@ class UserTanda < ApplicationRecord
   def tanda_name
     tanda.name
   end
+
+  def trackable_type
+    "UserTanda"
+  end
+
+  def trackable_id
+    id
+  end
 end

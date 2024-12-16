@@ -31,4 +31,12 @@ class Tanda < ApplicationRecord
   def creator_wallet_address
     creator_wallet || "No wallet linked"
   end
+
+  def trackable_type
+    "Tanda"
+  end
+
+  def trackable_id
+    id
+  end
 end
