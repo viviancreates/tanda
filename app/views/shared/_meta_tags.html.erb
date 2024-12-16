@@ -1,0 +1,19 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<%=
+  display_meta_tags({
+    site: "Tanda",
+    description: "Tanda is an innovative platform that lets you save together with friends and family. Achieve financial goals collaboratively and securely.",
+    image: image_url("favicon.png"),
+    og: {
+      title: "Tanda - Save Together, Achieve More",
+      description: "Collaborative saving made simple with Tanda.",
+      image: asset_url("favicon.png"),
+      site_name: "Tanda"
+    },
+  })
+%>
+
+<%= csrf_meta_tags %>
+<%= csp_meta_tag %>
