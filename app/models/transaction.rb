@@ -23,4 +23,11 @@ class Transaction < ApplicationRecord
     ["amount", "date", "description", "transaction_type"]
   end
 
+  def trackable_type
+    "Transaction"
+  end
+
+  def trackable_id
+    id
+  end
 end

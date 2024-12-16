@@ -122,3 +122,5 @@ group :test do
   gem 'minitest'
 end
 gem "sassc-rails"
+
+gem "good_job", "~> 4.6"

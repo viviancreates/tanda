@@ -42,5 +42,10 @@ class AnalyticsController < ApplicationController
       }
     end
     @user_contribution_line = current_user.transactions.group_by_day(:date).sum(:amount)
+
+   @activities = [
+      TrackableService.new(Tanda.first).track_action("created"),
+      TrackableService.new(Transaction.first).track_action("updated")
+    ]
   end
 end

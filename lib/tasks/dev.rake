@@ -16,7 +16,8 @@ task sample_data: :environment do
     last_name: "Davila",
     username: "Vivian",
     default_address: "0x12345",
-    balance: 500.0
+    balance: 500.0, 
+    admin: true
   )
 
   p "Created specific user: Vivian Davila"
