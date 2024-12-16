@@ -1,4 +1,5 @@
 # Tanda
+[Link to rubric self evaluation](https://daily-glider-ca4.notion.site/Rubric-Vivian-Davila-15e89123f3bb806e9222dbb8a6318fe8?pvs=4)
 
 ## Description
 The Tanda App is a Ruby on Rails application that allows users to set savings goals and track them collaboratively with friends and family, promoting financial accountability and transparency within groups, powered by cryptocurrency wallets.
