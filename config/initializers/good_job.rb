@@ -11,13 +11,13 @@ Rails.application.configure do
     max_threads: 5,
     poll_interval: 30,
     shutdown_timeout: 25,
-    #enable_cron: true,
-    #cron: {
-    #  example: {
-    #    cron: '0 * * * *',
-    #    class: 'ExampleJob'
-    #  },
-    #},
+    enable_cron: true,
+    cron: {
+      keep_alive: {
+        cron: '* * * * *',
+        class: 'KeepAliveJob'
+      },
+    },
     dashboard_default_locale: :en,
   }
 end
