@@ -1,5 +1,6 @@
 class AnalyticsController < ApplicationController
   def index
+    # This can use comments for better explanation of why it's needed.
     @user = current_user
     @user_tandas = current_user.user_tandas.includes(:tanda).where.not(tanda: nil)
     @charts_data = {}

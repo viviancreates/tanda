@@ -70,7 +70,7 @@ class TransactionsController < ApplicationController
     @transaction = Transaction.find(params[:id])
   end
 
-  def transaction_params
+  def transaction_params #For, why?
     params.require(:transaction).permit(:user_tanda_id, :amount, :date, :description, :transaction_type)
   end
 end

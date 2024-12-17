@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   before_action :configure_coinbase, only: [:create_wallet, :fund_wallet, :transfer]
 
+  # Consider moving these to the model or a concern
+
   def wallet
     @user = current_user
   end
