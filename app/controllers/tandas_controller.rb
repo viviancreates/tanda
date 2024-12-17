@@ -116,7 +116,7 @@ class TandasController < ApplicationController
     User.where(id: sent_friend_ids + received_friend_ids).distinct
   end
 
-  def set_breadcrumbs
+  def set_breadcrumbs # What is the purpose of this? Can be deleted. It seems as if it is not used.
     @breadcrumbs ||= [
       { content: "Home", href: root_path }
     ]

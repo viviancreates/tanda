@@ -27,7 +27,7 @@ The Tanda App is a Ruby on Rails application that allows users to set savings go
 2. Navigate to the project directory:
 `cd tanda`
 
-3. Install the required gems:
+3. Install the required gems: <!--There is an error when installing. I need to install `brew install autoconf automake`. Make sure you add this before the bundle step and the env needs to be configured before-->
 `bundle install`
 
 4. Set up the database:
@@ -177,5 +177,5 @@ rails test
 This project is licensed under the [MIT License](LICENSE).
 
 ## Contact
-Vivian Davila - [viviananddav@gmail.com](mailto:youremail@example.com)
+Vivian Davila - [viviananddav@gmail.com](mailto:youremail@example.com) <!--Replace youremail@example.com with your email-->
 Project Link: [GitHub Repository](https://github.com/viviancreates/tanda)

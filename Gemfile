@@ -77,7 +77,7 @@ gem "appdev_support"
 gem "awesome_print"
 gem "devise"
 gem "dotenv"
-gem "faker"
+gem "faker" # Delete this you have it twice Keep this one if you're using it in prod too and delete the other one
 gem "htmlbeautifier"
 gem "http"
 gem "sqlite3", "~> 1.4"
@@ -111,7 +111,7 @@ end
 
 group :development, :test do
   gem "rspec-rails", "~> 6.0.0"
-  gem 'faker'
+  gem 'faker' # Delete this you have it twice
 end
 
 group :test do

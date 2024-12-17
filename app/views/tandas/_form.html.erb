@@ -24,6 +24,7 @@
   </div>
 
   <div class="mb-3">
+    <%# Even though it is for the address. This `current_user` can still just go in the controller which you already have so this can be deleted.%>
     <%= f.hidden_field :creator_wallet, value: current_user.default_address %>
   </div>
 
